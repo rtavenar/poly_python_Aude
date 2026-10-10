@@ -319,7 +319,7 @@ Elles sont parfois pratiques, mais on peut toujours s'en passer, et un code sans
 Dans ce document, nous ne les utiliserons pas.
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * `range(a, b)` **exclut** la borne `b` : `range(1, 4)` produit 1, 2, 3, alors que `1:4` en R produit 1, 2, 3, 4.

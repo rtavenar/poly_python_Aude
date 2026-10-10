@@ -325,7 +325,7 @@ for v in tableau:  # À éviter !
 La version avec une boucle est beaucoup plus lente (regardez les unités : µs pour _microsecondes_, ns pour _nanosecondes_).
 Sur de gros volumes de données, la différence se compte en secondes, voire en minutes.
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * Un tableau `numpy` à une dimension est l'équivalent d'un vecteur R, et à deux dimensions d'une matrice : les opérations `+`, `*`, `**`… s'appliquent élément par élément, comme en R.

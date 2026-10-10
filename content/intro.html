@@ -393,7 +393,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-qui-s-adresse-ce-document">À qui s’adresse ce document ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-document-fait-pour-aude">Un document fait pour Aude</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-parcours-propose">Le parcours proposé</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-lire-les-encadres">Comment lire les encadrés</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-ecrire-et-executer-du-code-python">Où écrire et exécuter du code Python ?</a><ul class="nav section-nav flex-column">
@@ -418,7 +418,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="bienvenue">
 <h1>Bienvenue !<a class="headerlink" href="#bienvenue" title="Lien vers cette rubrique">#</a></h1>
-<p>Ce document est une version du polycopié <em>Introduction à Python</em> de la filière MIASHS de l’Université de Rennes 2, <strong>réécrite pour pouvoir apprendre seul·e, sans cours en présentiel</strong>, avec un objectif précis : <strong>acquérir les bases nécessaires pour analyser des données</strong> (<em>data science</em>) avec Python.</p>
+<p>Ce document a été écrit <strong>pour Aude</strong>. C’est une version du polycopié <em>Introduction à Python</em> de la filière MIASHS de l’Université de Rennes 2, <strong>réécrite pour pouvoir apprendre seule, sans cours en présentiel</strong>, avec un objectif précis : <strong>acquérir les bases nécessaires pour analyser des données</strong> (<em>data science</em>) avec Python.</p>
 <p>Il vous mène des toutes premières lignes de code jusqu’à l’analyse d’un vrai jeu de données avec les bibliothèques <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> et <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.
 Vous y trouverez :</p>
 <ul class="simple">
@@ -432,20 +432,15 @@ Vous y trouverez :</p>
 <p>Ce document est distribué librement sous licence <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a>.
 Le polycopié d’origine a notamment bénéficié des apports d’Aurélie Lemaitre, d’Agnès Maunoury et de Jean-Christophe Burnel.
 N’hésitez pas à faire vos remarques à son auteur dont vous trouverez le contact sur <a class="reference external" href="https://rtavenar.github.io/">sa page web</a>.</p>
-<section id="a-qui-s-adresse-ce-document">
-<h2>À qui s’adresse ce document ?<a class="headerlink" href="#a-qui-s-adresse-ce-document" title="Lien vers cette rubrique">#</a></h2>
-<p>À toute personne qui souhaite apprendre à programmer en Python pour analyser des données, <strong>sans aucun prérequis</strong> en programmation.
-Quelques notions de statistique (moyenne, médiane, quartiles, corrélation, régression) seront utiles dans la dernière partie.</p>
-<div class="important admonition">
-<p class="admonition-title">Vous connaissez déjà R ou SAS ?</p>
-<p>Ce document a été pensé pour vous aussi ! Vous connaissez déjà la logique de l’analyse de données ; il vous reste à apprendre la <strong>syntaxe</strong> et les <strong>habitudes</strong> de Python, qui diffèrent sur des points importants.</p>
+<section id="un-document-fait-pour-aude">
+<h2>Un document fait pour Aude<a class="headerlink" href="#un-document-fait-pour-aude" title="Lien vers cette rubrique">#</a></h2>
+<p>Aude connaît déjà R et SAS : la logique de l’analyse de données (tableaux, variables, modèles statistiques) lui est donc familière. Ce qu’il reste à apprendre, c’est la <strong>syntaxe</strong> et les <strong>habitudes</strong> de Python, qui diffèrent sur des points importants. Le document en tient compte :</p>
 <ul class="simple">
-<li><p>Des encadrés <strong>« Si vous venez de R ou de SAS »</strong> signalent, dans chaque chapitre, les pièges à éviter (indices qui commencent à 0, indentation, <code class="docutils literal notranslate"><span class="pre">return</span></code> obligatoire, copie des listes…) et donnent des <strong>tables de correspondance</strong> entre R, SAS et Python.</p></li>
-<li><p>Vous pouvez parcourir plus vite les chapitres 1 à 8 : lisez les encadrés « À retenir » et « Si vous venez de R ou de SAS », répondez aux questions « Testez-vous », et faites au moins les exercices ★★. Ne les sautez pas complètement : <code class="docutils literal notranslate"><span class="pre">pandas</span></code> repose entièrement sur ces bases, et la plupart des erreurs viennent de réflexes R ou SAS appliqués à Python.</p></li>
-<li><p>Le chapitre 14 vous montre comment retrouver vos modèles habituels (<code class="docutils literal notranslate"><span class="pre">lm</span></code>, <code class="docutils literal notranslate"><span class="pre">glm</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">REG</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code>, tests…) avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p></li>
+<li><p>des encadrés <strong>« Différences avec R et SAS »</strong> signalent, dans chaque chapitre, les pièges à éviter (indices qui commencent à 0, indentation, <code class="docutils literal notranslate"><span class="pre">return</span></code> obligatoire, copie des listes…) et donnent des <strong>tables de correspondance</strong> entre R, SAS et Python ;</p></li>
+<li><p>les chapitres 1 à 8 peuvent être parcourus plus vite : lisez les encadrés « À retenir » et « Différences avec R et SAS », répondez aux questions « Testez-vous », et faites au moins les exercices ★★. Ne les sautez pas complètement : <code class="docutils literal notranslate"><span class="pre">pandas</span></code> repose entièrement sur ces bases, et la plupart des erreurs viennent de réflexes R ou SAS appliqués à Python ;</p></li>
+<li><p>le chapitre 14 montre comment retrouver les modèles habituels (<code class="docutils literal notranslate"><span class="pre">lm</span></code>, <code class="docutils literal notranslate"><span class="pre">glm</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">REG</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code>, tests…) avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p></li>
 </ul>
-</div>
-<p>Il suffit de savoir utiliser un ordinateur et d’avoir un peu de patience : apprendre à programmer, c’est un peu comme apprendre une langue étrangère, on progresse surtout en pratiquant régulièrement.</p>
+<p>Apprendre un nouveau langage, c’est un peu comme apprendre une nouvelle langue étrangère : on progresse surtout en pratiquant régulièrement.</p>
 </section>
 <section id="le-parcours-propose">
 <h2>Le parcours proposé<a class="headerlink" href="#le-parcours-propose" title="Lien vers cette rubrique">#</a></h2>
@@ -566,7 +561,7 @@ Essayez <strong>vraiment</strong> d’y répondre (dans votre tête ou sur papie
 </div>
 <div class="hint dropdown admonition">
 <p class="admonition-title">Indice</p>
-<p>Un coup de pouce si vous êtes bloqué·e. N’ouvrez l’indice qu’après avoir cherché un moment.</p>
+<p>Un coup de pouce si vous êtes bloquée. N’ouvrez l’indice qu’après avoir cherché un moment.</p>
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Solution</p>
@@ -666,12 +661,12 @@ C’est l’équivalent d’un enseignant qui expliquerait au tableau ce qui se 
 <ol class="arabic simple">
 <li><p><strong>Lisez les objectifs</strong> pour savoir où vous allez.</p></li>
 <li><p><strong>Lisez une section</strong> en retapant et en exécutant les exemples. Modifiez-les : que se passe-t-il si… ?</p></li>
-<li><p><strong>Répondez aux questions « Testez-vous »</strong> avant de regarder la réponse. Si vous vous êtes trompé·e, relisez la section : c’est normal et c’est comme ça qu’on apprend.</p></li>
+<li><p><strong>Répondez aux questions « Testez-vous »</strong> avant de regarder la réponse. Si vous vous êtes trompée, relisez la section : c’est normal et c’est comme ça qu’on apprend.</p></li>
 <li><p><strong>Faites les exercices</strong> dans l’ordre. Cherchez au moins 10 à 15 minutes avant d’ouvrir l’indice, puis encore un peu avant d’ouvrir la solution. Une fois la solution lue, <strong>refaites l’exercice sans la regarder</strong>.</p></li>
 <li><p><strong>Faites le bilan</strong> en fin de chapitre : cochez ce que vous savez faire et revenez sur ce qui reste flou.</p></li>
 </ol>
 <div class="tip admonition">
-<p class="admonition-title">Que faire quand on est bloqué·e ?</p>
+<p class="admonition-title">Que faire quand on est bloquée ?</p>
 <ol class="arabic simple">
 <li><p><strong>Lisez le message d’erreur</strong> en entier, et en particulier sa dernière ligne (nous apprendrons à les lire dès le chapitre 1).</p></li>
 <li><p><strong>Affichez vos variables</strong> avec <code class="docutils literal notranslate"><span class="pre">print</span></code> à différents endroits du programme pour vérifier qu’elles contiennent ce que vous croyez.</p></li>
@@ -749,7 +744,7 @@ C’est l’équivalent d’un enseignant qui expliquerait au tableau ce qui se 
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-qui-s-adresse-ce-document">À qui s’adresse ce document ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-document-fait-pour-aude">Un document fait pour Aude</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-parcours-propose">Le parcours proposé</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-lire-les-encadres">Comment lire les encadrés</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-ecrire-et-executer-du-code-python">Où écrire et exécuter du code Python ?</a><ul class="nav section-nav flex-column">

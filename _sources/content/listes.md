@@ -373,7 +373,7 @@ print(3 in liste)
 print(liste.index(7))
 ```
 
-Attention, `liste.index(valeur)` et `liste.remove(valeur)` provoquent une erreur (`ValueError`) si la valeur n'est pas dans la liste : pensez à tester avec `in` au préalable si vous n'en êtes pas sûr·e.
+Attention, `liste.index(valeur)` et `liste.remove(valeur)` provoquent une erreur (`ValueError`) si la valeur n'est pas dans la liste : pensez à tester avec `in` au préalable si vous n'en êtes pas sûre.
 
 ### Concaténer et répéter
 
@@ -751,7 +751,7 @@ for p, n, a in zip(prenoms, noms, ages):
 
 Pour que cela ait du sens, les listes doivent bien sûr être de même taille.
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 Trois différences avec les vecteurs de R sont sources d'erreurs fréquentes :

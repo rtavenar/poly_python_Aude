@@ -55,7 +55,7 @@ Par convention, on importe `pandas` sous le nom `pd` :
 import pandas as pd
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 Un `DataFrame` est l'équivalent d'un `data.frame` (ou d'un _tibble_) en R, et d'une table SAS. Voici les correspondances des opérations de ce chapitre :

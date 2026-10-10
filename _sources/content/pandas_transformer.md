@@ -47,7 +47,7 @@ import numpy as np
 df = pd.read_csv("donnees/penguins.csv")
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 | Opération | R (`dplyr`, `tidyr`) | SAS | `pandas` |

@@ -192,7 +192,7 @@ anova_espece = smf.ols("body_mass_g ~ C(species)", data=manchots).fit()
 sm.stats.anova_lm(anova_espece, typ=2)
 ```
 
-```{admonition} Si vous venez de R
+```{admonition} Différences avec R
 :class: seealso
 
 * Ne pas oublier `.fit()` : `smf.ols(...)` seul ne fait que **définir** le modèle.

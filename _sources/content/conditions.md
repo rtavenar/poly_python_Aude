@@ -328,7 +328,7 @@ if x > 0:
 print("positif")
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * Les blocs sont délimités par l'**indentation** et non par des accolades (`{ }` en R) ou par `DO; ... END;` (en SAS) : c'est la différence de syntaxe qui surprend le plus au début.
