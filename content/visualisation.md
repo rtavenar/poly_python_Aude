@@ -299,7 +299,7 @@ sns.pairplot(data=df, hue="species", height=1.8)
 plt.show()
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * La logique de `seaborn` est proche de celle de `ggplot2` : on donne un tableau de données (`data=df`) et on associe des colonnes à des rôles visuels (`x=`, `y=`, `hue=` pour la couleur, `style=` pour la forme), comme avec `aes(x, y, colour = ...)`.

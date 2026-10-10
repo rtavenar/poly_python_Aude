@@ -256,7 +256,7 @@ On utilise une **liste** pour stocker une **série ordonnée de valeurs**, comme
 ````
 
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * Un dictionnaire ressemble à une **liste nommée** de R (`list(pomme = 3, kiwi = 12)`, avec un accès `stock[["kiwi"]]`), ou à un format SAS (`PROC FORMAT`) qui associe des libellés à des codes.

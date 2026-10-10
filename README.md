@@ -1,6 +1,6 @@
 # Apprendre Python en autonomie
 
-Version du polycopié _Introduction à Python_ (filière MIASHS, Université Rennes 2) réécrite pour l'apprentissage en autonomie, avec pour objectif l'analyse de données : bases de Python, puis fichiers, `numpy`, `pandas`, `matplotlib`, `seaborn` et `statsmodels`. Il est notamment pensé pour des personnes venant de R ou de SAS (encadrés et tables de correspondance).
+Version du polycopié _Introduction à Python_ (filière MIASHS, Université Rennes 2) réécrite pour Aude, afin qu'elle puisse apprendre en autonomie, avec pour objectif l'analyse de données : bases de Python, puis fichiers, `numpy`, `pandas`, `matplotlib`, `seaborn` et `statsmodels`. Aude connaissant R et SAS, chaque chapitre comporte des encadrés « Différences avec R et SAS » et des tables de correspondance.
 Schémas, questions « Testez-vous », exercices progressifs (★ à ★★★) avec indices et corrections, encadrés « Erreurs fréquentes », bilans de fin de chapitre, mini-projets et fiche mémo.
 
 ## Structure

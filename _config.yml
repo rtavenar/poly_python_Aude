@@ -96,7 +96,7 @@ sphinx:
         \begin{flushleft}
           {\sffamily\bfseries\fontsize{34}{40}\selectfont\color{TitleColor} \@title \par}
           \vspace{0.6cm}
-          {\Large\itshape Cours, illustrations et exercices corrigés pour apprendre seul·e\par}
+          {\Large\itshape Cours, illustrations et exercices corrigés pour Aude\par}
         \end{flushleft}
         \vspace{1.2cm}
         \noindent{\color{TitleColor}\rule{\textwidth}{0.6pt}}\par

@@ -584,7 +584,7 @@ prenom = "Aude"
 print(prnom)
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * L'affectation s'écrit uniquement avec `=` (pas de `<-`).

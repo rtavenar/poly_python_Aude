@@ -15,7 +15,7 @@ kernelspec:
 
 # Bienvenue !
 
-Ce document est une version du polycopié _Introduction à Python_ de la filière MIASHS de l'Université de Rennes 2, **réécrite pour pouvoir apprendre seul·e, sans cours en présentiel**, avec un objectif précis : **acquérir les bases nécessaires pour analyser des données** (_data science_) avec Python.
+Ce document a été écrit **pour Aude**. C'est une version du polycopié _Introduction à Python_ de la filière MIASHS de l'Université de Rennes 2, **réécrite pour pouvoir apprendre seule, sans cours en présentiel**, avec un objectif précis : **acquérir les bases nécessaires pour analyser des données** (_data science_) avec Python.
 
 Il vous mène des toutes premières lignes de code jusqu'à l'analyse d'un vrai jeu de données avec les bibliothèques `pandas`, `matplotlib`, `seaborn` et `statsmodels`.
 Vous y trouverez :
@@ -31,21 +31,15 @@ Ce document est distribué librement sous licence [CC BY-NC-SA](https://creative
 Le polycopié d'origine a notamment bénéficié des apports d'Aurélie Lemaitre, d'Agnès Maunoury et de Jean-Christophe Burnel.
 N'hésitez pas à faire vos remarques à son auteur dont vous trouverez le contact sur [sa page web](https://rtavenar.github.io/).
 
-## À qui s'adresse ce document ?
+## Un document fait pour Aude
 
-À toute personne qui souhaite apprendre à programmer en Python pour analyser des données, **sans aucun prérequis** en programmation.
-Quelques notions de statistique (moyenne, médiane, quartiles, corrélation, régression) seront utiles dans la dernière partie.
+Aude connaît déjà R et SAS : la logique de l'analyse de données (tableaux, variables, modèles statistiques) lui est donc familière. Ce qu'il reste à apprendre, c'est la **syntaxe** et les **habitudes** de Python, qui diffèrent sur des points importants. Le document en tient compte :
 
-````{admonition} Vous connaissez déjà R ou SAS ?
-:class: important
+* des encadrés **« Différences avec R et SAS »** signalent, dans chaque chapitre, les pièges à éviter (indices qui commencent à 0, indentation, `return` obligatoire, copie des listes…) et donnent des **tables de correspondance** entre R, SAS et Python ;
+* les chapitres 1 à 8 peuvent être parcourus plus vite : lisez les encadrés « À retenir » et « Différences avec R et SAS », répondez aux questions « Testez-vous », et faites au moins les exercices ★★. Ne les sautez pas complètement : `pandas` repose entièrement sur ces bases, et la plupart des erreurs viennent de réflexes R ou SAS appliqués à Python ;
+* le chapitre 14 montre comment retrouver les modèles habituels (`lm`, `glm`, `PROC REG`, `PROC LOGISTIC`, tests…) avec `statsmodels` et `scipy`.
 
-Ce document a été pensé pour vous aussi ! Vous connaissez déjà la logique de l'analyse de données ; il vous reste à apprendre la **syntaxe** et les **habitudes** de Python, qui diffèrent sur des points importants.
-
-* Des encadrés **« Si vous venez de R ou de SAS »** signalent, dans chaque chapitre, les pièges à éviter (indices qui commencent à 0, indentation, `return` obligatoire, copie des listes…) et donnent des **tables de correspondance** entre R, SAS et Python.
-* Vous pouvez parcourir plus vite les chapitres 1 à 8 : lisez les encadrés « À retenir » et « Si vous venez de R ou de SAS », répondez aux questions « Testez-vous », et faites au moins les exercices ★★. Ne les sautez pas complètement : `pandas` repose entièrement sur ces bases, et la plupart des erreurs viennent de réflexes R ou SAS appliqués à Python.
-* Le chapitre 14 vous montre comment retrouver vos modèles habituels (`lm`, `glm`, `PROC REG`, `PROC LOGISTIC`, tests…) avec `statsmodels` et `scipy`.
-````
-Il suffit de savoir utiliser un ordinateur et d'avoir un peu de patience : apprendre à programmer, c'est un peu comme apprendre une langue étrangère, on progresse surtout en pratiquant régulièrement.
+Apprendre un nouveau langage, c'est un peu comme apprendre une nouvelle langue étrangère : on progresse surtout en pratiquant régulièrement.
 
 ## Le parcours proposé
 
@@ -127,7 +121,7 @@ Un exercice à faire sur ordinateur. Le nombre d'étoiles indique la difficulté
 ```{admonition} Indice
 :class: hint, dropdown
 
-Un coup de pouce si vous êtes bloqué·e. N'ouvrez l'indice qu'après avoir cherché un moment.
+Un coup de pouce si vous êtes bloquée. N'ouvrez l'indice qu'après avoir cherché un moment.
 ```
 
 ```{admonition} Solution
@@ -246,11 +240,11 @@ Pour chaque chapitre :
 
 1. **Lisez les objectifs** pour savoir où vous allez.
 2. **Lisez une section** en retapant et en exécutant les exemples. Modifiez-les : que se passe-t-il si… ?
-3. **Répondez aux questions « Testez-vous »** avant de regarder la réponse. Si vous vous êtes trompé·e, relisez la section : c'est normal et c'est comme ça qu'on apprend.
+3. **Répondez aux questions « Testez-vous »** avant de regarder la réponse. Si vous vous êtes trompée, relisez la section : c'est normal et c'est comme ça qu'on apprend.
 4. **Faites les exercices** dans l'ordre. Cherchez au moins 10 à 15 minutes avant d'ouvrir l'indice, puis encore un peu avant d'ouvrir la solution. Une fois la solution lue, **refaites l'exercice sans la regarder**.
 5. **Faites le bilan** en fin de chapitre : cochez ce que vous savez faire et revenez sur ce qui reste flou.
 
-```{admonition} Que faire quand on est bloqué·e ?
+```{admonition} Que faire quand on est bloquée ?
 :class: tip
 
 1. **Lisez le message d'erreur** en entier, et en particulier sa dernière ligne (nous apprendrons à les lire dès le chapitre 1).

@@ -16,7 +16,7 @@ kernelspec:
 (ch:et_apres)=
 # Et après ?
 
-Félicitations, vous êtes arrivé·e au bout de ce document !
+Félicitations, vous êtes arrivée au bout de ce document !
 Vous savez maintenant écrire des programmes Python, et charger, préparer, résumer, visualiser et modéliser un jeu de données.
 Pour continuer à progresser en analyse de données, la clé est de **pratiquer régulièrement sur de vraies données**. Voici quelques pistes.
 
@@ -29,7 +29,7 @@ Pour continuer à progresser en analyse de données, la clé est de **pratiquer 
 ```{admonition} Un dernier conseil
 :class: tip
 
-Quand vous êtes bloqué·e, pensez à la démarche du chapitre 8 : lire le message d'erreur, observer ce que fait réellement le programme (en affichant `head()`, `shape`, `dtypes`… pour un `DataFrame`), comparer avec ce que vous attendiez.
+Quand vous êtes bloquée, pensez à la démarche du chapitre 8 : lire le message d'erreur, observer ce que fait réellement le programme (en affichant `head()`, `shape`, `dtypes`… pour un `DataFrame`), comparer avec ce que vous attendiez.
 Et n'oubliez pas que les meilleurs analystes passent, eux aussi, une bonne partie de leur temps à chercher des _bugs_ et à nettoyer des données !
 ```
 

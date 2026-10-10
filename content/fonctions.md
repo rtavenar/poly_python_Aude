@@ -406,7 +406,7 @@ Ainsi, les modules sont chargés avant toute utilisation, et on voit d'un coup d
 | `NameError: name 'math' is not defined` | le module n'a pas été importé |
 ```
 
-````{admonition} Si vous venez de R ou de SAS
+````{admonition} Différences avec R et SAS
 :class: seealso
 
 * `def f(x):` correspond à `f <- function(x) { ... }` en R, ou à une macro SAS (`%macro f(x); ... %mend;`), en beaucoup plus simple à manipuler.
