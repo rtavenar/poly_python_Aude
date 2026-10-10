@@ -1,0 +1,1302 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. Lire et écrire des fichiers &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/fichiers';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="10. numpy et le calcul matriciel" href="numpy.html" />
+    <link rel="prev" title="8. Déboguer et tester son code" href="tests.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables.html">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boucles.html">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelisation.html">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/fichiers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lire et écrire des fichiers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lister-les-fichiers-d-un-dossier-avec-le-module-os">9.1. Lister les fichiers d’un dossier avec le module <code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-textuels-et-encodage">9.2. Fichiers textuels et encodage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qu-est-ce-qu-un-fichier-textuel">9.2.1. Qu’est-ce qu’un fichier textuel ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-encodage">9.2.2. L’encodage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-des-fichiers-textuels">9.3. Lire des fichiers textuels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-textuels-generiques">9.3.1. Fichiers textuels génériques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mieux-la-directive-with">9.3.2. Mieux : la directive <code class="docutils literal notranslate"><span class="pre">with</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-csv">9.3.3. Fichiers CSV</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-des-fichiers-a-en-tete">9.3.3.1. Cas des fichiers à en-tête</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide-la-moyenne-d-une-colonne">9.3.3.2. Exemple guidé : la moyenne d’une colonne</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-json">9.3.4. Fichiers JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecrire-des-fichiers-textuels">9.4. Écrire des fichiers textuels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.4.1. Fichiers textuels génériques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.4.2. Fichiers CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.3. Fichiers JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">9.5. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">9.6. Bilan du chapitre</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lire-et-ecrire-des-fichiers">
+<span id="ch-fichiers"></span><h1><span class="section-number">9. </span>Lire et écrire des fichiers<a class="headerlink" href="#lire-et-ecrire-des-fichiers" title="Lien vers cette rubrique">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>À la fin de ce chapitre, vous saurez :</p>
+<ul class="simple">
+<li><p>lister les fichiers d’un dossier et construire leurs chemins avec le module <code class="docutils literal notranslate"><span class="pre">os</span></code> ;</p></li>
+<li><p>comprendre ce qu’est un fichier texte et la notion d’encodage ;</p></li>
+<li><p>lire un fichier texte ligne par ligne ;</p></li>
+<li><p>lire et écrire des fichiers CSV (module <code class="docutils literal notranslate"><span class="pre">csv</span></code>) et JSON (module <code class="docutils literal notranslate"><span class="pre">json</span></code>) ;</p></li>
+<li><p>utiliser <code class="docutils literal notranslate"><span class="pre">with</span></code> pour ne pas oublier de fermer un fichier.</p></li>
+</ul>
+<p><strong>Prérequis :</strong> chapitres 1 à 8. <strong>Durée indicative :</strong> 2h.</p>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Avant de commencer</p>
+<p>Ce chapitre nécessite de travailler <strong>sur votre ordinateur</strong> (avec Thonny, par exemple) : les fenêtres de code intégrées à la version web n’ont pas accès à vos fichiers.
+Pour reproduire les exemples, créez un dossier de travail contenant votre script Python et les fichiers de données utilisés dans ce chapitre (<code class="docutils literal notranslate"><span class="pre">simple.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">entete.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">simple.json</span></code> et le sous-dossier <code class="docutils literal notranslate"><span class="pre">donnees</span></code> contenant <code class="docutils literal notranslate"><span class="pre">fable.txt</span></code> et <code class="docutils literal notranslate"><span class="pre">notes.csv</span></code>), dont le contenu est donné au fil du texte.
+Les chemins de fichiers relatifs (comme <code class="docutils literal notranslate"><span class="pre">&quot;donnees/fable.txt&quot;</span></code>) sont interprétés à partir du <strong>dossier dans lequel le programme est exécuté</strong> : si Python ne trouve pas vos fichiers (<code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>), c’est en général que le script n’est pas lancé depuis le bon dossier.</p>
+</div>
+<p>Un fichier est un ensemble d’informations stocké sur une mémoire (un disque dur, une clé USB…).
+En lisant des fichiers depuis un programme Python, on va pouvoir traiter des données qui ne sont pas écrites « en dur » dans le programme : un tableau de notes, un texte, des relevés météo…
+Et en écrivant des fichiers, on pourra conserver les résultats de nos programmes.</p>
+<section id="lister-les-fichiers-d-un-dossier-avec-le-module-os">
+<h2><span class="section-number">9.1. </span>Lister les fichiers d’un dossier avec le module <code class="docutils literal notranslate"><span class="pre">os</span></code><a class="headerlink" href="#lister-les-fichiers-d-un-dossier-avec-le-module-os" title="Lien vers cette rubrique">#</a></h2>
+<p>Il est fréquent de vouloir répéter la même opération sur plusieurs fichiers, par exemple sur tous les fichiers d’extension <code class="docutils literal notranslate"><span class="pre">.txt</span></code> d’un dossier.
+Le module <code class="docutils literal notranslate"><span class="pre">os</span></code> propose pour cela des fonctions standard de manipulation de fichiers, notamment la fonction <code class="docutils literal notranslate"><span class="pre">listdir</span></code>, qui liste les fichiers et sous-dossiers contenus dans un dossier donné :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">for</span> <span class="n">nom_fichier</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">"donnees"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>machin.csv
+titanic.csv
+penguins.csv
+flights.csv
+notes.csv
+fable.txt
+truc.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">listdir</span></code> accepte un chemin absolu (comme <code class="docutils literal notranslate"><span class="pre">&quot;C:/Users/aude/Documents&quot;</span></code> ou <code class="docutils literal notranslate"><span class="pre">&quot;/home/aude/documents&quot;</span></code>) ou relatif (ici, <code class="docutils literal notranslate"><span class="pre">&quot;donnees&quot;</span></code> désigne le sous-dossier <code class="docutils literal notranslate"><span class="pre">donnees</span></code> du dossier de travail courant).</p>
+<p>Le nom stocké dans <code class="docutils literal notranslate"><span class="pre">nom_fichier</span></code> ne contient pas le chemin vers le fichier.
+Or, pour ouvrir ensuite ce fichier, il faudra bien spécifier ce chemin.
+On utilise pour cela la fonction <code class="docutils literal notranslate"><span class="pre">os.path.join</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">repertoire</span> <span class="o">=</span> <span class="s2">"donnees"</span>
+<span class="k">for</span> <span class="n">nom_fichier</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">repertoire</span><span class="p">):</span>
+    <span class="n">nom_complet_fichier</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repertoire</span><span class="p">,</span> <span class="n">nom_fichier</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">nom_complet_fichier</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>machin.csv -&gt; donnees/machin.csv
+titanic.csv -&gt; donnees/titanic.csv
+penguins.csv -&gt; donnees/penguins.csv
+flights.csv -&gt; donnees/flights.csv
+notes.csv -&gt; donnees/notes.csv
+fable.txt -&gt; donnees/fable.txt
+truc.txt -&gt; donnees/truc.txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il est préférable d’utiliser <code class="docutils literal notranslate"><span class="pre">os.path.join</span></code> plutôt que de concaténer les chaînes de caractères vous-même, car la forme des chemins dépend du système d’exploitation (<code class="docutils literal notranslate"><span class="pre">\</span></code> sous Windows, <code class="docutils literal notranslate"><span class="pre">/</span></code> sous Linux et macOS), ce que <code class="docutils literal notranslate"><span class="pre">os.path.join</span></code> gère pour vous.</p>
+</section>
+<section id="fichiers-textuels-et-encodage">
+<h2><span class="section-number">9.2. </span>Fichiers textuels et encodage<a class="headerlink" href="#fichiers-textuels-et-encodage" title="Lien vers cette rubrique">#</a></h2>
+<section id="qu-est-ce-qu-un-fichier-textuel">
+<h3><span class="section-number">9.2.1. </span>Qu’est-ce qu’un fichier textuel ?<a class="headerlink" href="#qu-est-ce-qu-un-fichier-textuel" title="Lien vers cette rubrique">#</a></h3>
+<p>Dans ce chapitre, nous ne traitons que de fichiers <strong>textuels</strong>, c’est-à-dire de fichiers dont le contenu est lisible en clair lorsqu’on les ouvre avec un éditeur de texte brut (comme le Bloc-notes sous Windows, TextEdit sous macOS, gedit sous Linux… ou Thonny).
+C’est le cas des fichiers <code class="docutils literal notranslate"><span class="pre">.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.json</span></code>, et même des fichiers <code class="docutils literal notranslate"><span class="pre">.py</span></code> !</p>
+<p>Sous Linux et macOS, la commande <code class="docutils literal notranslate"><span class="pre">head</span></code> affiche le début d’un fichier ; on obtient ici un contenu parfaitement lisible :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>entete.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NOM;PRENOM;AGE
+Lemarchand;John;23
+Trias;Anne;
+</pre></div>
+</div>
+</div>
+</div>
+<p>À l’inverse, un fichier non textuel (une image, un document Word, un fichier Excel…) n’est pas lisible ainsi : ce chapitre ne traite que des fichiers textuels.</p>
+</section>
+<section id="l-encodage">
+<h3><span class="section-number">9.2.2. </span>L’encodage<a class="headerlink" href="#l-encodage" title="Lien vers cette rubrique">#</a></h3>
+<p>Un ordinateur ne stocke que des nombres : pour stocker du texte, il faut donc associer un code à chaque caractère.
+Il existe plusieurs façons de faire, appelées <strong>encodages</strong>.
+Nous nous focaliserons ici sur les deux encodages que vous êtes les plus susceptibles de rencontrer :</p>
+<ul class="simple">
+<li><p>l’encodage UTF-8, dont le nom en Python est <code class="docutils literal notranslate"><span class="pre">&quot;utf-8&quot;</span></code> : c’est aujourd’hui l’encodage le plus répandu ;</p></li>
+<li><p>l’encodage Latin-1 (ISO-8859-1), dont le nom en Python est <code class="docutils literal notranslate"><span class="pre">&quot;iso-8859-1&quot;</span></code>, que l’on rencontre dans d’anciens fichiers (et dans certains exports de logiciels sous Windows).</p></li>
+</ul>
+<p>La principale différence entre ces deux encodages concerne les caractères accentués.
+Si vous lisez un fichier avec le mauvais encodage, les accents apparaissent sous une forme étrange (par exemple <code class="docutils literal notranslate"><span class="pre">Ã©</span></code> au lieu de <code class="docutils literal notranslate"><span class="pre">é</span></code>), ou vous obtenez une erreur <code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError</span></code>.</p>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p>Précisez toujours l’encodage lorsque vous ouvrez un fichier texte.
+En l’absence de contrainte extérieure, utilisez l’encodage UTF-8.
+Si les accents d’un fichier lu s’affichent mal, essayez l’autre encodage (<code class="docutils literal notranslate"><span class="pre">&quot;iso-8859-1&quot;</span></code>).</p>
+</div>
+</section>
+</section>
+<section id="lire-des-fichiers-textuels">
+<h2><span class="section-number">9.3. </span>Lire des fichiers textuels<a class="headerlink" href="#lire-des-fichiers-textuels" title="Lien vers cette rubrique">#</a></h2>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/fig_lecture_ecriture.svg"><img alt="../_images/fig_lecture_ecriture.svg" src="../_images/fig_lecture_ecriture.svg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">Les étapes de la lecture et de l’écriture d’un fichier.</span><a class="headerlink" href="#id4" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>La lecture d’un fichier se déroule en deux étapes :</p>
+<ol class="arabic simple">
+<li><p><strong>ouvrir</strong> le fichier en lecture ;</p></li>
+<li><p><strong>parcourir</strong> son contenu.</p></li>
+</ol>
+<p>En supposant que le nom du fichier à ouvrir soit stocké dans la variable <code class="docutils literal notranslate"><span class="pre">nom_fichier</span></code>, le code suivant ouvre un fichier en lecture avec l’encodage UTF-8 :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Le second argument (<code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code>, pour <em>read</em>) indique que le fichier doit être ouvert en lecture.
+La variable <code class="docutils literal notranslate"><span class="pre">fp</span></code> (pour <em>file pointer</em>) représente le fichier ouvert : elle garde en mémoire l’endroit où nous en sommes dans la lecture du fichier (pour l’instant, le début).</p>
+<section id="fichiers-textuels-generiques">
+<h3><span class="section-number">9.3.1. </span>Fichiers textuels génériques<a class="headerlink" href="#fichiers-textuels-generiques" title="Lien vers cette rubrique">#</a></h3>
+<p>Nous appelons « fichier textuel générique » un fichier dont le contenu n’a pas de structure particulière, comme un texte libre.
+Une fois ouvert, on peut le lire ligne par ligne :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/fable.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La Cigale, ayant chanté
+
+Tout l'été,
+
+Se trouva fort dépourvue
+
+Quand la bise fut venue :
+
+Pas un seul petit morceau
+
+De mouche ou de vermisseau.
+
+Elle alla crier famine
+
+Chez la Fourmi sa voisine,
+
+La priant de lui prêter
+
+Quelque grain pour subsister
+
+Jusqu'à la saison nouvelle.
+
+« Je vous paierai, lui dit-elle,
+
+Avant l'Oût, foi d'animal,
+
+Intérêt et principal. »
+
+La Fourmi n'est pas prêteuse :
+
+C'est là son moindre défaut.
+
+Que faisiez-vous au temps chaud ?
+
+Dit-elle à cette emprunteuse.
+
+— Nuit et jour à tout venant
+
+Je chantais, ne vous déplaise.
+
+— Vous chantiez ? j'en suis fort aise.
+
+Eh bien ! dansez maintenant.
+</pre></div>
+</div>
+</div>
+</div>
+<p>La variable <code class="docutils literal notranslate"><span class="pre">ligne</span></code>, de type chaîne de caractères, contient successivement le texte de chacune des lignes du fichier.</p>
+<p>Vous remarquez sans doute que des lignes vides sont affichées entre les lignes du texte.
+En effet, chaque ligne lue se termine par un caractère de retour à la ligne (noté <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code>), et <code class="docutils literal notranslate"><span class="pre">print</span></code> ajoute son propre retour à la ligne.
+On utilise souvent la méthode <code class="docutils literal notranslate"><span class="pre">strip</span></code> pour retirer ce caractère :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/fable.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="n">ligne</span> <span class="o">=</span> <span class="n">ligne</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La Cigale, ayant chanté
+Tout l'été,
+Se trouva fort dépourvue
+Quand la bise fut venue :
+Pas un seul petit morceau
+De mouche ou de vermisseau.
+Elle alla crier famine
+Chez la Fourmi sa voisine,
+La priant de lui prêter
+Quelque grain pour subsister
+Jusqu'à la saison nouvelle.
+« Je vous paierai, lui dit-elle,
+Avant l'Oût, foi d'animal,
+Intérêt et principal. »
+La Fourmi n'est pas prêteuse :
+C'est là son moindre défaut.
+Que faisiez-vous au temps chaud ?
+Dit-elle à cette emprunteuse.
+— Nuit et jour à tout venant
+Je chantais, ne vous déplaise.
+— Vous chantiez ? j'en suis fort aise.
+Eh bien ! dansez maintenant.
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut aussi lire tout le contenu d’un fichier d’un coup, dans une unique chaîne de caractères, avec la méthode <code class="docutils literal notranslate"><span class="pre">read</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/fable.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">contenu</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contenu</span><span class="p">),</span> <span class="s2">"caractères"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contenu</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="s2">"mots"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>608 caractères
+108 mots
+</pre></div>
+</div>
+</div>
+</div>
+<p>Une fois la lecture terminée, on <strong>ferme</strong> le fichier avec la méthode <code class="docutils literal notranslate"><span class="pre">close</span></code>.</p>
+</section>
+<section id="mieux-la-directive-with">
+<h3><span class="section-number">9.3.2. </span>Mieux : la directive <code class="docutils literal notranslate"><span class="pre">with</span></code><a class="headerlink" href="#mieux-la-directive-with" title="Lien vers cette rubrique">#</a></h3>
+<p>Il est facile d’oublier de fermer un fichier.
+Python propose une syntaxe qui s’en charge pour nous, avec le mot-clé <code class="docutils literal notranslate"><span class="pre">with</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/fable.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ici, le fichier est fermé"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La Cigale, ayant chanté
+Tout l'été,
+Se trouva fort dépourvue
+Quand la bise fut venue :
+Pas un seul petit morceau
+De mouche ou de vermisseau.
+Elle alla crier famine
+Chez la Fourmi sa voisine,
+La priant de lui prêter
+Quelque grain pour subsister
+Jusqu'à la saison nouvelle.
+« Je vous paierai, lui dit-elle,
+Avant l'Oût, foi d'animal,
+Intérêt et principal. »
+La Fourmi n'est pas prêteuse :
+C'est là son moindre défaut.
+Que faisiez-vous au temps chaud ?
+Dit-elle à cette emprunteuse.
+— Nuit et jour à tout venant
+Je chantais, ne vous déplaise.
+— Vous chantiez ? j'en suis fort aise.
+Eh bien ! dansez maintenant.
+Ici, le fichier est fermé
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le fichier est ouvert et stocké dans la variable <code class="docutils literal notranslate"><span class="pre">fp</span></code> au début du bloc <code class="docutils literal notranslate"><span class="pre">with</span></code>, et il est <strong>automatiquement fermé</strong> dès que l’on sort du bloc (même en cas d’erreur).
+C’est la façon recommandée d’ouvrir des fichiers en Python.</p>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Le fichier <code class="docutils literal notranslate"><span class="pre">donnees/fable.txt</span></code> contient 22 lignes. Qu’affiche le programme suivant ?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n = 0
+with open("donnees/fable.txt", "r", encoding="utf-8") as fp:
+    for ligne in fp.readlines():
+        if "Fourmi" in ligne:
+            n += 1
+print(n)
+</pre></div>
+</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<p>Il compte les lignes contenant le mot « Fourmi » (avec une majuscule) et affiche <code class="docutils literal notranslate"><span class="pre">2</span></code> : « Chez la Fourmi sa voisine, » et « La Fourmi n’est pas prêteuse : ».</p>
+</div>
+</section>
+<section id="fichiers-csv">
+<h3><span class="section-number">9.3.3. </span>Fichiers CSV<a class="headerlink" href="#fichiers-csv" title="Lien vers cette rubrique">#</a></h3>
+<p>Les fichiers CSV (<em>Comma-Separated Values</em>) permettent de stocker des données organisées sous la forme de <strong>tableaux</strong> dans des fichiers textuels.
+Chaque ligne du fichier correspond à une ligne du tableau, et au sein de chaque ligne, les cellules (les colonnes) sont séparées par un délimiteur.
+À l’origine, ce délimiteur était la virgule (d’où le nom de ce format), mais on rencontre très souvent le point-virgule, notamment dans les fichiers produits par les tableurs en français.
+Vous pouvez d’ailleurs ouvrir un fichier CSV avec un tableur (LibreOffice Calc, Excel…).</p>
+<p>Pour manipuler ces fichiers, Python dispose d’un module dédié, appelé <code class="docutils literal notranslate"><span class="pre">csv</span></code>.
+Ce module contient notamment une fonction <code class="docutils literal notranslate"><span class="pre">reader</span></code> qui simplifie la lecture des fichiers CSV (remarquez l’argument <code class="docutils literal notranslate"><span class="pre">delimiter</span></code>, qui précise le délimiteur utilisé) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="c1"># Contenu du fichier simple.csv :</span>
+<span class="c1"># 1;2;3;4;5</span>
+<span class="c1"># a;b;c;d;e</span>
+<span class="c1"># xx;xx;xx;xx;xx</span>
+<span class="c1"># 0.4;0.5;0.7;0.8;0.9</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"simple.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">";"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2', '3', '4', '5']
+['a', 'b', 'c', 'd', 'e']
+['xx', 'xx', 'xx', 'xx', 'xx']
+['0.4', '0.5', '0.7', '0.8', '0.9']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Contrairement au cas des fichiers textuels génériques, la variable de boucle <code class="docutils literal notranslate"><span class="pre">ligne</span></code> n’est plus une chaîne de caractères mais une <strong>liste</strong> de chaînes de caractères : les cellules de la ligne courante du tableau.</p>
+<div class="warning admonition">
+<p class="admonition-title">Erreur fréquente</p>
+<p>Toutes les valeurs lues dans un fichier CSV sont des <strong>chaînes de caractères</strong>, même celles qui ressemblent à des nombres.
+Pour faire des calculs, il faut les convertir avec <code class="docutils literal notranslate"><span class="pre">int</span></code> ou <code class="docutils literal notranslate"><span class="pre">float</span></code> : <code class="docutils literal notranslate"><span class="pre">float(ligne[3])</span></code>.</p>
+</div>
+<section id="cas-des-fichiers-a-en-tete">
+<h4><span class="section-number">9.3.3.1. </span>Cas des fichiers à en-tête<a class="headerlink" href="#cas-des-fichiers-a-en-tete" title="Lien vers cette rubrique">#</a></h4>
+<p>Souvent, la première ligne d’un fichier CSV contient les noms des colonnes (on parle d’<strong>en-tête</strong>), comme dans le fichier <code class="docutils literal notranslate"><span class="pre">entete.csv</span></code> suivant :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NOM</span><span class="p">;</span><span class="n">PRENOM</span><span class="p">;</span><span class="n">AGE</span>
+<span class="n">Lemarchand</span><span class="p">;</span><span class="n">John</span><span class="p">;</span><span class="mi">23</span>
+<span class="n">Trias</span><span class="p">;</span><span class="n">Anne</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Dans ce cas, il est pratique que chaque ligne lue soit représentée par un <strong>dictionnaire</strong> dont les clés sont les noms des colonnes : c’est ce que permet <code class="docutils literal notranslate"><span class="pre">csv.DictReader</span></code> (à utiliser à la place de <code class="docutils literal notranslate"><span class="pre">csv.reader</span></code>) :</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/fig_csv.svg"><img alt="../_images/fig_csv.svg" src="../_images/fig_csv.svg" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 9.2 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">csv.reader</span></code> produit une liste par ligne ; <code class="docutils literal notranslate"><span class="pre">csv.DictReader</span></code> produit un dictionnaire par ligne, dont les clés sont lues dans l’en-tête.</span><a class="headerlink" href="#id5" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"entete.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">";"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="s2">"PRENOM"</span><span class="p">],</span> <span class="n">ligne</span><span class="p">[</span><span class="s2">"NOM"</span><span class="p">],</span> <span class="s2">"a pour âge :"</span><span class="p">,</span> <span class="n">ligne</span><span class="p">[</span><span class="s2">"AGE"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>John Lemarchand a pour âge : 23
+Anne Trias a pour âge : 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le code est ainsi bien plus lisible : <code class="docutils literal notranslate"><span class="pre">ligne[&quot;AGE&quot;]</span></code> est plus parlant que <code class="docutils literal notranslate"><span class="pre">ligne[2]</span></code>.</p>
+</section>
+<section id="exemple-guide-la-moyenne-d-une-colonne">
+<h4><span class="section-number">9.3.3.2. </span>Exemple guidé : la moyenne d’une colonne<a class="headerlink" href="#exemple-guide-la-moyenne-d-une-colonne" title="Lien vers cette rubrique">#</a></h4>
+<p>Le fichier <code class="docutils literal notranslate"><span class="pre">donnees/notes.csv</span></code> contient les notes de 8 étudiants dans trois matières :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nom</span><span class="p">;</span><span class="n">prenom</span><span class="p">;</span><span class="n">maths</span><span class="p">;</span><span class="n">info</span><span class="p">;</span><span class="n">anglais</span>
+<span class="n">Martin</span><span class="p">;</span><span class="n">Aude</span><span class="p">;</span><span class="mi">14</span><span class="p">;</span><span class="mi">17</span><span class="p">;</span><span class="mi">12</span>
+<span class="n">Benali</span><span class="p">;</span><span class="n">Yanis</span><span class="p">;</span><span class="mi">9</span><span class="p">;</span><span class="mi">12</span><span class="p">;</span><span class="mi">15</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Calculons la moyenne de la classe en informatique.
+Il s’agit d’un accumulateur (une somme et un compteur), en n’oubliant pas de convertir les notes en nombres :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">nb_etudiants</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/notes.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">";"</span><span class="p">):</span>
+        <span class="n">somme</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="s2">"info"</span><span class="p">])</span>
+        <span class="n">nb_etudiants</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Moyenne en info : </span><span class="si">{</span><span class="n">somme</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nb_etudiants</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Moyenne en info : 13.00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fichiers-json">
+<h3><span class="section-number">9.3.4. </span>Fichiers JSON<a class="headerlink" href="#fichiers-json" title="Lien vers cette rubrique">#</a></h3>
+<p>Les fichiers JSON (<em>JavaScript Object Notation</em>) permettent de stocker des données <strong>structurées</strong>, par exemple avec une organisation hiérarchique.
+Un document JSON ressemble beaucoup à un dictionnaire Python (à la nuance près que les clés d’un document JSON sont forcément des chaînes de caractères, écrites entre guillemets doubles).
+Voici le contenu du fichier <code class="docutils literal notranslate"><span class="pre">simple.json</span></code> :</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"num_etudiant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21300000"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"notes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"date_de_naissance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"jour"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"mois"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"annee"</span><span class="p">:</span><span class="w"> </span><span class="mi">1995</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Pour lire de tels fichiers, on dispose du module <code class="docutils literal notranslate"><span class="pre">json</span></code>, qui contient une fonction <code class="docutils literal notranslate"><span class="pre">load</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"simple.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"notes"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"date_de_naissance"</span><span class="p">][</span><span class="s2">"annee"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'num_etudiant': '21300000', 'notes': [12, 5, 14], 'date_de_naissance': {'jour': 1, 'mois': 1, 'annee': 1995}}
+&lt;class 'dict'&gt;
+[12, 5, 14]
+1995
+</pre></div>
+</div>
+</div>
+</div>
+<p>Contrairement aux fichiers CSV, les données sont directement converties dans le bon type : <code class="docutils literal notranslate"><span class="pre">d[&quot;notes&quot;]</span></code> est une liste d’entiers, et non une chaîne de caractères.</p>
+<p>Un fichier JSON peut également contenir une liste de dictionnaires, comme dans l’exemple suivant :</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+<span class="w">    </span><span class="nt">"num_etudiant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21300000"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"notes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">]</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">"num_etudiant"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21300001"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"notes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">14</span><span class="p">]</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<p>Dans ce cas, <code class="docutils literal notranslate"><span class="pre">json.load</span></code> retourne bien évidemment une liste de dictionnaires.</p>
+</section>
+</section>
+<section id="ecrire-des-fichiers-textuels">
+<h2><span class="section-number">9.4. </span>Écrire des fichiers textuels<a class="headerlink" href="#ecrire-des-fichiers-textuels" title="Lien vers cette rubrique">#</a></h2>
+<p>L’écriture d’un fichier se déroule en trois étapes :</p>
+<ol class="arabic simple">
+<li><p>ouvrir le fichier en écriture ;</p></li>
+<li><p>ajouter du contenu dans le fichier ;</p></li>
+<li><p>fermer le fichier (automatiquement si l’on utilise <code class="docutils literal notranslate"><span class="pre">with</span></code>).</p></li>
+</ol>
+<p>Pour ouvrir un fichier en écriture, on utilise le mode <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> (pour <em>write</em>) :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>L’argument <code class="docutils literal notranslate"><span class="pre">newline=&quot;\n&quot;</span></code> assure que les retours à la ligne seront écrits de la même façon quel que soit le système d’exploitation.</p>
+<div class="warning admonition">
+<p class="admonition-title">Attention !</p>
+<p>Si le fichier existe déjà, ouvrir un fichier en mode <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> <strong>efface son contenu</strong> : on repart d’un fichier vide.
+Si l’on souhaite au contraire ajouter du texte à la fin d’un fichier existant, on utilise le mode <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> (pour <em>append</em>) :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fp = open(nom_fichier, "a", encoding="utf-8", newline="\n")
+</pre></div>
+</div>
+</div>
+<p>Si l’on n’utilise pas <code class="docutils literal notranslate"><span class="pre">with</span></code>, il ne faut pas oublier de fermer le fichier une fois l’écriture terminée, avec <code class="docutils literal notranslate"><span class="pre">fp.close()</span></code>, sans quoi une partie du contenu pourrait ne pas être écrite sur le disque.</p>
+<section id="id1">
+<h3><span class="section-number">9.4.1. </span>Fichiers textuels génériques<a class="headerlink" href="#id1" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour ajouter du contenu à un fichier, on utilise la méthode <code class="docutils literal notranslate"><span class="pre">write</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"ecriture.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"La vie est belle</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ligne numéro </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Contrairement à la fonction <code class="docutils literal notranslate"><span class="pre">print</span></code>, la méthode <code class="docutils literal notranslate"><span class="pre">write</span></code> n’ajoute pas de retour à la ligne après la chaîne de caractères : il faut l’inclure vous-même (avec <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code>) si vous souhaitez passer à la ligne.
+De plus, <code class="docutils literal notranslate"><span class="pre">write</span></code> n’accepte que des chaînes de caractères : pour écrire un nombre, il faut le convertir (avec <code class="docutils literal notranslate"><span class="pre">str</span></code> ou dans une f-string).</p>
+<p>Vérifions le contenu du fichier en le relisant :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"ecriture.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La vie est belle
+Ligne numéro 0
+Ligne numéro 1
+Ligne numéro 2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">9.4.2. </span>Fichiers CSV<a class="headerlink" href="#id2" title="Lien vers cette rubrique">#</a></h3>
+<p>Le module <code class="docutils literal notranslate"><span class="pre">csv</span></code> contient également une fonction <code class="docutils literal notranslate"><span class="pre">writer</span></code> qui simplifie l’écriture des fichiers CSV :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"ecriture.csv"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">csvfp</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
+    <span class="n">csvfp</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"nom"</span><span class="p">,</span> <span class="s2">"moyenne"</span><span class="p">])</span>
+    <span class="n">csvfp</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"Aude"</span><span class="p">,</span> <span class="mf">14.33</span><span class="p">])</span>
+    <span class="n">csvfp</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"Yanis"</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="c1"># Après cela, le fichier contient les lignes suivantes :</span>
+<span class="c1"># nom;moyenne</span>
+<span class="c1"># Aude;14.33</span>
+<span class="c1"># Yanis;12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">writerow</span></code> prend une liste en argument et écrit dans le fichier les éléments de cette liste, séparés par le délimiteur choisi ; elle se charge elle-même du retour à la ligne.</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">9.4.3. </span>Fichiers JSON<a class="headerlink" href="#id3" title="Lien vers cette rubrique">#</a></h3>
+<p>Le module <code class="docutils literal notranslate"><span class="pre">json</span></code> contient une fonction <code class="docutils literal notranslate"><span class="pre">dump</span></code> qui écrit le contenu d’un dictionnaire (ou d’une liste) dans un fichier JSON :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">liste</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"b"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">:</span> <span class="mi">7</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"ecriture.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">liste</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+<span class="c1"># Après cela, le fichier contient la ligne suivante :</span>
+<span class="c1"># [{"a": 5}, {"b": 3, "a": 7}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’argument optionnel <code class="docutils literal notranslate"><span class="pre">indent</span></code> permet d’obtenir un fichier plus lisible, avec des retours à la ligne et une indentation : <code class="docutils literal notranslate"><span class="pre">json.dump(liste,</span> <span class="pre">fp,</span> <span class="pre">indent=2)</span></code>.
+Vous pouvez vous référer à <a class="reference external" href="https://docs.python.org/fr/3/library/json.html#basic-usage">la documentation de cette fonction</a> pour plus de détails.</p>
+<div class="warning admonition">
+<p class="admonition-title">Erreurs fréquentes de ce chapitre</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Message d’erreur</p></th>
+<th class="head"><p>Cause probable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError:</span> <span class="pre">[Errno</span> <span class="pre">2]</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory:</span> <span class="pre">'notes.csv'</span></code></p></td>
+<td><p>le nom du fichier est mal écrit, ou le programme n’est pas exécuté depuis le dossier qui contient le fichier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError:</span> <span class="pre">'utf-8'</span> <span class="pre">codec</span> <span class="pre">can't</span> <span class="pre">decode</span> <span class="pre">byte</span> <span class="pre">...</span></code></p></td>
+<td><p>le fichier n’est pas encodé en UTF-8 : essayer <code class="docutils literal notranslate"><span class="pre">encoding=&quot;iso-8859-1&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">write()</span> <span class="pre">argument</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">str,</span> <span class="pre">not</span> <span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">write</span></code> n’accepte que des chaînes : convertir avec <code class="docutils literal notranslate"><span class="pre">str()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KeyError:</span> <span class="pre">'Nom'</span></code> avec <code class="docutils literal notranslate"><span class="pre">DictReader</span></code></p></td>
+<td><p>le nom de colonne ne correspond pas exactement à l’en-tête (majuscules, espaces…), ou le mauvais délimiteur est utilisé</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">convert</span> <span class="pre">string</span> <span class="pre">to</span> <span class="pre">float:</span> <span class="pre">''</span></code></p></td>
+<td><p>une cellule vide : il faut tester si la valeur est vide avant de la convertir</p></td>
+</tr>
+<tr class="row-odd"><td><p>Le fichier écrit est vide ou incomplet</p></td>
+<td><p>le fichier n’a pas été fermé : utiliser <code class="docutils literal notranslate"><span class="pre">with</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="exercices">
+<h2><span class="section-number">9.5. </span>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Rappel</p>
+<p>Ces exercices sont à faire sur votre ordinateur, avec les fichiers de données donnés dans ce chapitre.</p>
+</div>
+<div class="admonition-exercice-9-1-compter-les-lignes-des-fichiers-txt admonition" id="ex9-1">
+<p class="admonition-title">Exercice 9.1 : Compter les lignes des fichiers .txt ★</p>
+<p>Écrivez une fonction qui affiche, pour chaque fichier d’extension <code class="docutils literal notranslate"><span class="pre">.txt</span></code> d’un répertoire passé en argument, le nom du fichier ainsi que son nombre de lignes.</p>
+</div>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Écrivez d’abord une fonction <code class="docutils literal notranslate"><span class="pre">nb_lignes(nom_fichier)</span></code> qui retourne le nombre de lignes d’un fichier, puis une seconde fonction qui parcourt le répertoire avec <code class="docutils literal notranslate"><span class="pre">os.listdir</span></code> et teste l’extension avec la méthode <code class="docutils literal notranslate"><span class="pre">endswith</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nb_lignes</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nb_lignes_repertoire</span><span class="p">(</span><span class="n">repertoire</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">nom_fichier</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">repertoire</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">nom_fichier</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".txt"</span><span class="p">):</span>
+            <span class="n">nom_complet_fichier</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repertoire</span><span class="p">,</span> <span class="n">nom_fichier</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">nom_complet_fichier</span><span class="p">,</span> <span class="n">nb_lignes</span><span class="p">(</span><span class="n">nom_complet_fichier</span><span class="p">))</span>
+
+<span class="n">nb_lignes_repertoire</span><span class="p">(</span><span class="s2">"donnees"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On aurait aussi pu écrire <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">len(fp.readlines())</span></code> dans la fonction <code class="docutils literal notranslate"><span class="pre">nb_lignes</span></code>.</p>
+</div>
+<div class="admonition-exercice-9-2-statistiques-sur-un-texte admonition" id="ex9-2">
+<p class="admonition-title">Exercice 9.2 : Statistiques sur un texte ★★</p>
+<p>Écrivez une fonction <code class="docutils literal notranslate"><span class="pre">statistiques(nom_fichier)</span></code> qui retourne, pour le fichier texte dont le nom est passé en argument, son nombre de lignes, son nombre de mots et la longueur moyenne d’une ligne (en nombre de mots).
+Testez-la sur le fichier <code class="docutils literal notranslate"><span class="pre">donnees/fable.txt</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">statistiques</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">):</span>
+    <span class="n">nb_lignes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb_mots</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">nom_fichier</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fp</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+            <span class="n">nb_lignes</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">nb_mots</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ligne</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">nb_lignes</span><span class="p">,</span> <span class="n">nb_mots</span><span class="p">,</span> <span class="n">nb_mots</span> <span class="o">/</span> <span class="n">nb_lignes</span>
+
+<span class="n">lignes</span><span class="p">,</span> <span class="n">mots</span><span class="p">,</span> <span class="n">moyenne</span> <span class="o">=</span> <span class="n">statistiques</span><span class="p">(</span><span class="s2">"donnees/fable.txt"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lignes</span><span class="si">}</span><span class="s2"> lignes, </span><span class="si">{</span><span class="n">mots</span><span class="si">}</span><span class="s2"> mots, </span><span class="si">{</span><span class="n">moyenne</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> mots par ligne en moyenne"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Remarquez que les signes de ponctuation isolés (comme le « : » de « venue : ») sont comptés comme des mots par <code class="docutils literal notranslate"><span class="pre">split</span></code>. Pour un comptage plus précis, il faudrait d’abord les retirer avec <code class="docutils literal notranslate"><span class="pre">replace</span></code>.</p>
+</div>
+<div class="admonition-exercice-9-3-moyennes-des-etudiants admonition" id="ex9-3">
+<p class="admonition-title">Exercice 9.3 : Moyennes des étudiants ★★</p>
+<p>En utilisant le fichier <code class="docutils literal notranslate"><span class="pre">donnees/notes.csv</span></code>, écrivez un programme qui affiche, pour chaque étudiant, son prénom, son nom et sa moyenne dans les trois matières (avec deux décimales), puis le nom de l’étudiant ayant la meilleure moyenne.</p>
+</div>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Utilisez <code class="docutils literal notranslate"><span class="pre">csv.DictReader</span></code>. Pour la meilleure moyenne, reprenez l’idée de l’exercice 7.3 (garder en mémoire la meilleure valeur rencontrée et le nom associé).</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+
+<span class="n">meilleure_moyenne</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">meilleur_etudiant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"donnees/notes.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">";"</span><span class="p">):</span>
+        <span class="n">moyenne</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="s2">"maths"</span><span class="p">])</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="s2">"info"</span><span class="p">])</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="s2">"anglais"</span><span class="p">]))</span> <span class="o">/</span> <span class="mi">3</span>
+        <span class="n">nom_complet</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ligne</span><span class="p">[</span><span class="s1">'prenom'</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ligne</span><span class="p">[</span><span class="s1">'nom'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">nom_complet</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">moyenne</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">meilleure_moyenne</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">moyenne</span> <span class="o">&gt;</span> <span class="n">meilleure_moyenne</span><span class="p">:</span>
+            <span class="n">meilleure_moyenne</span> <span class="o">=</span> <span class="n">moyenne</span>
+            <span class="n">meilleur_etudiant</span> <span class="o">=</span> <span class="n">nom_complet</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Meilleure moyenne : </span><span class="si">{</span><span class="n">meilleur_etudiant</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">meilleure_moyenne</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Et pandas dans tout ça ?</p>
+<p>Au chapitre 11, nous verrons que la bibliothèque <code class="docutils literal notranslate"><span class="pre">pandas</span></code> permet de lire un fichier CSV en une seule ligne (<code class="docutils literal notranslate"><span class="pre">pd.read_csv(...)</span></code>) et de faire des calculs sur ses colonnes sans écrire de boucle.
+Il reste néanmoins essentiel de comprendre ce qui se passe « sous le capot » (chemins, encodage, délimiteur, conversion des types) : ce sont exactement les mêmes notions qui interviennent, et les mêmes erreurs que l’on rencontre, avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
+</div>
+</section>
+<section id="bilan-du-chapitre">
+<h2><span class="section-number">9.6. </span>Bilan du chapitre<a class="headerlink" href="#bilan-du-chapitre" title="Lien vers cette rubrique">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">os.listdir(dossier)</span></code> liste un dossier ; <code class="docutils literal notranslate"><span class="pre">os.path.join(dossier,</span> <span class="pre">nom)</span></code> construit un chemin.</p></li>
+<li><p>Ouvrir : <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open(nom,</span> <span class="pre">mode,</span> <span class="pre">encoding=&quot;utf-8&quot;)</span> <span class="pre">as</span> <span class="pre">fp:</span></code> avec le mode <code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code> (lecture), <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> (écriture, <strong>écrase</strong> le fichier) ou <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> (ajout à la fin).</p></li>
+<li><p>Texte : <code class="docutils literal notranslate"><span class="pre">fp.readlines()</span></code> (liste des lignes, à nettoyer avec <code class="docutils literal notranslate"><span class="pre">strip</span></code>), <code class="docutils literal notranslate"><span class="pre">fp.read()</span></code> (tout le texte), <code class="docutils literal notranslate"><span class="pre">fp.write(chaine)</span></code> (ajouter <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> soi-même).</p></li>
+<li><p>CSV : <code class="docutils literal notranslate"><span class="pre">csv.reader(fp,</span> <span class="pre">delimiter=&quot;;&quot;)</span></code> (listes), <code class="docutils literal notranslate"><span class="pre">csv.DictReader(fp,</span> <span class="pre">delimiter=&quot;;&quot;)</span></code> (dictionnaires), <code class="docutils literal notranslate"><span class="pre">csv.writer(fp,</span> <span class="pre">delimiter=&quot;;&quot;).writerow(liste)</span></code>. Les valeurs lues sont des chaînes.</p></li>
+<li><p>JSON : <code class="docutils literal notranslate"><span class="pre">json.load(fp)</span></code>, <code class="docutils literal notranslate"><span class="pre">json.dump(donnees,</span> <span class="pre">fp)</span></code>.</p></li>
+</ul>
+</div>
+<p>Faites le point : êtes-vous capable de…</p>
+<ul class="simple">
+<li><p>lister les fichiers d’un dossier et construire leur chemin complet ?</p></li>
+<li><p>lire un fichier texte ligne par ligne ?</p></li>
+<li><p>lire un fichier CSV avec en-tête et faire des calculs sur une colonne ?</p></li>
+<li><p>lire un fichier JSON et accéder à une information imbriquée ?</p></li>
+<li><p>écrire des résultats dans un fichier CSV ou JSON ?</p></li>
+<li><p>diagnostiquer une <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> ou un problème d’encodage ?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tests.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Déboguer et tester son code</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="numpy.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title"><span class="section-number">10. </span><code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lister-les-fichiers-d-un-dossier-avec-le-module-os">9.1. Lister les fichiers d’un dossier avec le module <code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-textuels-et-encodage">9.2. Fichiers textuels et encodage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qu-est-ce-qu-un-fichier-textuel">9.2.1. Qu’est-ce qu’un fichier textuel ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-encodage">9.2.2. L’encodage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-des-fichiers-textuels">9.3. Lire des fichiers textuels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-textuels-generiques">9.3.1. Fichiers textuels génériques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mieux-la-directive-with">9.3.2. Mieux : la directive <code class="docutils literal notranslate"><span class="pre">with</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-csv">9.3.3. Fichiers CSV</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cas-des-fichiers-a-en-tete">9.3.3.1. Cas des fichiers à en-tête</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide-la-moyenne-d-une-colonne">9.3.3.2. Exemple guidé : la moyenne d’une colonne</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fichiers-json">9.3.4. Fichiers JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecrire-des-fichiers-textuels">9.4. Écrire des fichiers textuels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.4.1. Fichiers textuels génériques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.4.2. Fichiers CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.3. Fichiers JSON</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">9.5. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">9.6. Bilan du chapitre</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

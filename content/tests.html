@@ -1,0 +1,1053 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. Déboguer et tester son code &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tests';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="9. Lire et écrire des fichiers" href="fichiers.html" />
+    <link rel="prev" title="7. Dictionnaires, tuples et sets" href="dictionnaires.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables.html">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boucles.html">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fichiers.html">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelisation.html">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/tests.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Déboguer et tester son code</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-erreurs-en-python">8.1. Les erreurs en Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-un-message-d-erreur">8.1.1. Lire un message d’erreur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-erreurs-les-plus-courantes">8.1.2. Les erreurs les plus courantes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trouver-un-bug-une-demarche-methodique">8.2. Trouver un <em>bug</em> : une démarche méthodique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide">8.2.1. Exemple guidé</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-tests-unitaires">8.3. Les tests unitaires</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-tester">8.3.1. Pourquoi tester ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-ses-tests">8.3.2. Choisir ses tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-automatiquement-avec-assert">8.3.3. Tester automatiquement avec <code class="docutils literal notranslate"><span class="pre">assert</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">8.4. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">8.5. Bilan du chapitre</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deboguer-et-tester-son-code">
+<span id="ch-tests"></span><h1><span class="section-number">8. </span>Déboguer et tester son code<a class="headerlink" href="#deboguer-et-tester-son-code" title="Lien vers cette rubrique">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>À la fin de ce chapitre, vous saurez :</p>
+<ul class="simple">
+<li><p>lire un message d’erreur et reconnaître les types d’erreurs les plus courants ;</p></li>
+<li><p>adopter une démarche méthodique pour trouver un <em>bug</em> ;</p></li>
+<li><p>écrire des tests unitaires simples, avec <code class="docutils literal notranslate"><span class="pre">print</span></code> ou avec <code class="docutils literal notranslate"><span class="pre">assert</span></code> ;</p></li>
+</ul>
+<p><strong>Prérequis :</strong> chapitres 1 à 5. <strong>Durée indicative :</strong> 1h.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Pour info</p>
+<p>Il existe en Python des outils dédiés au test de programmes (comme <code class="docutils literal notranslate"><span class="pre">pytest</span></code> ou <code class="docutils literal notranslate"><span class="pre">unittest</span></code>).
+Ce chapitre ne traite pas de ces outils, mais de l’intérêt des tests en général et de bonnes habitudes à prendre dès le début.</p>
+</div>
+<p>Dans ce document, nous avons jusqu’à présent supposé que tout se passait bien : que votre code ne produisait jamais d’erreur et ne contenait jamais de <em>bug</em>.
+Quel que soit votre niveau en Python, ces deux hypothèses sont peu réalistes !
+Nous allons donc voir comment vérifier si votre code fait bien ce que l’on attend de lui, et comment comprendre son comportement lorsque ce n’est pas le cas.</p>
+<p>On distingue deux situations :</p>
+<ul class="simple">
+<li><p>le programme <strong>s’arrête avec un message d’erreur</strong> : c’est la situation la plus simple, car Python vous indique où et pourquoi ;</p></li>
+<li><p>le programme <strong>s’exécute sans erreur mais donne un résultat faux</strong> : c’est un <em>bug</em> « silencieux », plus difficile à trouver, et c’est là que les tests sont indispensables.</p></li>
+</ul>
+<section id="les-erreurs-en-python">
+<h2><span class="section-number">8.1. </span>Les erreurs en Python<a class="headerlink" href="#les-erreurs-en-python" title="Lien vers cette rubrique">#</a></h2>
+<section id="lire-un-message-d-erreur">
+<h3><span class="section-number">8.1.1. </span>Lire un message d’erreur<a class="headerlink" href="#lire-un-message-d-erreur" title="Lien vers cette rubrique">#</a></h3>
+<p>Étudions ce qu’il se passe lors de l’exécution du code suivant :</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="ne">TypeError</span>: can only concatenate str (not "int") to str
+</pre></div>
+</div>
+</div>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/fig_erreur.svg"><img alt="../_images/fig_erreur.svg" src="../_images/fig_erreur.svg" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Rappel du chapitre 1 : anatomie d’un message d’erreur.</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Ce type de message ne doit pas vous effrayer, il est là pour vous aider.
+Il vous fournit de précieuses informations :</p>
+<ol class="arabic simple">
+<li><p>l’erreur se produit à la ligne 2 du code ;</p></li>
+<li><p>le problème est une <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> : Python ne peut concaténer (<code class="docutils literal notranslate"><span class="pre">concatenate</span></code>) une chaîne (<code class="docutils literal notranslate"><span class="pre">str</span></code>) qu’avec une autre chaîne, et non avec un entier (<code class="docutils literal notranslate"><span class="pre">int</span></code>).</p></li>
+</ol>
+<p>Reste à comprendre pourquoi.
+Dans la ligne 2 (<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>), deux opérations sont effectuées : l’opération <code class="docutils literal notranslate"><span class="pre">+</span></code> entre <code class="docutils literal notranslate"><span class="pre">x</span></code> et <code class="docutils literal notranslate"><span class="pre">2</span></code>, puis l’affectation du résultat à <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+Nous avons vu que Python sait effectuer l’opération <code class="docutils literal notranslate"><span class="pre">+</span></code> avec des opérandes de types variés (nombre + nombre, liste + liste, chaîne + chaîne…).
+Intéressons-nous donc au type des opérandes : <code class="docutils literal notranslate"><span class="pre">x</span></code>, définie à la ligne 1, est une chaîne de caractères, tandis que <code class="docutils literal notranslate"><span class="pre">2</span></code> est un entier.
+Or Python ne définit pas d’addition entre une chaîne et un entier.
+Plus précisément, Python nous dit : « si je pouvais convertir l’entier en chaîne de caractères à la volée, je pourrais faire l’opération <code class="docutils literal notranslate"><span class="pre">+</span></code>, qui serait alors une concaténation, mais je ne me permets pas de le faire sans que vous l’ayez écrit explicitement ».</p>
+<p>Maintenant que nous avons compris le sens de ce <em>bug</em>, il nous reste à le corriger.
+Si nous souhaitons faire la somme du nombre 12 (stocké sous forme de chaîne de caractères dans la variable <code class="docutils literal notranslate"><span class="pre">x</span></code>) et de la valeur 2, nous écrivons :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lorsque l’erreur se produit à l’intérieur d’une fonction, le message d’erreur liste toute la <strong>pile d’appels</strong> : la ligne du programme principal qui a appelé la fonction, puis la ligne de la fonction où l’erreur s’est produite.
+C’est généralement la <strong>dernière</strong> ligne de code mentionnée qui est la plus intéressante.</p>
+</section>
+<section id="les-erreurs-les-plus-courantes">
+<h3><span class="section-number">8.1.2. </span>Les erreurs les plus courantes<a class="headerlink" href="#les-erreurs-les-plus-courantes" title="Lien vers cette rubrique">#</a></h3>
+<p>Voici un récapitulatif des erreurs rencontrées dans ce document :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type d’erreur</p></th>
+<th class="head"><p>Signification</p></th>
+<th class="head"><p>Exemple typique</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code></p></td>
+<td><p>le code ne respecte pas la « grammaire » de Python</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">:</span></code> ou parenthèse oubliés, <code class="docutils literal notranslate"><span class="pre">=</span></code> au lieu de <code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IndentationError</span></code></p></td>
+<td><p>décalages incorrects</p></td>
+<td><p>bloc non indenté après un <code class="docutils literal notranslate"><span class="pre">if</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NameError</span></code></p></td>
+<td><p>nom (variable, fonction) inconnu</p></td>
+<td><p>faute de frappe, variable utilisée avant d’être définie, module non importé</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TypeError</span></code></p></td>
+<td><p>opération impossible pour ce type de données</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;12&quot;</span> <span class="pre">+</span> <span class="pre">2</span></code>, mauvais nombre d’arguments dans un appel</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></p></td>
+<td><p>bon type mais valeur incorrecte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int(&quot;douze&quot;)</span></code>, <code class="docutils literal notranslate"><span class="pre">liste.remove(x)</span></code> si <code class="docutils literal notranslate"><span class="pre">x</span></code> est absent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+<td><p>indice hors de la liste</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">liste[len(liste)]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KeyError</span></code></p></td>
+<td><p>clé absente d’un dictionnaire</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">d[&quot;cle_inexistante&quot;]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AttributeError</span></code></p></td>
+<td><p>attribut ou méthode inexistant pour cet objet</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">liste.lower()</span></code>, <code class="docutils literal notranslate"><span class="pre">None.append(...)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></p></td>
+<td><p>division par zéro</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">moyenne</span></code> d’une liste vide</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></p></td>
+<td><p>fichier introuvable</p></td>
+<td><p>mauvais nom ou mauvais dossier</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Quel type d’erreur produit chacune de ces lignes ?</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print(len(5))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3][3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prnt(&quot;bonjour&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float(&quot;3,5&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{&quot;a&quot;:</span> <span class="pre">1}[&quot;b&quot;]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;.append(&quot;d&quot;)</span></code></p></li>
+</ol>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TypeError</span></code> : un entier n’a pas de longueur ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code> : les indices valides vont de 0 à 2 ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NameError</span></code> : faute de frappe dans <code class="docutils literal notranslate"><span class="pre">print</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> : la virgule n’est pas acceptée (il faut un point) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KeyError</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> : les chaînes n’ont pas de méthode <code class="docutils literal notranslate"><span class="pre">append</span></code>.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="trouver-un-bug-une-demarche-methodique">
+<h2><span class="section-number">8.2. </span>Trouver un <em>bug</em> : une démarche méthodique<a class="headerlink" href="#trouver-un-bug-une-demarche-methodique" title="Lien vers cette rubrique">#</a></h2>
+<p>Lorsqu’un programme ne fait pas ce qu’il devrait, il est tentant de modifier le code un peu au hasard jusqu’à ce que « ça marche ».
+C’est rarement efficace ! Voici une démarche plus fiable.</p>
+<ol class="arabic simple">
+<li><p><strong>Reproduire le problème</strong> sur un exemple aussi petit que possible, dont vous connaissez le résultat attendu.</p></li>
+<li><p><strong>Lire le message d’erreur</strong> s’il y en a un, en commençant par la dernière ligne.</p></li>
+<li><p><strong>Observer</strong> ce que fait réellement le programme : affichez les valeurs des variables avec <code class="docutils literal notranslate"><span class="pre">print</span></code> à des endroits stratégiques (au début d’une fonction, à chaque tour de boucle…), ou exécutez le code pas à pas avec Python Tutor ou le débogueur de Thonny.</p></li>
+<li><p><strong>Comparer</strong> avec ce que vous attendiez : à quel moment la valeur d’une variable s’écarte-t-elle de ce que vous aviez prévu ? Le <em>bug</em> se trouve juste avant.</p></li>
+<li><p><strong>Corriger</strong>, puis <strong>re-tester</strong> tous vos exemples (une correction peut en casser une autre !).</p></li>
+</ol>
+<section id="exemple-guide">
+<h3><span class="section-number">8.2.1. </span>Exemple guidé<a class="headerlink" href="#exemple-guide" title="Lien vers cette rubrique">#</a></h3>
+<p>La fonction suivante est censée calculer la moyenne des valeurs positives d’une liste.
+Elle s’exécute sans erreur… mais le résultat est faux : la moyenne des valeurs positives de <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">-2,</span> <span class="pre">6]</span></code> devrait valoir 5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_positifs</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+    <span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">somme</span> <span class="o">+=</span> <span class="n">x</span>
+        <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">nb</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">moyenne_positifs</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.3333333333333335
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ajoutons un affichage dans la boucle pour observer l’évolution des variables :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_positifs</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+    <span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">somme</span> <span class="o">+=</span> <span class="n">x</span>
+        <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, somme = </span><span class="si">{</span><span class="n">somme</span><span class="si">}</span><span class="s2">, nb = </span><span class="si">{</span><span class="n">nb</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>   <span class="c1"># affichage de débogage</span>
+    <span class="k">return</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">nb</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">moyenne_positifs</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 4, somme = 4, nb = 1
+x = -2, somme = 4, nb = 2
+x = 6, somme = 10, nb = 3
+3.3333333333333335
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’affichage montre que <code class="docutils literal notranslate"><span class="pre">nb</span></code> est incrémenté même lorsque <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">-2</span></code> : l’instruction <code class="docutils literal notranslate"><span class="pre">nb</span> <span class="pre">+=</span> <span class="pre">1</span></code> est mal indentée, elle devrait se trouver <strong>dans</strong> le bloc du <code class="docutils literal notranslate"><span class="pre">if</span></code>.
+Une fois le <em>bug</em> corrigé, on n’oublie pas de retirer l’affichage de débogage :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_positifs</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+    <span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">somme</span> <span class="o">+=</span> <span class="n">x</span>
+            <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">nb</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">moyenne_positifs</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remarquez au passage que cette fonction produira une <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> si la liste ne contient aucune valeur positive : selon l’usage prévu, il faudrait peut-être traiter ce cas à part (en retournant <code class="docutils literal notranslate"><span class="pre">None</span></code>, par exemple).</p>
+</section>
+</section>
+<section id="les-tests-unitaires">
+<h2><span class="section-number">8.3. </span>Les tests unitaires<a class="headerlink" href="#les-tests-unitaires" title="Lien vers cette rubrique">#</a></h2>
+<section id="pourquoi-tester">
+<h3><span class="section-number">8.3.1. </span>Pourquoi tester ?<a class="headerlink" href="#pourquoi-tester" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour avoir confiance dans le code que vous écrivez, il faut l’avoir testé sur un ensemble d’exemples qui reflète l’ensemble des situations auxquelles votre programme pourra être confronté.
+Or, cela représente vite un grand nombre de cas dès que le programme devient un peu complexe.
+Il est donc recommandé de <strong>découper son code en fonctions</strong> de tailles raisonnables, qui puissent être testées indépendamment les unes des autres.
+Les tests associés à chacune de ces fonctions sont appelés <strong>tests unitaires</strong>.</p>
+<p>Mettre en place de tels tests présente plusieurs avantages :</p>
+<ul class="simple">
+<li><p>vous détectez rapidement un éventuel <em>bug</em>, ce qui fait gagner beaucoup de temps ;</p></li>
+<li><p>lorsque vous modifiez votre code plus tard (pour le corriger ou lui ajouter une fonctionnalité), vous pouvez relancer les tests pour vous assurer que vous n’avez rien cassé dans les cas qui fonctionnaient déjà.</p></li>
+</ul>
+</section>
+<section id="choisir-ses-tests">
+<h3><span class="section-number">8.3.2. </span>Choisir ses tests<a class="headerlink" href="#choisir-ses-tests" title="Lien vers cette rubrique">#</a></h3>
+<p>Prenons un exemple concret.
+Supposons que l’on souhaite écrire une fonction <code class="docutils literal notranslate"><span class="pre">bissextile</span></code> capable de dire si une année est bissextile.
+En se renseignant sur <a class="reference external" href="https://fr.wikipedia.org/wiki/Ann%C3%A9e_bissextile">le sujet</a>, on apprend qu’une année est bissextile :</p>
+<ul class="simple">
+<li><p>si elle est divisible par 4 et non divisible par 100, ou</p></li>
+<li><p>si elle est divisible par 400.</p></li>
+</ul>
+<p>On en déduit un ensemble de tests couvrant les différents cas de figure :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bissextile</span><span class="p">(</span><span class="mi">2004</span><span class="p">))</span>  <span class="c1"># True car divisible par 4 et non par 100</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bissextile</span><span class="p">(</span><span class="mi">1900</span><span class="p">))</span>  <span class="c1"># False car divisible par 100 et non par 400</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bissextile</span><span class="p">(</span><span class="mi">2000</span><span class="p">))</span>  <span class="c1"># True car divisible par 400</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bissextile</span><span class="p">(</span><span class="mi">1999</span><span class="p">))</span>  <span class="c1"># False car non divisible par 4</span>
+</pre></div>
+</div>
+<div class="important admonition">
+<p class="admonition-title">À retenir : comment choisir ses tests ?</p>
+<ul class="simple">
+<li><p>Un test par <strong>cas de figure</strong> distinct de l’énoncé (ici, les 4 situations possibles).</p></li>
+<li><p>Des <strong>cas limites</strong> : liste vide, liste à un seul élément, valeur nulle, valeurs égales, première et dernière valeur d’un intervalle…</p></li>
+<li><p>Pour chaque test, <strong>le résultat attendu doit être connu à l’avance</strong> (calculé à la main, ou trouvé dans l’énoncé).</p></li>
+</ul>
+</div>
+</section>
+<section id="tester-automatiquement-avec-assert">
+<h3><span class="section-number">8.3.3. </span>Tester automatiquement avec <code class="docutils literal notranslate"><span class="pre">assert</span></code><a class="headerlink" href="#tester-automatiquement-avec-assert" title="Lien vers cette rubrique">#</a></h3>
+<p>Avec des <code class="docutils literal notranslate"><span class="pre">print</span></code>, il faut vérifier « à l’œil » que chaque résultat affiché correspond au résultat attendu, ce qui devient fastidieux quand les tests sont nombreux.
+L’instruction <code class="docutils literal notranslate"><span class="pre">assert</span></code> permet d’automatiser cette vérification : <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">condition</span></code> ne fait rien si la condition est vraie, et provoque une erreur (<code class="docutils literal notranslate"><span class="pre">AssertionError</span></code>) si elle est fausse.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bissextile</span><span class="p">(</span><span class="n">annee</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span>   <span class="c1"># version incomplète, volontairement fausse</span>
+
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2004</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1999</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1900</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>   <span class="c1"># ce test échoue</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tous les tests sont passés !"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2004</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1999</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1900</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>   <span class="c1"># ce test échoue</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"Tous les tests sont passés !"</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le message d’erreur indique précisément quel test a échoué.
+On peut regrouper les tests d’une fonction dans une fonction de test, que l’on relance après chaque modification :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bissextile</span><span class="p">(</span><span class="n">annee</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_bissextile</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2004</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>    <span class="c1"># divisible par 4 et non par 100</span>
+    <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1900</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>   <span class="c1"># divisible par 100 et non par 400</span>
+    <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>    <span class="c1"># divisible par 400</span>
+    <span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1999</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>   <span class="c1"># non divisible par 4</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"test_bissextile : OK"</span><span class="p">)</span>
+
+<span class="n">test_bissextile</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test_bissextile : OK
+</pre></div>
+</div>
+</div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Attention avec les nombres à virgule</p>
+<p>À cause des erreurs d’arrondi, <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">0.1</span> <span class="pre">+</span> <span class="pre">0.2</span> <span class="pre">==</span> <span class="pre">0.3</span></code> échoue !
+Pour tester des résultats à virgule, on vérifie plutôt que l’écart est très petit : <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">abs(resultat</span> <span class="pre">-</span> <span class="pre">attendu)</span> <span class="pre">&lt;</span> <span class="pre">1e-9</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="exercices">
+<h2><span class="section-number">8.4. </span>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique">#</a></h2>
+<div class="admonition-exercice-8-1-trouvez-les-bugs admonition" id="ex8-1">
+<p class="admonition-title">Exercice 8.1 : Trouvez les bugs ★★</p>
+<p>Chacune des fonctions suivantes contient (au moins) un <em>bug</em>.
+Pour chacune, écrivez d’abord un ou plusieurs tests qui mettent le <em>bug</em> en évidence, puis corrigez la fonction.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Doit retourner le plus grand élément d'une liste non vide
+def maximum(liste):
+    m = 0
+    for x in liste:
+        if x &gt; m:
+            m = x
+    return m
+
+# Doit retourner le nombre de voyelles d'un mot
+def nb_voyelles(mot):
+    n = 0
+    for lettre in mot:
+        if lettre in "aeiouy":
+            n += 1
+        return n
+
+# Doit retourner la liste des éléments pairs de la liste
+def pairs(liste):
+    resultat = []
+    for i in range(len(liste)):
+        if i % 2 == 0:
+            resultat.append(liste[i])
+    return resultat
+</pre></div>
+</div>
+</div>
+<div id="pad_8_1" class="pad"></div>
+<script>
+    Pythonpad('pad_8_1', {'id': 'aude_8.1', 'title': 'Testez votre code ici', 'src': "def maximum(liste):\n    m = 0\n    for x in liste:\n        if x > m:\n            m = x\n    return m\n\ndef nb_voyelles(mot):\n    n = 0\n    for lettre in mot:\n        if lettre in \"aeiouy\":\n            n += 1\n        return n\n\ndef pairs(liste):\n    resultat = []\n    for i in range(len(liste)):\n        if i % 2 == 0:\n            resultat.append(liste[i])\n    return resultat\n\n# Écrivez vos tests ici, par exemple :\nassert maximum([1, 5, 3]) == 5\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum</span></code> : que se passe-t-il si tous les éléments sont négatifs ?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nb_voyelles</span></code> : regardez bien l’indentation du <code class="docutils literal notranslate"><span class="pre">return</span></code>. Combien de tours de boucle sont effectués ?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pairs</span></code> : la fonction teste-t-elle la parité des éléments ou celle d’autre chose ?</p></li>
+</ul>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bug 1 : m est initialisé à 0, donc le résultat est faux si tous les éléments sont négatifs.</span>
+<span class="c1"># Test qui révèle le bug : assert maximum([-3, -1, -7]) == -1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">liste</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># on initialise avec le premier élément</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+<span class="c1"># Bug 2 : le return est dans la boucle, la fonction s'arrête dès la première lettre.</span>
+<span class="c1"># Test qui révèle le bug : assert nb_voyelles("bonjour") == 3</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nb_voyelles</span><span class="p">(</span><span class="n">mot</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">lettre</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lettre</span> <span class="ow">in</span> <span class="s2">"aeiouy"</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span>
+
+<span class="c1"># Bug 3 : on teste la parité de l'indice i et non celle de l'élément liste[i].</span>
+<span class="c1"># Test qui révèle le bug : assert pairs([1, 2, 3, 4]) == [2, 4]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pairs</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+    <span class="n">resultat</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">elem</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">resultat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resultat</span>
+
+<span class="k">assert</span> <span class="n">maximum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="k">assert</span> <span class="n">maximum</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">])</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">assert</span> <span class="n">nb_voyelles</span><span class="p">(</span><span class="s2">"bonjour"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="n">nb_voyelles</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="n">pairs</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">pairs</span><span class="p">([])</span> <span class="o">==</span> <span class="p">[]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tous les tests sont passés !"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Remarquez que chacun de ces <em>bugs</em> passait inaperçu sur certains exemples (par exemple <code class="docutils literal notranslate"><span class="pre">maximum([1,</span> <span class="pre">5,</span> <span class="pre">3])</span></code> donnait bien 5) : d’où l’importance de choisir des tests variés, en pensant aux cas particuliers.</p>
+</div>
+<div class="admonition-exercice-8-2-bissextile-en-une-ligne admonition" id="ex8-2">
+<p class="admonition-title">Exercice 8.2 : Bissextile en une ligne ★★</p>
+<p>Proposez une réécriture de la fonction <code class="docutils literal notranslate"><span class="pre">bissextile</span></code> qui tienne en une ligne de la forme :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bissextile</span><span class="p">(</span><span class="n">annee</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CONDITION_COMPLEXE</span>
+</pre></div>
+</div>
+<p>où <code class="docutils literal notranslate"><span class="pre">CONDITION_COMPLEXE</span></code> est un booléen calculé à partir de la valeur de <code class="docutils literal notranslate"><span class="pre">annee</span></code>.
+Assurez-vous que cette nouvelle fonction passe bien les tests énoncés plus haut.</p>
+</div>
+<div id="pad_8_2" class="pad"></div>
+<script>
+    Pythonpad('pad_8_2', {'id': 'aude_8.2', 'title': 'Testez votre code ici', 'src': "def bissextile(annee):\n    return ...  # Complétez ce code\n\nassert bissextile(2004) == True\nassert bissextile(1900) == False\nassert bissextile(2000) == True\nassert bissextile(1999) == False\nprint(\"Tous les tests sont passés !\")\n"});
+</script>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bissextile</span><span class="p">(</span><span class="n">annee</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2004</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1900</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">bissextile</span><span class="p">(</span><span class="mi">1999</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tous les tests sont passés !"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>C’est exactement l’intérêt des tests : on peut réécrire (on dit <strong>refactoriser</strong>) une fonction en toute confiance, puisque les tests nous assurent que son comportement n’a pas changé.</p>
+</div>
+</section>
+<section id="bilan-du-chapitre">
+<h2><span class="section-number">8.5. </span>Bilan du chapitre<a class="headerlink" href="#bilan-du-chapitre" title="Lien vers cette rubrique">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<ul class="simple">
+<li><p>Un message d’erreur se lit en partant de la fin : type d’erreur, explication, puis ligne en cause.</p></li>
+<li><p>Pour trouver un <em>bug</em> : reproduire sur un petit exemple, observer (<code class="docutils literal notranslate"><span class="pre">print</span></code>, Python Tutor, débogueur), comparer avec l’attendu, corriger, re-tester.</p></li>
+<li><p>Tester chaque fonction sur plusieurs cas, y compris les cas limites ; <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">condition</span></code> vérifie automatiquement un résultat.</p></li>
+</ul>
+</div>
+<p>Faites le point : êtes-vous capable de…</p>
+<ul class="simple">
+<li><p>associer un type d’erreur (<code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>…) à sa cause probable ?</p></li>
+<li><p>utiliser des <code class="docutils literal notranslate"><span class="pre">print</span></code> pour localiser un <em>bug</em> silencieux ?</p></li>
+<li><p>choisir un jeu de tests pertinent pour une fonction, avec des cas limites ?</p></li>
+<li><p>écrire une fonction de test utilisant <code class="docutils literal notranslate"><span class="pre">assert</span></code> ?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dictionnaires.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Dictionnaires, <em>tuples</em> et <em>sets</em></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fichiers.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Lire et écrire des fichiers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-erreurs-en-python">8.1. Les erreurs en Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-un-message-d-erreur">8.1.1. Lire un message d’erreur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-erreurs-les-plus-courantes">8.1.2. Les erreurs les plus courantes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trouver-un-bug-une-demarche-methodique">8.2. Trouver un <em>bug</em> : une démarche méthodique</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide">8.2.1. Exemple guidé</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-tests-unitaires">8.3. Les tests unitaires</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pourquoi-tester">8.3.1. Pourquoi tester ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-ses-tests">8.3.2. Choisir ses tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tester-automatiquement-avec-assert">8.3.3. Tester automatiquement avec <code class="docutils literal notranslate"><span class="pre">assert</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">8.4. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">8.5. Bilan du chapitre</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

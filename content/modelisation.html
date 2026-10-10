@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>14. Modélisation statistique avec statsmodels &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/modelisation';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Mini-projets" href="projets.html" />
+    <link rel="prev" title="13. Visualiser ses données avec matplotlib et seaborn" href="visualisation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables.html">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boucles.html">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fichiers.html">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/modelisation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modélisation statistique avec statsmodels</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondances-avec-r-et-sas">14.1. Correspondances avec R et SAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regression-lineaire">14.2. La régression linéaire</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-premier-modele">14.2.1. Un premier modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-aux-resultats">14.2.2. Accéder aux résultats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-qualitatives-et-interactions">14.2.3. Variables qualitatives et interactions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predire">14.2.4. Prédire</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-les-hypotheses">14.2.5. Vérifier les hypothèses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-des-modeles-et-tables-d-anova">14.2.6. Comparer des modèles et tables d’ANOVA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regression-logistique">14.3. La régression logistique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-tests-statistiques-classiques">14.4. Les tests statistiques classiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-deux-moyennes-test-de-student">14.4.1. Comparer deux moyennes : test de Student</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-de-deux-variables-qualitatives-test-du-khi-deux">14.4.2. Indépendance de deux variables qualitatives : test du khi-deux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation">14.4.3. Corrélation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">14.5. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">14.6. Bilan du chapitre</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelisation-statistique-avec-statsmodels">
+<span id="ch-modelisation"></span><h1><span class="section-number">14. </span>Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code><a class="headerlink" href="#modelisation-statistique-avec-statsmodels" title="Lien vers cette rubrique">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>À la fin de ce chapitre, vous saurez :</p>
+<ul class="simple">
+<li><p>ajuster un modèle de régression linéaire avec une <strong>formule</strong> (comme <code class="docutils literal notranslate"><span class="pre">lm</span></code> en R) et lire ses résultats ;</p></li>
+<li><p>intégrer des variables qualitatives et des interactions ;</p></li>
+<li><p>faire des prédictions et vérifier les résidus ;</p></li>
+<li><p>ajuster une régression logistique et interpréter des <em>odds ratios</em> ;</p></li>
+<li><p>réaliser les tests classiques (Student, khi-deux, ANOVA) avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>.</p></li>
+</ul>
+<p><strong>Prérequis :</strong> chapitres 11 à 13, et des connaissances en statistique (régression, tests). <strong>Durée indicative :</strong> 2h.</p>
+</div>
+<p>Si vous avez déjà pratiqué la statistique avec R ou SAS, ce chapitre vous montre comment retrouver vos outils habituels en Python.
+La bibliothèque <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> est la plus proche de l’esprit de R et de SAS : elle produit des tableaux de résultats complets (coefficients, erreurs standard, tests, intervalles de confiance…) et permet de décrire les modèles avec des <strong>formules</strong> très proches de celles de R.
+Pour les tests statistiques élémentaires, on utilise aussi le module <code class="docutils literal notranslate"><span class="pre">stats</span></code> de la bibliothèque <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Installation</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy</span></code> sont inclus dans Anaconda et dans Google Colab. Sinon : <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">statsmodels</span> <span class="pre">scipy</span></code>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">manchots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/penguins.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/titanic.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Par convention, on importe l’interface « formules » de <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> sous le nom <code class="docutils literal notranslate"><span class="pre">smf</span></code>, et l’interface générale sous le nom <code class="docutils literal notranslate"><span class="pre">sm</span></code>.
+Nous avons retiré d’emblée les manchots ayant des valeurs manquantes (<code class="docutils literal notranslate"><span class="pre">dropna()</span></code>), pour que tous les modèles portent sur les mêmes 333 individus.</p>
+<section id="correspondances-avec-r-et-sas">
+<h2><span class="section-number">14.1. </span>Correspondances avec R et SAS<a class="headerlink" href="#correspondances-avec-r-et-sas" title="Lien vers cette rubrique">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Objectif</p></th>
+<th class="head"><p>R</p></th>
+<th class="head"><p>SAS</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Régression linéaire</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lm(y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2,</span> <span class="pre">data</span> <span class="pre">=</span> <span class="pre">d)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">REG</span></code> / <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">GLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">smf.ols(&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2&quot;,</span> <span class="pre">data=d).fit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Résultats détaillés</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">summary(modele)</span></code></p></td>
+<td><p>(sortie de la procédure)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">modele.summary()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Variable qualitative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">factor(x)</span></code></p></td>
+<td><p>instruction <code class="docutils literal notranslate"><span class="pre">CLASS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C(x)</span></code> dans la formule</p></td>
+</tr>
+<tr class="row-odd"><td><p>Régression logistique</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">glm(y</span> <span class="pre">~</span> <span class="pre">x,</span> <span class="pre">family</span> <span class="pre">=</span> <span class="pre">binomial)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">smf.logit(&quot;y</span> <span class="pre">~</span> <span class="pre">x&quot;,</span> <span class="pre">data=d).fit()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>GLM (Poisson…)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">glm(...,</span> <span class="pre">family</span> <span class="pre">=</span> <span class="pre">poisson)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">GENMOD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">smf.glm(&quot;y</span> <span class="pre">~</span> <span class="pre">x&quot;,</span> <span class="pre">data=d,</span> <span class="pre">family=sm.families.Poisson()).fit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Table d’ANOVA</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">anova(modele)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">GLM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sm.stats.anova_lm(modele,</span> <span class="pre">typ=2)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Test de Student</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t.test(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">TTEST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stats.ttest_ind(x,</span> <span class="pre">y)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Test du khi-deux</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chisq.test(table)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">FREQ</span></code> / <code class="docutils literal notranslate"><span class="pre">CHISQ</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stats.chi2_contingency(table)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Corrélation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cor.test(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">CORR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stats.pearsonr(x,</span> <span class="pre">y)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Prédictions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">predict(modele,</span> <span class="pre">newdata)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">OUT=</span> <span class="pre">P=</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">modele.predict(nouvelles_donnees)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="la-regression-lineaire">
+<h2><span class="section-number">14.2. </span>La régression linéaire<a class="headerlink" href="#la-regression-lineaire" title="Lien vers cette rubrique">#</a></h2>
+<section id="un-premier-modele">
+<h3><span class="section-number">14.2.1. </span>Un premier modèle<a class="headerlink" href="#un-premier-modele" title="Lien vers cette rubrique">#</a></h3>
+<p>Modélisons la masse d’un manchot en fonction de la longueur de sa nageoire.
+La syntaxe est presque celle de R : une formule <code class="docutils literal notranslate"><span class="pre">&quot;y</span> <span class="pre">~</span> <span class="pre">x&quot;</span></code> (sous forme de chaîne de caractères), le <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> passé en argument <code class="docutils literal notranslate"><span class="pre">data</span></code>, puis la méthode <code class="docutils literal notranslate"><span class="pre">fit()</span></code> qui ajuste le modèle :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modele</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"body_mass_g ~ flipper_length_mm"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modele</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            body_mass_g   R-squared:                       0.762
+Model:                            OLS   Adj. R-squared:                  0.761
+Method:                 Least Squares   F-statistic:                     1060.
+Date:                Sat, 10 Oct 2026   Prob (F-statistic):          3.13e-105
+Time:                        13:02:52   Log-Likelihood:                -2461.1
+No. Observations:                 333   AIC:                             4926.
+Df Residuals:                     331   BIC:                             4934.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+Intercept         -5872.0927    310.285    -18.925      0.000   -6482.472   -5261.713
+flipper_length_mm    50.1533      1.540     32.562      0.000      47.123      53.183
+==============================================================================
+Omnibus:                        5.922   Durbin-Watson:                   2.102
+Prob(Omnibus):                  0.052   Jarque-Bera (JB):                5.876
+Skew:                           0.325   Prob(JB):                       0.0530
+Kurtosis:                       3.025   Cond. No.                     2.90e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.9e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ols</span></code> signifie <em>Ordinary Least Squares</em> (moindres carrés ordinaires).
+Dans un notebook, écrire simplement <code class="docutils literal notranslate"><span class="pre">modele.summary()</span></code> (sans <code class="docutils literal notranslate"><span class="pre">print</span></code>) affiche les mêmes résultats sous forme de tableaux mis en forme.
+La sortie de <code class="docutils literal notranslate"><span class="pre">summary()</span></code> ressemble beaucoup à celle de R ou de SAS :</p>
+<ul class="simple">
+<li><p>en haut, les caractéristiques globales : nombre d’observations, <span class="math notranslate nohighlight">\(R^2\)</span> (<code class="docutils literal notranslate"><span class="pre">R-squared</span></code>) et <span class="math notranslate nohighlight">\(R^2\)</span> ajusté, statistique de Fisher et sa <em>p</em>-valeur, critères AIC et BIC ;</p></li>
+<li><p>au milieu, le tableau des coefficients : estimation (<code class="docutils literal notranslate"><span class="pre">coef</span></code>), erreur standard, statistique <em>t</em>, <em>p</em>-valeur (<code class="docutils literal notranslate"><span class="pre">P&gt;|t|</span></code>) et intervalle de confiance à 95 % ;</p></li>
+<li><p>en bas, quelques diagnostics sur les résidus (normalité, autocorrélation).</p></li>
+</ul>
+<p>Ici, chaque millimètre de nageoire supplémentaire est associé, en moyenne, à environ 50 g de masse en plus, et le modèle explique 76 % de la variance de la masse.</p>
+</section>
+<section id="acceder-aux-resultats">
+<h3><span class="section-number">14.2.2. </span>Accéder aux résultats<a class="headerlink" href="#acceder-aux-resultats" title="Lien vers cette rubrique">#</a></h3>
+<p>Comme en R (<code class="docutils literal notranslate"><span class="pre">coef(modele)</span></code>, <code class="docutils literal notranslate"><span class="pre">confint(modele)</span></code>…), chaque élément du résultat est accessible séparément, ce qui permet de l’utiliser dans la suite d’un programme :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">modele</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>          <span class="c1"># coefficients (une Series)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modele</span><span class="o">.</span><span class="n">rsquared</span><span class="p">)</span>        <span class="c1"># R²</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modele</span><span class="o">.</span><span class="n">pvalues</span><span class="p">)</span>         <span class="c1"># p-valeurs</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modele</span><span class="o">.</span><span class="n">conf_int</span><span class="p">())</span>      <span class="c1"># intervalles de confiance (un DataFrame)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept           -5872.092683
+flipper_length_mm      50.153266
+dtype: float64
+0.7620921573403913
+Intercept             1.183941e-54
+flipper_length_mm    3.132836e-105
+dtype: float64
+                             0            1
+Intercept         -6482.472236 -5261.713130
+flipper_length_mm    47.123390    53.183142
+</pre></div>
+</div>
+</div>
+</div>
+<p>Les attributs <code class="docutils literal notranslate"><span class="pre">modele.fittedvalues</span></code> et <code class="docutils literal notranslate"><span class="pre">modele.resid</span></code> contiennent les valeurs ajustées et les résidus, et <code class="docutils literal notranslate"><span class="pre">modele.nobs</span></code> le nombre d’observations utilisées.</p>
+</section>
+<section id="variables-qualitatives-et-interactions">
+<h3><span class="section-number">14.2.3. </span>Variables qualitatives et interactions<a class="headerlink" href="#variables-qualitatives-et-interactions" title="Lien vers cette rubrique">#</a></h3>
+<p>Les formules acceptent les mêmes constructions qu’en R :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Formule</p></th>
+<th class="head"><p>Signification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code></p></td>
+<td><p>deux variables explicatives</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">C(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> traitée comme variable qualitative (codage par indicatrices, la première modalité servant de référence)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">*</span> <span class="pre">x2</span></code></p></td>
+<td><p>effets principaux et interaction (<code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x1:x2</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1:x2</span></code></p></td>
+<td><p>interaction seule</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">np.log(x)</span></code></p></td>
+<td><p>transformation d’une variable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">I(x</span> <span class="pre">**</span> <span class="pre">2)</span></code></p></td>
+<td><p>calcul arithmétique dans la formule</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x</span> <span class="pre">-</span> <span class="pre">1</span></code></p></td>
+<td><p>modèle sans constante</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Les colonnes de texte sont automatiquement traitées comme qualitatives, mais il est plus lisible (et indispensable pour une variable codée par des nombres, comme une classe 1, 2, 3) d’écrire <code class="docutils literal notranslate"><span class="pre">C(...)</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modele2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"body_mass_g ~ flipper_length_mm + C(species) + C(sex)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">modele2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># seulement le tableau des coefficients</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===========================================================================================
+                              coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------
+Intercept                -365.8174    532.050     -0.688      0.492   -1412.479     680.844
+C(species)[T.Chinstrap]   -87.6345     46.347     -1.891      0.060    -178.810       3.541
+C(species)[T.Gentoo]      836.2600     85.185      9.817      0.000     668.681    1003.839
+C(sex)[T.MALE]            530.3811     37.810     14.027      0.000     456.000     604.762
+flipper_length_mm          20.0249      2.846      7.037      0.000      14.427      25.623
+===========================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le coefficient <code class="docutils literal notranslate"><span class="pre">C(sex)[T.MALE]</span></code> s’interprète ainsi : à longueur de nageoire et espèce égales, les mâles pèsent en moyenne 530 g de plus que les femelles (la modalité de référence, <code class="docutils literal notranslate"><span class="pre">FEMALE</span></code>, est la première par ordre alphabétique).
+Pour choisir une autre modalité de référence : <code class="docutils literal notranslate"><span class="pre">C(species,</span> <span class="pre">Treatment(reference=&quot;Gentoo&quot;))</span></code>.</p>
+</section>
+<section id="predire">
+<h3><span class="section-number">14.2.4. </span>Prédire<a class="headerlink" href="#predire" title="Lien vers cette rubrique">#</a></h3>
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">predict</span></code> calcule les prédictions pour de nouvelles observations, fournies sous la forme d’un <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> ayant les mêmes noms de colonnes que les données d’origine :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nouveaux</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"flipper_length_mm"</span><span class="p">:</span> <span class="p">[</span><span class="mi">190</span><span class="p">,</span> <span class="mi">220</span><span class="p">],</span>
+    <span class="s2">"species"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Adelie"</span><span class="p">,</span> <span class="s2">"Gentoo"</span><span class="p">],</span>
+    <span class="s2">"sex"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"FEMALE"</span><span class="p">,</span> <span class="s2">"MALE"</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">modele2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">nouveaux</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    3438.916482
+1    5406.305048
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pour obtenir aussi les intervalles de confiance et de prédiction : <code class="docutils literal notranslate"><span class="pre">modele2.get_prediction(nouveaux).summary_frame(alpha=0.05)</span></code>.</p>
+</section>
+<section id="verifier-les-hypotheses">
+<h3><span class="section-number">14.2.5. </span>Vérifier les hypothèses<a class="headerlink" href="#verifier-les-hypotheses" title="Lien vers cette rubrique">#</a></h3>
+<p>Comme en R avec <code class="docutils literal notranslate"><span class="pre">plot(modele)</span></code>, on vérifie l’absence de structure dans les résidus et leur normalité approximative :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">modele2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">modele2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Valeurs ajustées"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Résidus"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Résidus en fonction des valeurs ajustées"</span><span class="p">)</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">modele2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Diagramme quantile-quantile des résidus"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7bdcc38a8cd5d7990c87720e54c1a2e3ebf68b4905935c6bce5b20cd74d1feb8.png" src="../_images/7bdcc38a8cd5d7990c87720e54c1a2e3ebf68b4905935c6bce5b20cd74d1feb8.png" />
+</div>
+</div>
+</section>
+<section id="comparer-des-modeles-et-tables-d-anova">
+<h3><span class="section-number">14.2.6. </span>Comparer des modèles et tables d’ANOVA<a class="headerlink" href="#comparer-des-modeles-et-tables-d-anova" title="Lien vers cette rubrique">#</a></h3>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">sm.stats.anova_lm</span></code> produit des tables d’analyse de la variance (avec <code class="docutils literal notranslate"><span class="pre">typ=2</span></code> ou <code class="docutils literal notranslate"><span class="pre">typ=3</span></code> pour les sommes des carrés de type II ou III, comme dans <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">GLM</span></code> ou <code class="docutils literal notranslate"><span class="pre">car::Anova</span></code> en R) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">modele2</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum_sq</th>
+      <th>df</th>
+      <th>F</th>
+      <th>PR(&gt;F)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>C(species)</th>
+      <td>1.314181e+07</td>
+      <td>2.0</td>
+      <td>75.217723</td>
+      <td>1.295035e-27</td>
+    </tr>
+    <tr>
+      <th>C(sex)</th>
+      <td>1.718958e+07</td>
+      <td>1.0</td>
+      <td>196.770645</td>
+      <td>2.414442e-35</td>
+    </tr>
+    <tr>
+      <th>flipper_length_mm</th>
+      <td>4.325617e+06</td>
+      <td>1.0</td>
+      <td>49.515732</td>
+      <td>1.154539e-11</td>
+    </tr>
+    <tr>
+      <th>Residual</th>
+      <td>2.865357e+07</td>
+      <td>328.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Avec deux modèles emboîtés, elle réalise le test de Fisher de comparaison (comme <code class="docutils literal notranslate"><span class="pre">anova(m1,</span> <span class="pre">m2)</span></code> en R) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">modele</span><span class="p">,</span> <span class="n">modele2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>df_resid</th>
+      <th>ssr</th>
+      <th>df_diff</th>
+      <th>ss_diff</th>
+      <th>F</th>
+      <th>Pr(&gt;F)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>331.0</td>
+      <td>5.121196e+07</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>328.0</td>
+      <td>2.865357e+07</td>
+      <td>3.0</td>
+      <td>2.255839e+07</td>
+      <td>86.075999</td>
+      <td>4.215933e-41</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Une ANOVA à un facteur n’est rien d’autre qu’une régression sur une variable qualitative :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anova_espece</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"body_mass_g ~ C(species)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">anova_espece</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sum_sq</th>
+      <th>df</th>
+      <th>F</th>
+      <th>PR(&gt;F)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>C(species)</th>
+      <td>1.451902e+08</td>
+      <td>2.0</td>
+      <td>341.894895</td>
+      <td>3.744505e-81</td>
+    </tr>
+    <tr>
+      <th>Residual</th>
+      <td>7.006945e+07</td>
+      <td>330.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Si vous venez de R</p>
+<ul class="simple">
+<li><p>Ne pas oublier <code class="docutils literal notranslate"><span class="pre">.fit()</span></code> : <code class="docutils literal notranslate"><span class="pre">smf.ols(...)</span></code> seul ne fait que <strong>définir</strong> le modèle.</p></li>
+<li><p>Comme <code class="docutils literal notranslate"><span class="pre">lm</span></code> par défaut, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> supprime les lignes ayant des valeurs manquantes dans les variables du modèle : vérifiez toujours <code class="docutils literal notranslate"><span class="pre">modele.nobs</span></code>.</p></li>
+<li><p>Il existe aussi une interface sans formule, <code class="docutils literal notranslate"><span class="pre">sm.OLS(y,</span> <span class="pre">X)</span></code>, plus proche de la notation matricielle ; elle n’ajoute <strong>pas</strong> de constante automatiquement (il faut utiliser <code class="docutils literal notranslate"><span class="pre">sm.add_constant(X)</span></code>). Les formules sont plus simples pour commencer.</p></li>
+<li><p>Pour les modèles mixtes (<code class="docutils literal notranslate"><span class="pre">lme4</span></code>), voir <code class="docutils literal notranslate"><span class="pre">smf.mixedlm</span></code> ; pour l’apprentissage automatique (forêts aléatoires, validation croisée…), la bibliothèque de référence est <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="la-regression-logistique">
+<h2><span class="section-number">14.3. </span>La régression logistique<a class="headerlink" href="#la-regression-logistique" title="Lien vers cette rubrique">#</a></h2>
+<p>Pour une variable à expliquer binaire (0 / 1), on utilise la régression logistique, avec <code class="docutils literal notranslate"><span class="pre">smf.logit</span></code> (ou, de façon équivalente, <code class="docutils literal notranslate"><span class="pre">smf.glm(...,</span> <span class="pre">family=sm.families.Binomial())</span></code>).
+Modélisons la survie des passagers du Titanic :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">"survived ~ C(sex) + C(pclass) + age"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">logit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.453279
+         Iterations 6
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:               survived   No. Observations:                  714
+Model:                          Logit   Df Residuals:                      709
+Method:                           MLE   Df Model:                            4
+Date:                Sat, 10 Oct 2026   Pseudo R-squ.:                  0.3289
+Time:                        13:02:52   Log-Likelihood:                -323.64
+converged:                       True   LL-Null:                       -482.26
+Covariance Type:            nonrobust   LLR p-value:                 2.074e-67
+==================================================================================
+                     coef    std err          z      P&gt;|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept          3.7770      0.401      9.416      0.000       2.991       4.563
+C(sex)[T.male]    -2.5228      0.207    -12.164      0.000      -2.929      -2.116
+C(pclass)[T.2]    -1.3098      0.278     -4.710      0.000      -1.855      -0.765
+C(pclass)[T.3]    -2.5806      0.281     -9.169      0.000      -3.132      -2.029
+age               -0.0370      0.008     -4.831      0.000      -0.052      -0.022
+==================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’argument <code class="docutils literal notranslate"><span class="pre">disp=0</span></code> de <code class="docutils literal notranslate"><span class="pre">fit()</span></code> supprime le message sur la convergence de l’algorithme.
+Remarquez le nombre d’observations : 714, car les 177 passagers sans âge ont été écartés.</p>
+<p>Les coefficients sont exprimés sur l’échelle du logarithme de la cote (<em>log-odds</em>). Pour obtenir les <strong><em>odds ratios</em></strong>, comme dans la sortie de <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code>, on prend leur exponentielle, ainsi que celle des bornes des intervalles de confiance :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">odds_ratios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"OR"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logit</span><span class="o">.</span><span class="n">params</span><span class="p">),</span>
+    <span class="s2">"IC 2.5 %"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logit</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="s2">"IC 97.5 %"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logit</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">odds_ratios</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OR</th>
+      <th>IC 2.5 %</th>
+      <th>IC 97.5 %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>43.685</td>
+      <td>19.902</td>
+      <td>95.890</td>
+    </tr>
+    <tr>
+      <th>C(sex)[T.male]</th>
+      <td>0.080</td>
+      <td>0.053</td>
+      <td>0.120</td>
+    </tr>
+    <tr>
+      <th>C(pclass)[T.2]</th>
+      <td>0.270</td>
+      <td>0.156</td>
+      <td>0.465</td>
+    </tr>
+    <tr>
+      <th>C(pclass)[T.3]</th>
+      <td>0.076</td>
+      <td>0.044</td>
+      <td>0.131</td>
+    </tr>
+    <tr>
+      <th>age</th>
+      <td>0.964</td>
+      <td>0.949</td>
+      <td>0.978</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>À classe et âge égaux, la cote de survie d’un homme est environ 12 fois plus faible que celle d’une femme (<em>odds ratio</em> de 0,08) ; chaque année d’âge supplémentaire multiplie la cote par 0,96.</p>
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">predict</span></code> donne ici des <strong>probabilités</strong> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">passagers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"sex"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"female"</span><span class="p">,</span> <span class="s2">"male"</span><span class="p">],</span> <span class="s2">"pclass"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"age"</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">]})</span>
+<span class="n">logit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">passagers</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0.935
+1    0.080
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="les-tests-statistiques-classiques">
+<h2><span class="section-number">14.4. </span>Les tests statistiques classiques<a class="headerlink" href="#les-tests-statistiques-classiques" title="Lien vers cette rubrique">#</a></h2>
+<p>Le module <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> fournit les tests usuels. Ils prennent en argument des <code class="docutils literal notranslate"><span class="pre">Series</span></code> (ou des tableaux) et retournent un résultat contenant la statistique et la <em>p</em>-valeur.</p>
+<section id="comparer-deux-moyennes-test-de-student">
+<h3><span class="section-number">14.4.1. </span>Comparer deux moyennes : test de Student<a class="headerlink" href="#comparer-deux-moyennes-test-de-student" title="Lien vers cette rubrique">#</a></h3>
+<p>Les mâles Adélie sont-ils plus lourds que les femelles ?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adelie</span> <span class="o">=</span> <span class="n">manchots</span><span class="p">[</span><span class="n">manchots</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Adelie"</span><span class="p">]</span>
+<span class="n">males</span> <span class="o">=</span> <span class="n">adelie</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"MALE"</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]</span>
+<span class="n">femelles</span> <span class="o">=</span> <span class="n">adelie</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"FEMALE"</span><span class="p">,</span> <span class="s2">"body_mass_g"</span><span class="p">]</span>
+
+<span class="n">resultat</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">males</span><span class="p">,</span> <span class="n">femelles</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>   <span class="c1"># test de Welch</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultat</span><span class="o">.</span><span class="n">statistic</span><span class="p">,</span> <span class="n">resultat</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.126285923485874 6.402319748031804e-26
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">equal_var=False</span></code> correspond au test de Welch (le défaut de <code class="docutils literal notranslate"><span class="pre">t.test</span></code> en R) ; avec <code class="docutils literal notranslate"><span class="pre">equal_var=True</span></code>, on obtient le test de Student classique. Pour des échantillons appariés, on utilise <code class="docutils literal notranslate"><span class="pre">stats.ttest_rel</span></code>, et pour un test non paramétrique, <code class="docutils literal notranslate"><span class="pre">stats.mannwhitneyu</span></code>.</p>
+</section>
+<section id="independance-de-deux-variables-qualitatives-test-du-khi-deux">
+<h3><span class="section-number">14.4.2. </span>Indépendance de deux variables qualitatives : test du khi-deux<a class="headerlink" href="#independance-de-deux-variables-qualitatives-test-du-khi-deux" title="Lien vers cette rubrique">#</a></h3>
+<p>La survie est-elle indépendante du sexe ?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"survived"</span><span class="p">])</span>
+<span class="n">khi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ddl</span><span class="p">,</span> <span class="n">attendus</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"khi-deux = </span><span class="si">{</span><span class="n">khi2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, ddl = </span><span class="si">{</span><span class="n">ddl</span><span class="si">}</span><span class="s2">, p-valeur = </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>survived    0    1
+sex               
+female     81  233
+male      468  109
+khi-deux = 260.7, ddl = 1, p-valeur = 1.20e-58
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">chi2_contingency</span></code> retourne quatre valeurs (statistique, <em>p</em>-valeur, degrés de liberté et effectifs attendus sous l’hypothèse d’indépendance), que l’on récupère par <strong>déballage</strong>, comme un <em>tuple</em> (chapitre 7).
+Remarquez qu’il applique par défaut la correction de continuité de Yates pour les tableaux 2 × 2, comme <code class="docutils literal notranslate"><span class="pre">chisq.test</span></code> en R.</p>
+</section>
+<section id="correlation">
+<h3><span class="section-number">14.4.3. </span>Corrélation<a class="headerlink" href="#correlation" title="Lien vers cette rubrique">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">manchots</span><span class="p">[</span><span class="s2">"flipper_length_mm"</span><span class="p">],</span> <span class="n">manchots</span><span class="p">[</span><span class="s2">"body_mass_g"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"r = </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p-valeur = </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r = 0.873, p-valeur = 3.13e-105
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">stats.spearmanr</span></code> calcule la corrélation des rangs de Spearman.</p>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<ol class="arabic simple">
+<li><p>Quelle formule <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> correspond au modèle R <code class="docutils literal notranslate"><span class="pre">lm(y</span> <span class="pre">~</span> <span class="pre">factor(groupe)</span> <span class="pre">+</span> <span class="pre">age,</span> <span class="pre">data</span> <span class="pre">=</span> <span class="pre">d)</span></code> ?</p></li>
+<li><p>Que se passe-t-il si l’on écrit <code class="docutils literal notranslate"><span class="pre">modele</span> <span class="pre">=</span> <span class="pre">smf.ols(&quot;y</span> <span class="pre">~</span> <span class="pre">x&quot;,</span> <span class="pre">data=d)</span></code> puis <code class="docutils literal notranslate"><span class="pre">modele.params</span></code> ?</p></li>
+<li><p>Comment obtenir l”<em>odds ratio</em> associé à une variable dans un modèle <code class="docutils literal notranslate"><span class="pre">logit</span></code> ?</p></li>
+</ol>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">smf.ols(&quot;y</span> <span class="pre">~</span> <span class="pre">C(groupe)</span> <span class="pre">+</span> <span class="pre">age&quot;,</span> <span class="pre">data=d).fit()</span></code>.</p></li>
+<li><p>Une erreur (<code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>) : sans <code class="docutils literal notranslate"><span class="pre">.fit()</span></code>, le modèle est seulement défini, pas ajusté, et n’a donc pas de coefficients.</p></li>
+<li><p>En prenant l’exponentielle du coefficient : <code class="docutils literal notranslate"><span class="pre">np.exp(modele.params[&quot;nom_du_coefficient&quot;])</span></code>.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="exercices">
+<h2><span class="section-number">14.5. </span>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Rappel</p>
+<p>Ces exercices sont à faire dans un notebook, avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">statsmodels.formula.api</span> <span class="pre">as</span> <span class="pre">smf</span></code>, <code class="docutils literal notranslate"><span class="pre">statsmodels.api</span> <span class="pre">as</span> <span class="pre">sm</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> importés.</p>
+</div>
+<div class="admonition-exercice-14-1-le-bec-des-manchots admonition" id="ex14-1">
+<p class="admonition-title">Exercice 14.1 : Le bec des manchots ★</p>
+<p>Avec les manchots (sans valeurs manquantes) :</p>
+<ol class="arabic simple">
+<li><p>ajustez la régression de l’épaisseur du bec (<code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code>) sur sa longueur (<code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code>). Quel est le signe de la pente ?</p></li>
+<li><p>ajoutez l’espèce comme variable explicative. Que devient le signe de la pente ? Comment l’expliquer (pensez au nuage de points coloré par espèce du chapitre 13) ?</p></li>
+</ol>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+
+<span class="n">manchots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/penguins.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"bill_depth_mm ~ bill_length_mm"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>   <span class="c1"># pente négative (environ -0.08)</span>
+
+<span class="n">m2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"bill_depth_mm ~ bill_length_mm + C(species)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>   <span class="c1"># pente positive (environ +0.20)</span>
+</pre></div>
+</div>
+<p>C’est un exemple classique de <strong>paradoxe de Simpson</strong> : au sein de chaque espèce, les becs plus longs sont aussi plus épais (pente positive), mais les Gentoo ont à la fois des becs longs et fins, ce qui inverse la tendance lorsqu’on mélange les espèces.
+Le modèle sans l’espèce confond l’effet de la longueur du bec et celui de l’espèce.</p>
+</div>
+<div class="admonition-exercice-14-2-interaction admonition" id="ex14-2">
+<p class="admonition-title">Exercice 14.2 : Interaction ★★</p>
+<p>Le lien entre la longueur de la nageoire et la masse est-il le même pour les trois espèces ?
+Ajustez un modèle avec interaction entre <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code> et <code class="docutils literal notranslate"><span class="pre">species</span></code>, puis comparez-le au modèle sans interaction avec un test de Fisher.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+
+<span class="n">manchots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/penguins.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">sans</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"body_mass_g ~ flipper_length_mm + C(species)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">avec</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">"body_mass_g ~ flipper_length_mm * C(species)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">manchots</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">avec</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">sans</span><span class="p">,</span> <span class="n">avec</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>La <em>p</em>-valeur du test de comparaison (environ 0,005) indique que les pentes diffèrent un peu selon l’espèce : chez les Gentoo, la masse augmente plus vite avec la longueur de la nageoire.</p>
+</div>
+<div class="admonition-exercice-14-3-survie-et-tarif admonition" id="ex14-3">
+<p class="admonition-title">Exercice 14.3 : Survie et tarif ★★</p>
+<ol class="arabic simple">
+<li><p>Ajustez une régression logistique de la survie sur le sexe, la classe et le prix du billet (<code class="docutils literal notranslate"><span class="pre">fare</span></code>). Le prix du billet a-t-il un effet significatif une fois la classe prise en compte ?</p></li>
+<li><p>Remplacez <code class="docutils literal notranslate"><span class="pre">fare</span></code> par <code class="docutils literal notranslate"><span class="pre">np.log1p(fare)</span></code> (le logarithme de 1 + prix, car certains billets valent 0). Que constatez-vous ?</p></li>
+<li><p>Calculez la probabilité de survie prédite par le premier modèle pour un homme de 3e classe ayant payé 8 et pour une femme de 1re classe ayant payé 80.</p></li>
+</ol>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/titanic.csv"</span><span class="p">)</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">"survived ~ C(sex) + C(pclass) + fare"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># fare : p-valeur d'environ 0.4, non significatif</span>
+
+<span class="n">m2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">"survived ~ C(sex) + C(pclass) + np.log1p(fare)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># toujours non significatif</span>
+
+<span class="n">passagers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"sex"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"male"</span><span class="p">,</span> <span class="s2">"female"</span><span class="p">],</span> <span class="s2">"pclass"</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"fare"</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">80</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">passagers</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>   <span class="c1"># environ 0.10 et 0.91</span>
+</pre></div>
+</div>
+<p>Une fois la classe prise en compte, le prix du billet n’apporte presque plus d’information : prix et classe sont très liés.</p>
+</div>
+<div class="admonition-exercice-14-4-tests admonition" id="ex14-4">
+<p class="admonition-title">Exercice 14.4 : Tests ★★</p>
+<ol class="arabic simple">
+<li><p>La longueur moyenne de la nageoire diffère-t-elle entre les manchots Adélie de l’île Dream et ceux de l’île Biscoe ? (Test de Welch.)</p></li>
+<li><p>La survie sur le Titanic est-elle indépendante de la classe ? (Test du khi-deux.)</p></li>
+<li><p>Retrouvez le résultat de la question 2 avec une régression logistique et un test du rapport de vraisemblance (attribut <code class="docutils literal notranslate"><span class="pre">llr_pvalue</span></code> du modèle).</p></li>
+</ol>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">manchots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/penguins.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"donnees/titanic.csv"</span><span class="p">)</span>
+
+<span class="n">adelie</span> <span class="o">=</span> <span class="n">manchots</span><span class="p">[</span><span class="n">manchots</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Adelie"</span><span class="p">]</span>
+<span class="n">dream</span> <span class="o">=</span> <span class="n">adelie</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie</span><span class="p">[</span><span class="s2">"island"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Dream"</span><span class="p">,</span> <span class="s2">"flipper_length_mm"</span><span class="p">]</span>
+<span class="n">biscoe</span> <span class="o">=</span> <span class="n">adelie</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie</span><span class="p">[</span><span class="s2">"island"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Biscoe"</span><span class="p">,</span> <span class="s2">"flipper_length_mm"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">dream</span><span class="p">,</span> <span class="n">biscoe</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>   <span class="c1"># p-valeur d'environ 0.4 : pas de différence mise en évidence</span>
+
+<span class="n">khi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ddl</span><span class="p">,</span> <span class="n">attendus</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">titanic</span><span class="p">[</span><span class="s2">"pclass"</span><span class="p">],</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"survived"</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">khi2</span><span class="p">,</span> <span class="n">ddl</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># khi-deux d'environ 102,9 à 2 ddl : dépendance très nette</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">"survived ~ C(pclass)"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">llr</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">llr_pvalue</span><span class="p">)</span>   <span class="c1"># test du rapport de vraisemblance : même conclusion</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="bilan-du-chapitre">
+<h2><span class="section-number">14.6. </span>Bilan du chapitre<a class="headerlink" href="#bilan-du-chapitre" title="Lien vers cette rubrique">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">statsmodels.formula.api</span> <span class="pre">as</span> <span class="pre">smf</span></code> ; <code class="docutils literal notranslate"><span class="pre">modele</span> <span class="pre">=</span> <span class="pre">smf.ols(&quot;y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">C(x2)&quot;,</span> <span class="pre">data=df).fit()</span></code> ; <code class="docutils literal notranslate"><span class="pre">modele.summary()</span></code>.</p></li>
+<li><p>Résultats : <code class="docutils literal notranslate"><span class="pre">params</span></code>, <code class="docutils literal notranslate"><span class="pre">pvalues</span></code>, <code class="docutils literal notranslate"><span class="pre">conf_int()</span></code>, <code class="docutils literal notranslate"><span class="pre">rsquared</span></code>, <code class="docutils literal notranslate"><span class="pre">resid</span></code>, <code class="docutils literal notranslate"><span class="pre">fittedvalues</span></code>, <code class="docutils literal notranslate"><span class="pre">nobs</span></code> ; prédictions : <code class="docutils literal notranslate"><span class="pre">modele.predict(nouveau_df)</span></code>.</p></li>
+<li><p>Formules : <code class="docutils literal notranslate"><span class="pre">C(x)</span></code> (qualitative), <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">*</span> <span class="pre">x2</span></code> (interaction), <code class="docutils literal notranslate"><span class="pre">np.log(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">I(x</span> <span class="pre">**</span> <span class="pre">2)</span></code>.</p></li>
+<li><p>ANOVA : <code class="docutils literal notranslate"><span class="pre">sm.stats.anova_lm(modele,</span> <span class="pre">typ=2)</span></code> ; comparaison de modèles emboîtés : <code class="docutils literal notranslate"><span class="pre">sm.stats.anova_lm(m1,</span> <span class="pre">m2)</span></code>.</p></li>
+<li><p>Logistique : <code class="docutils literal notranslate"><span class="pre">smf.logit(&quot;y</span> <span class="pre">~</span> <span class="pre">...&quot;,</span> <span class="pre">data=df).fit()</span></code> ; <em>odds ratios</em> : <code class="docutils literal notranslate"><span class="pre">np.exp(modele.params)</span></code>.</p></li>
+<li><p>Tests : <code class="docutils literal notranslate"><span class="pre">stats.ttest_ind</span></code>, <code class="docutils literal notranslate"><span class="pre">stats.chi2_contingency</span></code>, <code class="docutils literal notranslate"><span class="pre">stats.pearsonr</span></code> (module <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>).</p></li>
+</ul>
+</div>
+<p>Faites le point : êtes-vous capable de…</p>
+<ul class="simple">
+<li><p>traduire un modèle <code class="docutils literal notranslate"><span class="pre">lm</span></code> ou <code class="docutils literal notranslate"><span class="pre">glm</span></code> de R (ou une <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">REG</span></code> / <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code>) en Python ?</p></li>
+<li><p>lire le tableau de résultats d’un modèle et en extraire les coefficients et les <em>p</em>-valeurs ?</p></li>
+<li><p>inclure une variable qualitative et une interaction dans un modèle ?</p></li>
+<li><p>vérifier les résidus d’une régression linéaire ?</p></li>
+<li><p>réaliser un test de Student ou du khi-deux ?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="visualisation.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="projets.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Mini-projets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correspondances-avec-r-et-sas">14.1. Correspondances avec R et SAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regression-lineaire">14.2. La régression linéaire</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-premier-modele">14.2.1. Un premier modèle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-aux-resultats">14.2.2. Accéder aux résultats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-qualitatives-et-interactions">14.2.3. Variables qualitatives et interactions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predire">14.2.4. Prédire</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-les-hypotheses">14.2.5. Vérifier les hypothèses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-des-modeles-et-tables-d-anova">14.2.6. Comparer des modèles et tables d’ANOVA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regression-logistique">14.3. La régression logistique</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-tests-statistiques-classiques">14.4. Les tests statistiques classiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-deux-moyennes-test-de-student">14.4.1. Comparer deux moyennes : test de Student</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independance-de-deux-variables-qualitatives-test-du-khi-deux">14.4.2. Indépendance de deux variables qualitatives : test du khi-deux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation">14.4.3. Corrélation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">14.5. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">14.6. Bilan du chapitre</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Variables, types et opérations &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/variables';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="2. Les conditions" href="conditions.html" />
+    <link rel="prev" title="Bienvenue !" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boucles.html">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fichiers.html">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelisation.html">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/variables.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Variables, types et opérations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-tout-premier-programme">1.1. Un tout premier programme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-variables">1.2. Les variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qu-est-ce-qu-une-variable">1.2.1. Qu’est-ce qu’une variable ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-types-de-base">1.2.2. Les types de base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-un-nom-de-variable">1.2.3. Choisir un nom de variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-affectation-en-detail">1.3. L’affectation en détail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operations-sur-les-nombres">1.4. Les opérations sur les nombres</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operateurs-arithmetiques">1.4.1. Les opérateurs arithmétiques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priorite-des-operateurs">1.4.2. Priorité des opérateurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operateurs-raccourcis">1.4.3. Les opérateurs raccourcis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-sur-les-chaines-et-conversions">1.5. Opérations sur les chaînes et conversions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation">1.5.1. Concaténation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversions-de-type">1.5.2. Conversions de type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#afficher-joliment-les-f-strings">1.5.3. Afficher joliment : les f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-un-message-d-erreur">1.6. Lire un message d’erreur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">1.7. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">1.8. Bilan du chapitre</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="variables-types-et-operations">
+<span id="ch-variables"></span><h1><span class="section-number">1. </span>Variables, types et opérations<a class="headerlink" href="#variables-types-et-operations" title="Lien vers cette rubrique">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>À la fin de ce chapitre, vous saurez :</p>
+<ul class="simple">
+<li><p>afficher du texte et des résultats de calcul avec <code class="docutils literal notranslate"><span class="pre">print</span></code> ;</p></li>
+<li><p>créer des variables, leur donner des valeurs et connaître leur type ;</p></li>
+<li><p>utiliser les opérateurs arithmétiques (<code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">//</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>, <code class="docutils literal notranslate"><span class="pre">**</span></code>) ;</p></li>
+<li><p>convertir une valeur d’un type à un autre (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>) ;</p></li>
+<li><p>lire un message d’erreur Python.</p></li>
+</ul>
+<p><strong>Durée indicative :</strong> 1h30.</p>
+</div>
+<section id="un-tout-premier-programme">
+<h2><span class="section-number">1.1. </span>Un tout premier programme<a class="headerlink" href="#un-tout-premier-programme" title="Lien vers cette rubrique">#</a></h2>
+<p>Commençons par le plus simple des programmes : afficher un message à l’écran.
+On utilise pour cela la <strong>fonction</strong> <code class="docutils literal notranslate"><span class="pre">print</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Bonjour !"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bonjour !
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le texte à afficher est placé <strong>entre guillemets</strong> (on parle de <em>chaîne de caractères</em>) et <strong>entre parenthèses</strong> après le mot <code class="docutils literal notranslate"><span class="pre">print</span></code>.
+On peut aussi demander à Python d’afficher le résultat d’un calcul :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60
+</pre></div>
+</div>
+</div>
+</div>
+<p>ou encore afficher plusieurs choses à la suite, séparées par des virgules (Python insère alors un espace entre elles) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"12 fois 5 font"</span><span class="p">,</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12 fois 5 font 60
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un programme est une <strong>suite d’instructions</strong> exécutées les unes après les autres, de haut en bas :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Première ligne"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Deuxième ligne"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Troisième ligne"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Première ligne
+Deuxième ligne
+Troisième ligne
+</pre></div>
+</div>
+</div>
+</div>
+<p>Enfin, tout ce qui suit un symbole <code class="docutils literal notranslate"><span class="pre">#</span></code> sur une ligne est un <strong>commentaire</strong> : Python l’ignore complètement.
+Les commentaires servent à expliquer le code aux humains qui le lisent (y compris vous-même dans trois semaines !).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ceci est un commentaire : il n'est pas exécuté</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Le commentaire n'a rien affiché"</span><span class="p">)</span>  <span class="c1"># on peut aussi commenter en fin de ligne</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Le commentaire n'a rien affiché
+</pre></div>
+</div>
+</div>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Qu’affiche le programme suivant ?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print("3 + 4")
+print(3 + 4)
+</pre></div>
+</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<p>Il affiche :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>3 + 4
+7
+</pre></div>
+</div>
+<p>Dans la première ligne, <code class="docutils literal notranslate"><span class="pre">&quot;3</span> <span class="pre">+</span> <span class="pre">4&quot;</span></code> est entre guillemets : c’est un texte, que Python affiche tel quel.
+Dans la seconde, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4</span></code> est un calcul que Python effectue avant d’afficher le résultat.</p>
+</div>
+</section>
+<section id="les-variables">
+<h2><span class="section-number">1.2. </span>Les variables<a class="headerlink" href="#les-variables" title="Lien vers cette rubrique">#</a></h2>
+<section id="qu-est-ce-qu-une-variable">
+<h3><span class="section-number">1.2.1. </span>Qu’est-ce qu’une variable ?<a class="headerlink" href="#qu-est-ce-qu-une-variable" title="Lien vers cette rubrique">#</a></h3>
+<p>Dès qu’un programme fait plus que quelques calculs, on a besoin de <strong>mémoriser des valeurs</strong> pour les réutiliser plus tard.
+En Python, les données sont stockées dans des <strong>variables</strong>.
+Une variable est une association entre un <strong>nom</strong> (choisi par vous) et une <strong>valeur</strong>, qui peut changer au cours de l’exécution du programme.</p>
+<p>On peut se représenter une variable comme une <strong>étiquette</strong> portant un nom, accrochée à une boîte qui contient une valeur :</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/fig_variables.svg"><img alt="../_images/fig_variables.svg" src="../_images/fig_variables.svg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Quatre variables et leurs valeurs. Chaque valeur a un <strong>type</strong>.</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Pour créer une variable, on utilise le signe <code class="docutils literal notranslate"><span class="pre">=</span></code>, appelé <strong>opérateur d’affectation</strong> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">taille</span> <span class="o">=</span> <span class="mf">1.72</span>
+<span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="n">inscrite</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ces instructions n’affichent rien : elles se contentent de ranger des valeurs en mémoire.
+On peut ensuite utiliser les variables en écrivant simplement leur nom :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">prenom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">age</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prenom</span><span class="p">,</span> <span class="s2">"mesure"</span><span class="p">,</span> <span class="n">taille</span><span class="p">,</span> <span class="s2">"m"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aude
+20
+Aude mesure 1.72 m
+</pre></div>
+</div>
+</div>
+</div>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p>Le signe <code class="docutils literal notranslate"><span class="pre">=</span></code> en Python ne signifie <strong>pas</strong> « est égal à » comme en mathématiques, mais « <strong>prend la valeur</strong> ».
+L’instruction <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">=</span> <span class="pre">19</span></code> se lit : « la variable <code class="docutils literal notranslate"><span class="pre">age</span></code> prend la valeur 19 ».
+On met toujours <strong>le nom de la variable à gauche</strong> et <strong>la valeur à droite</strong>.</p>
+</div>
+</section>
+<section id="les-types-de-base">
+<h3><span class="section-number">1.2.2. </span>Les types de base<a class="headerlink" href="#les-types-de-base" title="Lien vers cette rubrique">#</a></h3>
+<p>Chaque valeur a un <strong>type</strong>, qui détermine ce que l’on peut faire avec elle.
+Les types de base en Python sont les suivants :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Signification</p></th>
+<th class="head"><p>Exemples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>nombre entier (<em>integer</em>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">12</span></code>, <code class="docutils literal notranslate"><span class="pre">-3</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>nombre à virgule (<em>floating point number</em>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.72</span></code>, <code class="docutils literal notranslate"><span class="pre">-0.5</span></code>, <code class="docutils literal notranslate"><span class="pre">12.</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>chaîne de caractères (<em>string</em>), c’est-à-dire du texte</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;Aude&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">'abc'</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;12&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>booléen : vrai ou faux</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+<td><p>nombre complexe (peu utilisé dans ce document)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2j</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Il existe de plus une valeur spéciale, <code class="docutils literal notranslate"><span class="pre">None</span></code>, qui signifie « pas de valeur » ou « valeur manquante » (son type est <code class="docutils literal notranslate"><span class="pre">NoneType</span></code>).</p>
+<div class="warning admonition">
+<p class="admonition-title">Erreur fréquente</p>
+<ul class="simple">
+<li><p>En Python, la virgule des nombres décimaux s’écrit avec un <strong>point</strong> : on écrit <code class="docutils literal notranslate"><span class="pre">1.72</span></code> et non <code class="docutils literal notranslate"><span class="pre">1,72</span></code>.</p></li>
+<li><p>Les chaînes de caractères peuvent être délimitées par des guillemets doubles (<code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code>) ou simples (<code class="docutils literal notranslate"><span class="pre">'abc'</span></code>) : les deux sont équivalents, mais il faut utiliser le même au début et à la fin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> et <code class="docutils literal notranslate"><span class="pre">False</span></code> prennent une majuscule.</p></li>
+</ul>
+</div>
+<p>Pour connaître le type d’une valeur ou d’une variable, on utilise la fonction <code class="docutils literal notranslate"><span class="pre">type</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">age</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">taille</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">prenom</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">inscrite</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>En Python, on ne déclare pas le type d’une variable : il est déduit de la valeur qu’on y range.
+Et si l’on range une valeur d’un autre type dans la même variable, son type change (on dit que Python est <strong>typé dynamiquement</strong>) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="mi">12</span>        <span class="c1"># v est de type entier</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mf">12.</span>       <span class="c1"># v change de type : c'est désormais un nombre à virgule</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Quel est le type de chacune des valeurs suivantes ? <code class="docutils literal notranslate"><span class="pre">42</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;42&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">42.0</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;vrai&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">42</span></code> : <code class="docutils literal notranslate"><span class="pre">int</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;42&quot;</span></code> : <code class="docutils literal notranslate"><span class="pre">str</span></code> (il y a des guillemets, c’est donc du texte, même s’il ne contient que des chiffres !) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">42.0</span></code> : <code class="docutils literal notranslate"><span class="pre">float</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;vrai&quot;</span></code> : <code class="docutils literal notranslate"><span class="pre">str</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> : <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p></li>
+</ul>
+<p>Vous pouvez vérifier chacune de ces réponses avec la fonction <code class="docutils literal notranslate"><span class="pre">type</span></code>.</p>
+</div>
+</section>
+<section id="choisir-un-nom-de-variable">
+<h3><span class="section-number">1.2.3. </span>Choisir un nom de variable<a class="headerlink" href="#choisir-un-nom-de-variable" title="Lien vers cette rubrique">#</a></h3>
+<p>Les noms de variables doivent respecter quelques règles :</p>
+<ul class="simple">
+<li><p>ils doivent commencer par une lettre (minuscule ou majuscule) ou par le symbole <code class="docutils literal notranslate"><span class="pre">_</span></code> ;</p></li>
+<li><p>ils ne doivent contenir que des lettres, des chiffres et des symboles <code class="docutils literal notranslate"><span class="pre">_</span></code> (pas d’espace, pas de tiret <code class="docutils literal notranslate"><span class="pre">-</span></code>, pas d’apostrophe) ;</p></li>
+<li><p>ils ne doivent pas être un <strong>mot réservé</strong> du langage Python, dont voici la liste :</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ow">and</span> <span class="k">del</span> <span class="k">for</span> <span class="ow">is</span> <span class="k">raise</span> <span class="k">assert</span> <span class="k">elif</span> <span class="kn">from</span><span class="w"> </span><span class="nn">lambda</span> <span class="k">return</span> <span class="k">break</span> <span class="k">else</span> <span class="k">global</span>
+<span class="ow">not</span> <span class="k">try</span> <span class="k">nonlocal</span> <span class="kc">True</span> <span class="kc">False</span> <span class="k">class</span><span class="w"> </span><span class="nc">except</span> <span class="k">if</span> <span class="ow">or</span> <span class="k">while</span> <span class="k">continue</span> <span class="kn">import</span>
+<span class="nn">pass</span> <span class="k">yield</span> <span class="kc">None</span> <span class="k">def</span><span class="w"> </span><span class="nf">finally</span> <span class="ow">in</span> <span class="k">as</span> <span class="k">with</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>enfin, il est vivement conseillé de ne pas utiliser le nom d’une fonction existante de Python (comme <code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>…) : vous apprendrez ces noms au fur et à mesure.</p></li>
+</ul>
+<p>Les noms de variables sont <strong>sensibles à la casse</strong> : <code class="docutils literal notranslate"><span class="pre">mavariable</span></code> et <code class="docutils literal notranslate"><span class="pre">maVariable</span></code> sont deux variables différentes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mavariable</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">maVariable</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mavariable</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">maVariable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Bonne pratique</p>
+<p>Choisissez des noms <strong>explicites</strong> : <code class="docutils literal notranslate"><span class="pre">prix_total</span></code> est bien plus clair que <code class="docutils literal notranslate"><span class="pre">pt</span></code> ou <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+Un programme est écrit une fois mais relu de nombreuses fois !
+En Python, l’usage est d’écrire les noms de variables en minuscules, avec des <code class="docutils literal notranslate"><span class="pre">_</span></code> pour séparer les mots (<code class="docutils literal notranslate"><span class="pre">nombre_etudiants</span></code>).
+Les accents sont autorisés mais il est d’usage de les éviter.</p>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Parmi les noms suivants, lesquels sont des noms de variables valides ?
+<code class="docutils literal notranslate"><span class="pre">note1</span></code>, <code class="docutils literal notranslate"><span class="pre">1ere_note</span></code>, <code class="docutils literal notranslate"><span class="pre">note-finale</span></code>, <code class="docutils literal notranslate"><span class="pre">note_finale</span></code>, <code class="docutils literal notranslate"><span class="pre">_temp</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">Note</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">note1</span></code> : valide ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1ere_note</span></code> : <strong>invalide</strong> (commence par un chiffre) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">note-finale</span></code> : <strong>invalide</strong> (le <code class="docutils literal notranslate"><span class="pre">-</span></code> est interprété comme une soustraction) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">note_finale</span></code> : valide ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_temp</span></code> : valide ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code> : <strong>invalide</strong> (mot réservé) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Note</span></code> : valide (mais c’est une autre variable que <code class="docutils literal notranslate"><span class="pre">note</span></code>).</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="l-affectation-en-detail">
+<h2><span class="section-number">1.3. </span>L’affectation en détail<a class="headerlink" href="#l-affectation-en-detail" title="Lien vers cette rubrique">#</a></h2>
+<p>La règle de l’affectation est la suivante : « <strong>calculer</strong> la valeur de ce qui est à droite du <code class="docutils literal notranslate"><span class="pre">=</span></code>, puis <strong>ranger</strong> le résultat dans la variable de gauche ».
+Il est donc tout à fait valide d’écrire :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mathématiquement, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code> n’a aucun sens.
+Mais en Python, cette instruction se lit : « <code class="docutils literal notranslate"><span class="pre">x</span></code> prend la valeur (ancienne valeur de <code class="docutils literal notranslate"><span class="pre">x</span></code>) + 2 ».</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/fig_affectation.svg"><img alt="../_images/fig_affectation.svg" src="../_images/fig_affectation.svg" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Les deux temps de l’affectation <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code> : d’abord le calcul à droite, ensuite le rangement à gauche (l’ancienne valeur est perdue).</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Le même principe s’applique pour des expressions plus complexes :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3.9</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-7.8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pour exécuter la deuxième instruction, Python commence par évaluer <code class="docutils literal notranslate"><span class="pre">3.9</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">x)</span></code> avec la valeur courante de <code class="docutils literal notranslate"><span class="pre">x</span></code> (2), obtient <code class="docutils literal notranslate"><span class="pre">-7.8</span></code>, puis range ce résultat dans <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<p>Comme les instructions sont exécutées dans l’ordre, la valeur d’une variable à un instant donné dépend de tout ce qui a été exécuté avant :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remarquez que modifier <code class="docutils literal notranslate"><span class="pre">a</span></code> à la ligne 3 ne modifie pas <code class="docutils literal notranslate"><span class="pre">b</span></code> : au moment de la ligne 2, Python a calculé <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">1</span></code> (qui valait 4) et a rangé <strong>le résultat</strong> dans <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p><em><a class="reference external" href="https://pythontutor.com/visualize.html#code=a%20%3D%203%0Ab%20%3D%20a%20%2B%201%0Aa%20%3D%2010%0Aprint%28a%2C%20b%29%0A&amp;amp;cumulative=false&amp;amp;heapPrimitives=nevernest&amp;amp;mode=display&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false">Voir ce code s’exécuter pas à pas dans Python Tutor</a></em></p>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Que contiennent les variables <code class="docutils literal notranslate"><span class="pre">a</span></code> et <code class="docutils literal notranslate"><span class="pre">b</span></code> à la fin de ce programme ?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>a = 5
+b = 2
+a = b
+b = a
+</pre></div>
+</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> et <code class="docutils literal notranslate"><span class="pre">b</span></code> valent toutes les deux 2.
+À la ligne 3, <code class="docutils literal notranslate"><span class="pre">a</span></code> prend la valeur de <code class="docutils literal notranslate"><span class="pre">b</span></code>, soit 2 (et la valeur 5 est perdue).
+À la ligne 4, <code class="docutils literal notranslate"><span class="pre">b</span></code> prend la valeur de <code class="docutils literal notranslate"><span class="pre">a</span></code>, qui vaut maintenant 2.
+Ce programme n’échange donc <strong>pas</strong> les valeurs de <code class="docutils literal notranslate"><span class="pre">a</span></code> et <code class="docutils literal notranslate"><span class="pre">b</span></code> (c’est l’objet de l’exercice 1.5).</p>
+</div>
+</section>
+<section id="les-operations-sur-les-nombres">
+<h2><span class="section-number">1.4. </span>Les opérations sur les nombres<a class="headerlink" href="#les-operations-sur-les-nombres" title="Lien vers cette rubrique">#</a></h2>
+<section id="les-operateurs-arithmetiques">
+<h3><span class="section-number">1.4.1. </span>Les opérateurs arithmétiques<a class="headerlink" href="#les-operateurs-arithmetiques" title="Lien vers cette rubrique">#</a></h3>
+<p>Voici les opérateurs disponibles pour les nombres (<code class="docutils literal notranslate"><span class="pre">int</span></code> et <code class="docutils literal notranslate"><span class="pre">float</span></code>) :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Opérateur</p></th>
+<th class="head text-center"><p>Opération</p></th>
+<th class="head text-center"><p>Exemple</p></th>
+<th class="head text-center"><p>Résultat</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td class="text-center"><p>Addition</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">+</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td class="text-center"><p>Soustraction</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">-</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td class="text-center"><p>Multiplication</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">*</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">14</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td class="text-center"><p>Division</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">/</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3.5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td class="text-center"><p>Puissance</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">**</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">49</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td class="text-center"><p>Division entière (quotient)</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td class="text-center"><p>Modulo (reste de la division entière)</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">%</span> <span class="pre">2</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Les deux derniers opérateurs méritent qu’on s’y arrête : ce sont ceux de la division que vous avez apprise à l’école primaire.
+Si l’on partage 17 bonbons entre 5 enfants, chaque enfant en reçoit 3 et il en reste 2 :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">17</span> <span class="o">//</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># quotient : nombre de bonbons par enfant</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">17</span> <span class="o">%</span> <span class="mi">5</span><span class="p">)</span>   <span class="c1"># reste : nombre de bonbons restants</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p>L’opérateur <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulo) est très utile en pratique :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">2</span></code> vaut <code class="docutils literal notranslate"><span class="pre">0</span></code> si <code class="docutils literal notranslate"><span class="pre">n</span></code> est pair et <code class="docutils literal notranslate"><span class="pre">1</span></code> si <code class="docutils literal notranslate"><span class="pre">n</span></code> est impair ;</p></li>
+<li><p>plus généralement, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">k</span> <span class="pre">==</span> <span class="pre">0</span></code> signifie « <code class="docutils literal notranslate"><span class="pre">n</span></code> est divisible par <code class="docutils literal notranslate"><span class="pre">k</span></code> » ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">10</span></code> donne le dernier chiffre d’un entier positif <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+</ul>
+</div>
+<p>Notez que la division <code class="docutils literal notranslate"><span class="pre">/</span></code> donne toujours un <code class="docutils literal notranslate"><span class="pre">float</span></code>, même si le résultat « tombe juste » :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">6</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+0.6666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+<p>De manière générale, lorsqu’une opération mêle un <code class="docutils literal notranslate"><span class="pre">int</span></code> et un <code class="docutils literal notranslate"><span class="pre">float</span></code>, le résultat est un <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Les nombres à virgule sont approximatifs</p>
+<p>Les ordinateurs stockent les nombres à virgule avec une précision limitée, ce qui donne parfois des résultats surprenants.
+Par exemple, <code class="docutils literal notranslate"><span class="pre">print(0.1</span> <span class="pre">+</span> <span class="pre">0.2)</span></code> affiche <code class="docutils literal notranslate"><span class="pre">0.30000000000000004</span></code>.
+Ce n’est pas un bug de Python : la plupart des langages de programmation se comportent de la même façon.
+Retenez simplement qu’il faut éviter de tester l’égalité exacte entre deux nombres à virgule, et utiliser l’affichage avec un nombre fixé de décimales (voir plus bas) pour présenter les résultats.</p>
+</div>
+</section>
+<section id="priorite-des-operateurs">
+<h3><span class="section-number">1.4.2. </span>Priorité des opérateurs<a class="headerlink" href="#priorite-des-operateurs" title="Lien vers cette rubrique">#</a></h3>
+<p>Lorsqu’une expression contient plusieurs opérateurs, Python applique les mêmes règles de priorité qu’en mathématiques (de la priorité la plus forte à la plus faible) :</p>
+<ol class="arabic simple">
+<li><p>parenthèses ;</p></li>
+<li><p>puissance <code class="docutils literal notranslate"><span class="pre">**</span></code> ;</p></li>
+<li><p>multiplication, divisions et modulo (<code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">//</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>) ;</p></li>
+<li><p>addition et soustraction ;</p></li>
+<li><p>à priorité égale, de gauche à droite.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+20
+18
+</pre></div>
+</div>
+</div>
+</div>
+<p>En cas de doute, ajoutez des parenthèses : cela ne coûte rien et rend le code plus lisible.</p>
+</section>
+<section id="les-operateurs-raccourcis">
+<h3><span class="section-number">1.4.3. </span>Les opérateurs raccourcis<a class="headerlink" href="#les-operateurs-raccourcis" title="Lien vers cette rubrique">#</a></h3>
+<p>Il est très fréquent de modifier une variable à partir de sa propre valeur (par exemple pour compter quelque chose).
+Pour cela, il existe des raccourcis d’écriture : <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">2</span></code> est équivalent à <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">compteur</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># équivaut à compteur = compteur + 1</span>
+<span class="n">compteur</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compteur</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il en va de même pour <code class="docutils literal notranslate"><span class="pre">-=</span></code>, <code class="docutils literal notranslate"><span class="pre">*=</span></code>, <code class="docutils literal notranslate"><span class="pre">/=</span></code>, <em>etc.</em>
+Ce n’est qu’un raccourci : si vous ne vous sentez pas à l’aise avec, vous pouvez toujours écrire <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>.</p>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Que valent les expressions suivantes ? <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">//</span> <span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">%</span> <span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">15</span> <span class="pre">%</span> <span class="pre">5</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">//</span> <span class="pre">3</span></code> vaut <code class="docutils literal notranslate"><span class="pre">3</span></code> (10 = 3 × 3 + 1) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">%</span> <span class="pre">3</span></code> vaut <code class="docutils literal notranslate"><span class="pre">1</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">4</span></code> vaut <code class="docutils literal notranslate"><span class="pre">2.5</span></code> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">1</span></code> vaut <code class="docutils literal notranslate"><span class="pre">9</span></code> (la puissance est prioritaire) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">15</span> <span class="pre">%</span> <span class="pre">5</span></code> vaut <code class="docutils literal notranslate"><span class="pre">0</span></code> (15 est divisible par 5).</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="operations-sur-les-chaines-et-conversions">
+<h2><span class="section-number">1.5. </span>Opérations sur les chaînes et conversions<a class="headerlink" href="#operations-sur-les-chaines-et-conversions" title="Lien vers cette rubrique">#</a></h2>
+<section id="concatenation">
+<h3><span class="section-number">1.5.1. </span>Concaténation<a class="headerlink" href="#concatenation" title="Lien vers cette rubrique">#</a></h3>
+<p>Certains opérateurs fonctionnent aussi avec les chaînes de caractères, avec un sens différent :
+<code class="docutils literal notranslate"><span class="pre">+</span></code> met deux chaînes bout à bout (on dit qu’on les <strong>concatène</strong>) et <code class="docutils literal notranslate"><span class="pre">*</span></code> répète une chaîne.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Bonjour "</span> <span class="o">+</span> <span class="n">prenom</span> <span class="o">+</span> <span class="s2">" !"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ha"</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bonjour Aude !
+hahaha
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conversions-de-type">
+<h3><span class="section-number">1.5.2. </span>Conversions de type<a class="headerlink" href="#conversions-de-type" title="Lien vers cette rubrique">#</a></h3>
+<p>On ne peut pas additionner directement un texte et un nombre.
+Il faut d’abord <strong>convertir</strong> l’un des deux dans le type de l’autre, à l’aide des fonctions <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code> et <code class="docutils literal notranslate"><span class="pre">str</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texte</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="n">nombre</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>      <span class="c1"># conversion de str vers int</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nombre</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">age</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"J'ai "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" ans"</span><span class="p">)</span>  <span class="c1"># conversion de int vers str</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"3.5"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># conversion de str vers float</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">3.99</span><span class="p">))</span>         <span class="c1"># int() tronque : on garde la partie entière</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+J'ai 19 ans
+7.0
+3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Qu’affichent les instructions suivantes ?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print("5" + "5")
+print(5 + 5)
+print("5" * 3)
+print(int("5") * 3)
+</pre></div>
+</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>55
+10
+555
+15
+</pre></div>
+</div>
+<p>Sur des chaînes, <code class="docutils literal notranslate"><span class="pre">+</span></code> concatène et <code class="docutils literal notranslate"><span class="pre">*</span></code> répète ; sur des nombres, ce sont l’addition et la multiplication habituelles.</p>
+</div>
+</section>
+<section id="afficher-joliment-les-f-strings">
+<h3><span class="section-number">1.5.3. </span>Afficher joliment : les f-strings<a class="headerlink" href="#afficher-joliment-les-f-strings" title="Lien vers cette rubrique">#</a></h3>
+<p>Construire un message avec des <code class="docutils literal notranslate"><span class="pre">+</span></code> et des <code class="docutils literal notranslate"><span class="pre">str()</span></code> devient vite pénible.
+Python propose une écriture bien plus pratique, les <strong>f-strings</strong> : on place un <code class="docutils literal notranslate"><span class="pre">f</span></code> juste avant les guillemets et on écrit les noms de variables (ou des calculs) entre accolades <code class="docutils literal notranslate"><span class="pre">{}</span></code> dans le texte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prenom</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> ans et aura </span><span class="si">{</span><span class="n">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> ans l'an prochain."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aude a 19 ans et aura 20 ans l'an prochain.
+</pre></div>
+</div>
+</div>
+</div>
+<p>On peut aussi contrôler le nombre de décimales affichées avec <code class="docutils literal notranslate"><span class="pre">:.2f</span></code> (2 chiffres après la virgule) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prix</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prix : </span><span class="si">{</span><span class="n">prix</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prix : </span><span class="si">{</span><span class="n">prix</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prix : 3.3333333333333335 euros
+Prix : 3.33 euros
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vous rencontrerez aussi parfois une autre écriture, plus ancienne, qui utilise la méthode <code class="docutils literal notranslate"><span class="pre">format</span></code> : <code class="docutils literal notranslate"><span class="pre">&quot;{}</span> <span class="pre">a</span> <span class="pre">{}</span> <span class="pre">ans&quot;.format(prenom,</span> <span class="pre">age)</span></code>.
+Nous reviendrons sur ces deux façons de faire au <a class="reference internal" href="chaines.html#ch-chaines"><span class="std std-ref">chapitre sur les chaînes de caractères</span></a>.</p>
+</section>
+</section>
+<section id="lire-un-message-d-erreur">
+<h2><span class="section-number">1.6. </span>Lire un message d’erreur<a class="headerlink" href="#lire-un-message-d-erreur" title="Lien vers cette rubrique">#</a></h2>
+<p>En programmant, vous ferez des erreurs : <strong>c’est normal et cela arrive à tout le monde</strong>, débutant·e ou expert·e.
+Python vous aide en affichant un message d’erreur qu’il faut apprendre à lire.
+Voici ce qui se passe si l’on essaie d’additionner un texte et un nombre :</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="ne">TypeError</span>: can only concatenate str (not "int") to str
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ce message peut sembler effrayant, mais il contient des informations précieuses :</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/fig_erreur.svg"><img alt="../_images/fig_erreur.svg" src="../_images/fig_erreur.svg" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Anatomie d’un message d’erreur (<em>traceback</em>) dans un script. La ligne la plus importante est la <strong>dernière</strong>.</span><a class="headerlink" href="#id3" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p><strong>Où ?</strong> Le message indique la ligne du programme où l’erreur s’est produite (ici la ligne 2, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">2</span></code>).</p></li>
+<li><p><strong>Quel type d’erreur ?</strong> Ici une <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, c’est-à-dire un problème de type de données.</p></li>
+<li><p><strong>Quelle explication ?</strong> « can only concatenate str (not « int ») to str » : on ne peut concaténer (coller) une chaîne qu’avec une autre chaîne, pas avec un entier.</p></li>
+</ol>
+<p>En effet, <code class="docutils literal notranslate"><span class="pre">x</span></code> contient le texte <code class="docutils literal notranslate"><span class="pre">&quot;12&quot;</span></code> (et non le nombre 12).
+Pour corriger, il suffit de convertir <code class="docutils literal notranslate"><span class="pre">x</span></code> en entier :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">"12"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+</pre></div>
+</div>
+</div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Erreurs fréquentes de ce chapitre</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Message d’erreur</p></th>
+<th class="head"><p>Cause probable</p></th>
+<th class="head"><p>Correction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'prnom'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code></p></td>
+<td><p>faute de frappe dans un nom de variable, ou variable utilisée avant d’avoir été créée</p></td>
+<td><p>vérifier l’orthographe (et les majuscules)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SyntaxError:</span> <span class="pre">invalid</span> <span class="pre">syntax</span></code></p></td>
+<td><p>erreur de « grammaire » : parenthèse ou guillemet oublié, nom de variable invalide…</p></td>
+<td><p>regarder la ligne indiquée <strong>et la ligne précédente</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SyntaxError:</span> <span class="pre">unterminated</span> <span class="pre">string</span> <span class="pre">literal</span></code></p></td>
+<td><p>guillemet fermant oublié</p></td>
+<td><p>ajouter le guillemet</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">can</span> <span class="pre">only</span> <span class="pre">concatenate</span> <span class="pre">str</span> <span class="pre">(not</span> <span class="pre">&quot;int&quot;)</span> <span class="pre">to</span> <span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">+</span></code> entre un texte et un nombre</p></td>
+<td><p>convertir avec <code class="docutils literal notranslate"><span class="pre">int()</span></code> ou <code class="docutils literal notranslate"><span class="pre">str()</span></code>, ou utiliser une f-string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">invalid</span> <span class="pre">literal</span> <span class="pre">for</span> <span class="pre">int()</span> <span class="pre">with</span> <span class="pre">base</span> <span class="pre">10:</span> <span class="pre">'douze'</span></code></p></td>
+<td><p>conversion impossible</p></td>
+<td><p>vérifier le contenu de la chaîne</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ZeroDivisionError:</span> <span class="pre">division</span> <span class="pre">by</span> <span class="pre">zero</span></code></p></td>
+<td><p>division par zéro</p></td>
+<td><p>vérifier la valeur du diviseur</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Voici par exemple une <code class="docutils literal notranslate"><span class="pre">NameError</span></code>, due à une faute de frappe :</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prnom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">prnom</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name 'prnom' is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Si vous venez de R ou de SAS</p>
+<ul class="simple">
+<li><p>L’affectation s’écrit uniquement avec <code class="docutils literal notranslate"><span class="pre">=</span></code> (pas de <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>).</p></li>
+<li><p>En R, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;-</span> <span class="pre">5</span></code> crée un vecteur de longueur 1 ; en Python, <code class="docutils literal notranslate"><span class="pre">5</span></code> est un simple nombre, et une suite de valeurs est une <strong>liste</strong> (chapitre 5) ou un tableau <code class="docutils literal notranslate"><span class="pre">numpy</span></code> (chapitre 10). Les opérations « vectorisées » auxquelles vous êtes habitué·e n’existent qu’avec <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p></li>
+<li><p>La division <code class="docutils literal notranslate"><span class="pre">/</span></code> donne toujours un nombre à virgule ; la division entière s’écrit <code class="docutils literal notranslate"><span class="pre">//</span></code> (<code class="docutils literal notranslate"><span class="pre">%/%</span></code> en R) et le reste <code class="docutils literal notranslate"><span class="pre">%</span></code> (<code class="docutils literal notranslate"><span class="pre">%%</span></code> en R).</p></li>
+<li><p>Les valeurs logiques s’écrivent <code class="docutils literal notranslate"><span class="pre">True</span></code> et <code class="docutils literal notranslate"><span class="pre">False</span></code> (et non <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> / <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>), et la valeur manquante « générique » est <code class="docutils literal notranslate"><span class="pre">None</span></code> (avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, ce sera <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, l’équivalent de <code class="docutils literal notranslate"><span class="pre">NA</span></code> en R et de <code class="docutils literal notranslate"><span class="pre">.</span></code> en SAS).</p></li>
+<li><p>Dans un script, seul <code class="docutils literal notranslate"><span class="pre">print</span></code> affiche quelque chose : contrairement à la console R, une expression seule sur une ligne n’est pas affichée (sauf dans la console Python ou en dernière ligne d’une cellule de notebook).</p></li>
+</ul>
+</div>
+</section>
+<section id="exercices">
+<h2><span class="section-number">1.7. </span>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique">#</a></h2>
+<div class="admonition-exercice-1-1-conversion-de-temperatures admonition" id="ex1-1">
+<p class="admonition-title">Exercice 1.1 : Conversion de températures ★</p>
+<p>La température en degrés Fahrenheit <span class="math notranslate nohighlight">\(F\)</span> s’obtient à partir de la température en degrés Celsius <span class="math notranslate nohighlight">\(C\)</span> par la formule <span class="math notranslate nohighlight">\(F = \frac{9}{5} C + 32\)</span>.</p>
+<p>Écrivez un programme qui, à partir d’une température en degrés Celsius stockée dans une variable <code class="docutils literal notranslate"><span class="pre">celsius</span></code>, calcule la température en degrés Fahrenheit, la stocke dans une variable <code class="docutils literal notranslate"><span class="pre">fahrenheit</span></code> et l’affiche sous la forme <code class="docutils literal notranslate"><span class="pre">20</span> <span class="pre">°C</span> <span class="pre">=</span> <span class="pre">68.0</span> <span class="pre">°F</span></code>.</p>
+</div>
+<div id="pad_1_1" class="pad"></div>
+<script>
+    Pythonpad('pad_1_1', {'id': 'aude_1.1', 'title': 'Testez votre code ici', 'src': "celsius = 20\n# Complétez ce code\n# Résultat attendu pour celsius = 20 : 20 °C = 68.0 °F\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>La traduction de la formule en Python est <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">/</span> <span class="pre">5</span> <span class="pre">*</span> <span class="pre">celsius</span> <span class="pre">+</span> <span class="pre">32</span></code>.
+Pour l’affichage, utilisez une f-string : <code class="docutils literal notranslate"><span class="pre">f&quot;{celsius}</span> <span class="pre">°C</span> <span class="pre">=</span> <span class="pre">...&quot;</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">celsius</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">fahrenheit</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">celsius</span> <span class="o">+</span> <span class="mi">32</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">celsius</span><span class="si">}</span><span class="s2"> °C = </span><span class="si">{</span><span class="n">fahrenheit</span><span class="si">}</span><span class="s2"> °F"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Testez avec d’autres valeurs : -40 °C doit donner -40 °F, et 100 °C doit donner 212 °F.</p>
+</div>
+<div class="admonition-exercice-1-2-prix-ttc admonition" id="ex1-2">
+<p class="admonition-title">Exercice 1.2 : Prix TTC ★</p>
+<p>Un article coûte <code class="docutils literal notranslate"><span class="pre">prix_ht</span></code> euros hors taxes. La TVA est de 20 %.
+Écrivez un programme qui calcule et affiche le montant de la TVA et le prix toutes taxes comprises (TTC), avec deux chiffres après la virgule.
+Pour <code class="docutils literal notranslate"><span class="pre">prix_ht</span> <span class="pre">=</span> <span class="pre">49.99</span></code>, on doit obtenir :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TVA : 10.00 euros
+Prix TTC : 59.99 euros
+</pre></div>
+</div>
+</div>
+<div id="pad_1_2" class="pad"></div>
+<script>
+    Pythonpad('pad_1_2', {'id': 'aude_1.2', 'title': 'Testez votre code ici', 'src': "prix_ht = 49.99\ntaux_tva = 0.20\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>La TVA vaut <code class="docutils literal notranslate"><span class="pre">prix_ht</span> <span class="pre">*</span> <span class="pre">taux_tva</span></code> et le prix TTC est la somme du prix hors taxes et de la TVA.
+Pour afficher deux décimales, utilisez <code class="docutils literal notranslate"><span class="pre">{variable:.2f}</span></code> dans une f-string.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prix_ht</span> <span class="o">=</span> <span class="mf">49.99</span>
+<span class="n">taux_tva</span> <span class="o">=</span> <span class="mf">0.20</span>
+<span class="n">tva</span> <span class="o">=</span> <span class="n">prix_ht</span> <span class="o">*</span> <span class="n">taux_tva</span>
+<span class="n">prix_ttc</span> <span class="o">=</span> <span class="n">prix_ht</span> <span class="o">+</span> <span class="n">tva</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"TVA : </span><span class="si">{</span><span class="n">tva</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prix TTC : </span><span class="si">{</span><span class="n">prix_ttc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stocker le taux dans une variable (<code class="docutils literal notranslate"><span class="pre">taux_tva</span></code>) plutôt que d’écrire <code class="docutils literal notranslate"><span class="pre">0.20</span></code> directement dans le calcul rend le programme plus lisible et plus facile à modifier si le taux change.</p>
+</div>
+<div class="admonition-exercice-1-3-heures-minutes-secondes admonition" id="ex1-3">
+<p class="admonition-title">Exercice 1.3 : Heures, minutes, secondes ★★</p>
+<p>Une durée est donnée en secondes dans une variable <code class="docutils literal notranslate"><span class="pre">duree</span></code> (par exemple <code class="docutils literal notranslate"><span class="pre">duree</span> <span class="pre">=</span> <span class="pre">4000</span></code>).
+Écrivez un programme qui affiche cette durée en heures, minutes et secondes.
+Pour 4000 secondes, on doit obtenir : <code class="docutils literal notranslate"><span class="pre">4000</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">h</span> <span class="pre">6</span> <span class="pre">min</span> <span class="pre">40</span> <span class="pre">s</span></code>.</p>
+</div>
+<div id="pad_1_3" class="pad"></div>
+<script>
+    Pythonpad('pad_1_3', {'id': 'aude_1.3', 'title': 'Testez votre code ici', 'src': "duree = 4000\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Une heure dure 3600 secondes.
+Le nombre d’heures est donc le quotient <code class="docutils literal notranslate"><span class="pre">duree</span> <span class="pre">//</span> <span class="pre">3600</span></code>, et le <strong>reste</strong> <code class="docutils literal notranslate"><span class="pre">duree</span> <span class="pre">%</span> <span class="pre">3600</span></code> est le nombre de secondes qui ne forment pas une heure complète.
+Recommencez ensuite avec ce reste et 60 secondes par minute.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">duree</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="n">heures</span> <span class="o">=</span> <span class="n">duree</span> <span class="o">//</span> <span class="mi">3600</span>
+<span class="n">reste</span> <span class="o">=</span> <span class="n">duree</span> <span class="o">%</span> <span class="mi">3600</span>          <span class="c1"># secondes restantes une fois les heures retirées</span>
+<span class="n">minutes</span> <span class="o">=</span> <span class="n">reste</span> <span class="o">//</span> <span class="mi">60</span>
+<span class="n">secondes</span> <span class="o">=</span> <span class="n">reste</span> <span class="o">%</span> <span class="mi">60</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">duree</span><span class="si">}</span><span class="s2"> s = </span><span class="si">{</span><span class="n">heures</span><span class="si">}</span><span class="s2"> h </span><span class="si">{</span><span class="n">minutes</span><span class="si">}</span><span class="s2"> min </span><span class="si">{</span><span class="n">secondes</span><span class="si">}</span><span class="s2"> s"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Vérification : 1 × 3600 + 6 × 60 + 40 = 3600 + 360 + 40 = 4000. ✅</p>
+</div>
+<div class="admonition-exercice-1-4-chiffres-d-un-nombre admonition" id="ex1-4">
+<p class="admonition-title">Exercice 1.4 : Chiffres d’un nombre ★★</p>
+<p>Soit <code class="docutils literal notranslate"><span class="pre">n</span></code> un nombre entier positif à trois chiffres (par exemple <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">472</span></code>).
+Écrivez un programme qui affiche séparément son chiffre des unités, son chiffre des dizaines et son chiffre des centaines, puis la somme de ses chiffres.</p>
+</div>
+<div id="pad_1_4" class="pad"></div>
+<script>
+    Pythonpad('pad_1_4', {'id': 'aude_1.4', 'title': 'Testez votre code ici', 'src': "n = 472\n# Complétez ce code\n# Résultat attendu : unités 2, dizaines 7, centaines 4, somme 13\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">10</span></code> donne le chiffre des unités.
+Que donne <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code> ? Et <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">//</span> <span class="pre">10)</span> <span class="pre">%</span> <span class="pre">10</span></code> ?</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">472</span>
+<span class="n">unites</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span>               <span class="c1"># 2</span>
+<span class="n">dizaines</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>     <span class="c1"># 47 % 10 -&gt; 7</span>
+<span class="n">centaines</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">100</span>          <span class="c1"># 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"unités :"</span><span class="p">,</span> <span class="n">unites</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"dizaines :"</span><span class="p">,</span> <span class="n">dizaines</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"centaines :"</span><span class="p">,</span> <span class="n">centaines</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"somme des chiffres :"</span><span class="p">,</span> <span class="n">unites</span> <span class="o">+</span> <span class="n">dizaines</span> <span class="o">+</span> <span class="n">centaines</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-1-5-echanger-deux-variables admonition" id="ex1-5">
+<p class="admonition-title">Exercice 1.5 : Échanger deux variables ★★</p>
+<p>On dispose de deux variables <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">5</span></code> et <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">8</span></code>.
+Écrivez un programme qui <strong>échange</strong> leurs valeurs (à la fin, <code class="docutils literal notranslate"><span class="pre">a</span></code> doit valoir 8 et <code class="docutils literal notranslate"><span class="pre">b</span></code> doit valoir 5), sans écrire les nombres 5 et 8 ailleurs que dans les deux premières lignes.
+Relisez la question « Testez-vous » de la section sur l’affectation : le piège y est décrit !</p>
+</div>
+<div id="pad_1_5" class="pad"></div>
+<script>
+    Pythonpad('pad_1_5', {'id': 'aude_1.5', 'title': 'Testez votre code ici', 'src': "a = 5\nb = 8\n# Complétez ce code\nprint(a, b)  # doit afficher 8 5\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Pensez à la façon dont vous échangeriez le contenu de deux verres (un verre de jus d’orange et un verre de lait) : il vous faut un troisième verre !</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>On utilise une troisième variable pour mettre de côté la valeur de <code class="docutils literal notranslate"><span class="pre">a</span></code> avant de l’écraser :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">a</span>    <span class="c1"># on sauvegarde la valeur de a</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span>       <span class="c1"># a prend la valeur de b (l'ancienne valeur de a est perdue, mais on l'a sauvegardée)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">temp</span>    <span class="c1"># b prend l'ancienne valeur de a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Python propose aussi une écriture plus compacte, que nous expliquerons au chapitre 7 :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-1-6-ticket-de-caisse admonition" id="ex1-6">
+<p class="admonition-title">Exercice 1.6 : Ticket de caisse ★★★</p>
+<p>Vous achetez <code class="docutils literal notranslate"><span class="pre">nb_croissants</span></code> croissants à 1,10 € pièce et <code class="docutils literal notranslate"><span class="pre">nb_baguettes</span></code> baguettes à 0,95 € pièce.
+Vous payez avec un billet de 20 €.
+Écrivez un programme qui affiche le montant total et la monnaie rendue, puis le nombre de pièces de 2 € qui seront rendues au maximum dans cette monnaie.</p>
+<p>Pour 3 croissants et 2 baguettes, on doit obtenir :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Total : 5.20 euros
+Monnaie : 14.80 euros
+Dont 7 pièce(s) de 2 euros
+</pre></div>
+</div>
+</div>
+<div id="pad_1_6" class="pad"></div>
+<script>
+    Pythonpad('pad_1_6', {'id': 'aude_1.6', 'title': 'Testez votre code ici', 'src': "nb_croissants = 3\nnb_baguettes = 2\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Le nombre de pièces de 2 € est le quotient de la division entière de la monnaie par 2.
+Le résultat est un <code class="docutils literal notranslate"><span class="pre">float</span></code> (par exemple <code class="docutils literal notranslate"><span class="pre">7.0</span></code>) : convertissez-le en entier avec <code class="docutils literal notranslate"><span class="pre">int()</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_croissants</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nb_baguettes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">prix_croissant</span> <span class="o">=</span> <span class="mf">1.10</span>
+<span class="n">prix_baguette</span> <span class="o">=</span> <span class="mf">0.95</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">nb_croissants</span> <span class="o">*</span> <span class="n">prix_croissant</span> <span class="o">+</span> <span class="n">nb_baguettes</span> <span class="o">*</span> <span class="n">prix_baguette</span>
+<span class="n">monnaie</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">-</span> <span class="n">total</span>
+<span class="n">pieces_2_euros</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">monnaie</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total : </span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Monnaie : </span><span class="si">{</span><span class="n">monnaie</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dont </span><span class="si">{</span><span class="n">pieces_2_euros</span><span class="si">}</span><span class="s2"> pièce(s) de 2 euros"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Remarque : le calcul <code class="docutils literal notranslate"><span class="pre">int(monnaie</span> <span class="pre">//</span> <span class="pre">2)</span></code> fonctionne car <code class="docutils literal notranslate"><span class="pre">monnaie</span> <span class="pre">//</span> <span class="pre">2</span></code> vaut <code class="docutils literal notranslate"><span class="pre">7.0</span></code>, que <code class="docutils literal notranslate"><span class="pre">int</span></code> convertit en <code class="docutils literal notranslate"><span class="pre">7</span></code>.</p>
+</div>
+</section>
+<section id="bilan-du-chapitre">
+<h2><span class="section-number">1.8. </span>Bilan du chapitre<a class="headerlink" href="#bilan-du-chapitre" title="Lien vers cette rubrique">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print(...)</span></code> affiche des valeurs ; le texte s’écrit entre guillemets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable</span> <span class="pre">=</span> <span class="pre">valeur</span></code> : on <strong>calcule</strong> ce qui est à droite puis on <strong>range</strong> le résultat dans la variable de gauche.</p></li>
+<li><p>Types de base : <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code> (et la valeur spéciale <code class="docutils literal notranslate"><span class="pre">None</span></code>). La fonction <code class="docutils literal notranslate"><span class="pre">type</span></code> donne le type d’une valeur.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">//</span></code> donne le quotient de la division entière, <code class="docutils literal notranslate"><span class="pre">%</span></code> le reste ; <code class="docutils literal notranslate"><span class="pre">/</span></code> donne toujours un <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p></li>
+<li><p>On convertit avec <code class="docutils literal notranslate"><span class="pre">int()</span></code>, <code class="docutils literal notranslate"><span class="pre">float()</span></code>, <code class="docutils literal notranslate"><span class="pre">str()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f&quot;...</span> <span class="pre">{variable}</span> <span class="pre">...&quot;</span></code> permet d’insérer des valeurs dans un texte.</p></li>
+<li><p>Un message d’erreur se lit en commençant par <strong>la dernière ligne</strong>, puis en allant voir la ligne de code indiquée.</p></li>
+</ul>
+</div>
+<p>Faites le point : êtes-vous capable de…</p>
+<ul class="simple">
+<li><p>créer une variable, l’afficher et connaître son type ?</p></li>
+<li><p>prédire la valeur d’une variable après une suite d’affectations ?</p></li>
+<li><p>calculer un quotient et un reste avec <code class="docutils literal notranslate"><span class="pre">//</span></code> et <code class="docutils literal notranslate"><span class="pre">%</span></code> ?</p></li>
+<li><p>convertir un texte en nombre et inversement ?</p></li>
+<li><p>afficher un message contenant des valeurs de variables avec une f-string ?</p></li>
+<li><p>identifier, dans un message d’erreur, la ligne en cause et le type d’erreur ?</p></li>
+</ul>
+<p>Si vous avez coché toutes les cases, passez au chapitre suivant. Sinon, relisez les sections correspondantes et refaites les exercices associés.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Bienvenue !</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="conditions.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Les conditions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-tout-premier-programme">1.1. Un tout premier programme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-variables">1.2. Les variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qu-est-ce-qu-une-variable">1.2.1. Qu’est-ce qu’une variable ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-types-de-base">1.2.2. Les types de base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choisir-un-nom-de-variable">1.2.3. Choisir un nom de variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-affectation-en-detail">1.3. L’affectation en détail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operations-sur-les-nombres">1.4. Les opérations sur les nombres</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operateurs-arithmetiques">1.4.1. Les opérateurs arithmétiques</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priorite-des-operateurs">1.4.2. Priorité des opérateurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-operateurs-raccourcis">1.4.3. Les opérateurs raccourcis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-sur-les-chaines-et-conversions">1.5. Opérations sur les chaînes et conversions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenation">1.5.1. Concaténation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversions-de-type">1.5.2. Conversions de type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#afficher-joliment-les-f-strings">1.5.3. Afficher joliment : les f-strings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lire-un-message-d-erreur">1.6. Lire un message d’erreur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">1.7. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">1.8. Bilan du chapitre</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

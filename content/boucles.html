@@ -1,0 +1,1288 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Les boucles &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/boucles';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="4. Les fonctions et les modules" href="fonctions.html" />
+    <link rel="prev" title="2. Les conditions" href="conditions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables.html">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fichiers.html">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelisation.html">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/boucles.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Les boucles</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-while">3.1. La boucle <code class="docutils literal notranslate"><span class="pre">while</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe">3.1.1. Syntaxe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suivre-une-boucle-a-la-main-le-tableau-de-suivi">3.1.2. Suivre une boucle à la main : le tableau de suivi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-aux-boucles-infinies">3.1.3. Attention aux boucles infinies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-for">3.2. La boucle <code class="docutils literal notranslate"><span class="pre">for</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parcourir-une-liste">3.2.1. Parcourir une liste</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeter-un-nombre-donne-de-fois-range">3.2.2. Répéter un nombre donné de fois : <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-accumulateurs">3.3. Les accumulateurs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide-la-somme-des-entiers-de-1-a-n">3.3.1. Exemple guidé : la somme des entiers de 1 à n</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter">3.3.2. Compter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelle-boucle-choisir">3.4. Quelle boucle choisir ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boucles-imbriquees">3.5. Boucles imbriquées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">3.6. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">3.7. Bilan du chapitre</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="les-boucles">
+<span id="ch-boucles"></span><h1><span class="section-number">3. </span>Les boucles<a class="headerlink" href="#les-boucles" title="Lien vers cette rubrique">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>À la fin de ce chapitre, vous saurez :</p>
+<ul class="simple">
+<li><p>répéter des instructions tant qu’une condition est vraie (boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>) ;</p></li>
+<li><p>répéter des instructions pour chaque élément d’une liste (boucle <code class="docutils literal notranslate"><span class="pre">for</span></code>) ;</p></li>
+<li><p>générer des suites d’entiers avec <code class="docutils literal notranslate"><span class="pre">range</span></code> ;</p></li>
+<li><p>utiliser des variables « accumulateurs » (somme, compteur…) ;</p></li>
+<li><p>suivre l’exécution d’une boucle à la main, avec un tableau de suivi.</p></li>
+</ul>
+<p><strong>Prérequis :</strong> chapitres 1 et 2. <strong>Durée indicative :</strong> 2h.</p>
+</div>
+<p>Imaginons que l’on veuille afficher les nombres de 1 à 100.
+Écrire cent fois <code class="docutils literal notranslate"><span class="pre">print</span></code> serait fastidieux… et un programme qui doit traiter un million de données ne peut évidemment pas être écrit ainsi.
+Les <strong>boucles</strong> permettent de <strong>répéter</strong> une série d’instructions autant de fois que nécessaire.</p>
+<p>Il existe en Python deux types de boucles :</p>
+<ul class="simple">
+<li><p>la boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>, qui répète des instructions **tant qu’**une condition est vraie ;</p></li>
+<li><p>la boucle <code class="docutils literal notranslate"><span class="pre">for</span></code>, qui répète des instructions <strong>pour chaque</strong> valeur d’une séquence (par exemple une liste).</p></li>
+</ul>
+<section id="la-boucle-while">
+<h2><span class="section-number">3.1. </span>La boucle <code class="docutils literal notranslate"><span class="pre">while</span></code><a class="headerlink" href="#la-boucle-while" title="Lien vers cette rubrique">#</a></h2>
+<section id="syntaxe">
+<h3><span class="section-number">3.1.1. </span>Syntaxe<a class="headerlink" href="#syntaxe" title="Lien vers cette rubrique">#</a></h3>
+<p>La boucle <code class="docutils literal notranslate"><span class="pre">while</span></code> (« tant que » en anglais) a une syntaxe très proche de celle du <code class="docutils literal notranslate"><span class="pre">if</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fin de la boucle, x vaut"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+2
+6
+Fin de la boucle, x vaut 14
+</pre></div>
+</div>
+</div>
+</div>
+<p>Son fonctionnement est le suivant :</p>
+<ol class="arabic simple">
+<li><p>on teste la condition (<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">10</span></code>) ;</p></li>
+<li><p>si elle est vraie, on exécute le bloc indenté (le <strong>corps</strong> de la boucle), puis <strong>on revient à l’étape 1</strong> ;</p></li>
+<li><p>si elle est fausse, on passe à la suite du programme, après la boucle.</p></li>
+</ol>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/fig_while.svg"><img alt="../_images/fig_while.svg" src="../_images/fig_while.svg" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Fonctionnement de la boucle <code class="docutils literal notranslate"><span class="pre">while</span></code> de l’exemple ci-dessus.</span><a class="headerlink" href="#id1" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p><em><a class="reference external" href="https://pythontutor.com/visualize.html#code=x%20%3D%200%0Awhile%20x%20%3C%3D%2010%3A%0A%20%20%20%20print%28x%29%0A%20%20%20%20x%20%3D%202%20%2A%20x%20%2B%202%0Aprint%28%22Fin%20de%20la%20boucle%2C%20x%20vaut%22%2C%20x%29%0A&amp;amp;cumulative=false&amp;amp;heapPrimitives=nevernest&amp;amp;mode=display&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false">Voir ce code s’exécuter pas à pas dans Python Tutor</a></em></p>
+</section>
+<section id="suivre-une-boucle-a-la-main-le-tableau-de-suivi">
+<h3><span class="section-number">3.1.2. </span>Suivre une boucle à la main : le tableau de suivi<a class="headerlink" href="#suivre-une-boucle-a-la-main-le-tableau-de-suivi" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour comprendre (ou vérifier) ce que fait une boucle, une technique très efficace consiste à dresser un <strong>tableau de suivi</strong> : une ligne par tour de boucle, une colonne par variable.
+Pour l’exemple précédent :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Moment</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></th>
+<th class="head"><p>Condition <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">10</span></code></p></th>
+<th class="head"><p>Affichage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>avant la boucle</p></td>
+<td><p>0</p></td>
+<td><p>vraie</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>après le tour 1</p></td>
+<td><p>2</p></td>
+<td><p>vraie</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>après le tour 2</p></td>
+<td><p>6</p></td>
+<td><p>vraie</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>après le tour 3</p></td>
+<td><p>14</p></td>
+<td><p><strong>fausse</strong> → sortie</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>À la sortie de la boucle, <code class="docutils literal notranslate"><span class="pre">x</span></code> vaut 14.
+Prenez l’habitude de faire ce type de tableau sur papier lorsqu’une boucle ne fait pas ce que vous attendez : c’est exactement ce que fait Python Tutor pour vous.</p>
+</section>
+<section id="attention-aux-boucles-infinies">
+<h3><span class="section-number">3.1.3. </span>Attention aux boucles infinies<a class="headerlink" href="#attention-aux-boucles-infinies" title="Lien vers cette rubrique">#</a></h3>
+<p>Si la condition d’une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code> ne devient jamais fausse, la boucle ne s’arrête jamais :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Si on arrive ici, on a fini"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ici, <code class="docutils literal notranslate"><span class="pre">x</span></code> vaut 2 et n’est jamais modifiée dans la boucle : la condition <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> reste vraie pour toujours et le programme affiche -1, -2, -3… sans fin.</p>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p>Dans une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>, le corps de la boucle doit <strong>modifier au moins une des variables de la condition</strong>, de façon à ce que celle-ci finisse par devenir fausse.
+Si votre programme semble « bloqué », il est probablement pris dans une boucle infinie : interrompez-le avec la combinaison de touches <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> (ou le bouton <em>Stop</em> de Thonny).</p>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Qu’affiche le programme suivant ? Construisez le tableau de suivi.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n = 1
+while n &lt; 20:
+    n = n * 3
+print(n)
+</pre></div>
+</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Moment</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">20</span></code> ?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>avant la boucle</p></td>
+<td><p>1</p></td>
+<td><p>vraie</p></td>
+</tr>
+<tr class="row-odd"><td><p>après le tour 1</p></td>
+<td><p>3</p></td>
+<td><p>vraie</p></td>
+</tr>
+<tr class="row-even"><td><p>après le tour 2</p></td>
+<td><p>9</p></td>
+<td><p>vraie</p></td>
+</tr>
+<tr class="row-odd"><td><p>après le tour 3</p></td>
+<td><p>27</p></td>
+<td><p>fausse → sortie</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Le programme affiche <code class="docutils literal notranslate"><span class="pre">27</span></code> (une seule fois, puisque le <code class="docutils literal notranslate"><span class="pre">print</span></code> est après la boucle).
+Remarquez que la valeur finale dépasse 20 : la condition n’est testée qu’au début de chaque tour.</p>
+</div>
+</section>
+</section>
+<section id="la-boucle-for">
+<h2><span class="section-number">3.2. </span>La boucle <code class="docutils literal notranslate"><span class="pre">for</span></code><a class="headerlink" href="#la-boucle-for" title="Lien vers cette rubrique">#</a></h2>
+<section id="parcourir-une-liste">
+<h3><span class="section-number">3.2.1. </span>Parcourir une liste<a class="headerlink" href="#parcourir-une-liste" title="Lien vers cette rubrique">#</a></h3>
+<p>Le second type de boucle utilise une <strong>liste</strong>, c’est-à-dire une suite ordonnée de valeurs écrites entre crochets et séparées par des virgules (nous étudierons les listes en détail au chapitre 5).
+La boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> exécute son corps <strong>une fois pour chaque élément</strong> de la liste :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fin de la boucle"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+5
+7
+Fin de la boucle
+</pre></div>
+</div>
+</div>
+</div>
+<p>À chaque tour, la variable <code class="docutils literal notranslate"><span class="pre">x</span></code> (appelée <strong>variable de boucle</strong>) prend successivement pour valeur chacun des éléments de la liste, dans l’ordre.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/fig_for.svg"><img alt="../_images/fig_for.svg" src="../_images/fig_for.svg" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">À chaque tour de boucle, <code class="docutils literal notranslate"><span class="pre">x</span></code> prend la valeur de l’élément suivant de la liste.</span><a class="headerlink" href="#id2" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<p>Le nom de la variable de boucle est libre, et la liste peut contenir n’importe quel type de valeurs :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">prenom</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"Aude"</span><span class="p">,</span> <span class="s2">"Ali"</span><span class="p">,</span> <span class="s2">"Chloé"</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bonjour </span><span class="si">{</span><span class="n">prenom</span><span class="si">}</span><span class="s2"> !"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bonjour Aude !
+Bonjour Ali !
+Bonjour Chloé !
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repeter-un-nombre-donne-de-fois-range">
+<h3><span class="section-number">3.2.2. </span>Répéter un nombre donné de fois : <code class="docutils literal notranslate"><span class="pre">range</span></code><a class="headerlink" href="#repeter-un-nombre-donne-de-fois-range" title="Lien vers cette rubrique">#</a></h3>
+<p>Il est très fréquent de vouloir parcourir une suite d’entiers.
+C’est le rôle de la fonction <code class="docutils literal notranslate"><span class="pre">range</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">range</span></code> peut prendre un, deux ou trois arguments :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">range(n)</span></code> produit les entiers de <code class="docutils literal notranslate"><span class="pre">0</span></code> à <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code> (soit <code class="docutils literal notranslate"><span class="pre">n</span></code> valeurs) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(a,</span> <span class="pre">b)</span></code> produit les entiers de <code class="docutils literal notranslate"><span class="pre">a</span></code> (inclus) à <code class="docutils literal notranslate"><span class="pre">b</span></code> (<strong>exclu</strong>) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(a,</span> <span class="pre">b,</span> <span class="pre">pas)</span></code> produit les entiers de <code class="docutils literal notranslate"><span class="pre">a</span></code> à <code class="docutils literal notranslate"><span class="pre">b</span></code> (exclu) en avançant de <code class="docutils literal notranslate"><span class="pre">pas</span></code> à chaque fois.</p></li>
+</ul>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/fig_range.svg"><img alt="../_images/fig_range.svg" src="../_images/fig_range.svg" style="width: 75%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Les valeurs produites par <code class="docutils literal notranslate"><span class="pre">range</span></code> dans trois cas. La borne de fin n’est jamais atteinte.</span><a class="headerlink" href="#id3" title="Lien vers cette image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+3
+5
+7
+9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pour répéter une action <code class="docutils literal notranslate"><span class="pre">n</span></code> fois, on écrit donc simplement <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(n):</span></code> (même si l’on n’utilise pas la valeur de <code class="docutils literal notranslate"><span class="pre">i</span></code>) :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hip hip hip, hourra !"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hip hip hip, hourra !
+Hip hip hip, hourra !
+Hip hip hip, hourra !
+</pre></div>
+</div>
+</div>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Quelles valeurs sont produites par <code class="docutils literal notranslate"><span class="pre">range(3)</span></code>, <code class="docutils literal notranslate"><span class="pre">range(2,</span> <span class="pre">5)</span></code>, <code class="docutils literal notranslate"><span class="pre">range(10,</span> <span class="pre">0,</span> <span class="pre">-3)</span></code> et <code class="docutils literal notranslate"><span class="pre">range(5,</span> <span class="pre">5)</span></code> ?</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">range(3)</span></code> : 0, 1, 2 ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(2,</span> <span class="pre">5)</span></code> : 2, 3, 4 ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(10,</span> <span class="pre">0,</span> <span class="pre">-3)</span></code> : 10, 7, 4, 1 (un pas négatif permet de compter à rebours) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(5,</span> <span class="pre">5)</span></code> : aucune valeur ! Une boucle <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(5,</span> <span class="pre">5)</span></code> ne fait aucun tour.</p></li>
+</ul>
+<p>Pour vérifier, vous pouvez afficher <code class="docutils literal notranslate"><span class="pre">list(range(10,</span> <span class="pre">0,</span> <span class="pre">-3))</span></code>.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Pour info</p>
+<p>Si vous avez déjà programmé dans un autre langage, vous avez peut-être l’habitude que les boucles <code class="docutils literal notranslate"><span class="pre">for</span></code> parcourent des entiers (des indices).
+En Python, la boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> parcourt directement <strong>les éléments</strong> d’une séquence ; <code class="docutils literal notranslate"><span class="pre">range</span></code> n’est qu’un cas particulier de séquence.
+Nous verrons au chapitre 5 <a class="reference internal" href="listes.html#parcours-liste"><span class="std std-ref">comment parcourir une liste avec ses indices</span></a> lorsque c’est nécessaire.</p>
+</div>
+</section>
+</section>
+<section id="les-accumulateurs">
+<h2><span class="section-number">3.3. </span>Les accumulateurs<a class="headerlink" href="#les-accumulateurs" title="Lien vers cette rubrique">#</a></h2>
+<p>Une utilisation très courante des boucles consiste à <strong>accumuler</strong> un résultat au fil des tours : faire une somme, compter des éléments, construire un texte…
+Le principe est toujours le même :</p>
+<ol class="arabic simple">
+<li><p><strong>avant</strong> la boucle, on initialise une variable (à 0 pour une somme ou un compteur) ;</p></li>
+<li><p><strong>dans</strong> la boucle, on met à jour cette variable ;</p></li>
+<li><p><strong>après</strong> la boucle, on utilise le résultat.</p></li>
+</ol>
+<section id="exemple-guide-la-somme-des-entiers-de-1-a-n">
+<h3><span class="section-number">3.3.1. </span>Exemple guidé : la somme des entiers de 1 à n<a class="headerlink" href="#exemple-guide-la-somme-des-entiers-de-1-a-n" title="Lien vers cette rubrique">#</a></h3>
+<p>Calculons <span class="math notranslate nohighlight">\(1 + 2 + \dots + n\)</span> pour <span class="math notranslate nohighlight">\(n = 4\)</span> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>                    <span class="c1"># 1. initialisation</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>    <span class="c1"># i prend les valeurs 1, 2, ..., n</span>
+    <span class="n">somme</span> <span class="o">=</span> <span class="n">somme</span> <span class="o">+</span> <span class="n">i</span>        <span class="c1"># 2. mise à jour</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">somme</span><span class="p">)</span>                 <span class="c1"># 3. utilisation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le tableau de suivi permet de voir comment la somme se construit :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tour</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">i</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">somme</span></code> après le tour</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(avant)</p></td>
+<td><p>–</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em><a class="reference external" href="https://pythontutor.com/visualize.html#code=n%20%3D%204%0Asomme%20%3D%200%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%201.%20initialisation%0Afor%20i%20in%20range%281%2C%20n%20%2B%201%29%3A%20%20%20%20%23%20i%20prend%20les%20valeurs%201%2C%202%2C%20...%2C%20n%0A%20%20%20%20somme%20%3D%20somme%20%2B%20i%20%20%20%20%20%20%20%20%23%202.%20mise%20%C3%A0%20jour%0Aprint%28somme%29%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%203.%20utilisation%0A&amp;amp;cumulative=false&amp;amp;heapPrimitives=nevernest&amp;amp;mode=display&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false">Voir ce code s’exécuter pas à pas dans Python Tutor</a></em></p>
+<div class="warning admonition">
+<p class="admonition-title">Erreur fréquente</p>
+<ul class="simple">
+<li><p><strong>Initialiser l’accumulateur dans la boucle</strong> : si l’on place <code class="docutils literal notranslate"><span class="pre">somme</span> <span class="pre">=</span> <span class="pre">0</span></code> à l’intérieur de la boucle, la somme est remise à zéro à chaque tour !</p></li>
+<li><p><strong>Oublier le <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span></code> dans <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1)</span></code></strong> : <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">n)</span></code> s’arrête à <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>Mettre le <code class="docutils literal notranslate"><span class="pre">print</span></code> dans la boucle</strong> alors qu’on ne veut afficher que le résultat final (ou l’inverse) : vérifiez l’indentation.</p></li>
+</ul>
+</div>
+</section>
+<section id="compter">
+<h3><span class="section-number">3.3.2. </span>Compter<a class="headerlink" href="#compter" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour compter, on ajoute 1 à un compteur à chaque fois qu’une condition est vérifiée.
+On combine alors une boucle et un <code class="docutils literal notranslate"><span class="pre">if</span></code> :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="n">nb_admis</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">nb_admis</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nb_admis</span><span class="p">,</span> <span class="s2">"étudiants admis"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 étudiants admis
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="quelle-boucle-choisir">
+<h2><span class="section-number">3.4. </span>Quelle boucle choisir ?<a class="headerlink" href="#quelle-boucle-choisir" title="Lien vers cette rubrique">#</a></h2>
+<p>Au début, il peut être difficile de choisir entre <code class="docutils literal notranslate"><span class="pre">for</span></code> et <code class="docutils literal notranslate"><span class="pre">while</span></code>.
+Voici une règle simple :</p>
+<ul class="simple">
+<li><p>si l’on veut parcourir les éléments d’une liste (ou d’une autre collection), ou si l’on <strong>connaît à l’avance le nombre de tours</strong>, on utilise une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> (avec <code class="docutils literal notranslate"><span class="pre">range</span></code> si besoin) ;</p></li>
+<li><p>si l’on veut répéter une action **tant qu’**une condition est vérifiée, sans savoir à l’avance combien de tours seront nécessaires, on utilise une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>.</p></li>
+</ul>
+<p>Par exemple, « afficher les 10 premiers multiples de 7 » appelle une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code>, tandis que « combien d’années faut-il pour doubler un capital placé à 3 % ? » appelle une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>.</p>
+</section>
+<section id="boucles-imbriquees">
+<h2><span class="section-number">3.5. </span>Boucles imbriquées<a class="headerlink" href="#boucles-imbriquees" title="Lien vers cette rubrique">#</a></h2>
+<p>Le corps d’une boucle peut contenir une autre boucle.
+La boucle intérieure est alors exécutée entièrement à chaque tour de la boucle extérieure :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"---"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 x 1 = 1
+1 x 2 = 2
+1 x 3 = 3
+---
+2 x 1 = 2
+2 x 2 = 4
+2 x 3 = 6
+---
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+---
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ici, la boucle sur <code class="docutils literal notranslate"><span class="pre">j</span></code> fait 3 tours pour <strong>chacun</strong> des 3 tours de la boucle sur <code class="docutils literal notranslate"><span class="pre">i</span></code> : il y a donc 9 affichages de produits en tout.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Pour aller plus loin : interrompre une boucle</p>
+<p>L’instruction <code class="docutils literal notranslate"><span class="pre">break</span></code> permet de sortir immédiatement d’une boucle, et <code class="docutils literal notranslate"><span class="pre">continue</span></code> de passer directement au tour suivant.
+Elles sont parfois pratiques, mais on peut toujours s’en passer, et un code sans <code class="docutils literal notranslate"><span class="pre">break</span></code> est souvent plus facile à relire.
+Dans ce document, nous ne les utiliserons pas.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Si vous venez de R ou de SAS</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">range(a,</span> <span class="pre">b)</span></code> <strong>exclut</strong> la borne <code class="docutils literal notranslate"><span class="pre">b</span></code> : <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">4)</span></code> produit 1, 2, 3, alors que <code class="docutils literal notranslate"><span class="pre">1:4</span></code> en R produit 1, 2, 3, 4.</p></li>
+<li><p>Comme en R, on évite les boucles explicites pour traiter des <strong>données</strong> : avec <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, les calculs sur des colonnes entières sont « vectorisés » (chapitres 10 à 12). Les boucles restent utiles pour tout le reste (parcourir des fichiers, répéter une simulation, construire un résultat…).</p></li>
+<li><p>En SAS, l’étape DATA « boucle » implicitement sur les observations ; en Python, rien de tel : les instructions sont exécutées une fois, sauf boucle explicite.</p></li>
+</ul>
+</div>
+</section>
+<section id="exercices">
+<h2><span class="section-number">3.6. </span>Exercices<a class="headerlink" href="#exercices" title="Lien vers cette rubrique">#</a></h2>
+<div class="admonition-exercice-3-1-nombres-impairs admonition" id="ex3-1">
+<p class="admonition-title">Exercice 3.1 : Nombres impairs ★</p>
+<p>Écrivez une boucle permettant d’afficher tous les nombres impairs strictement inférieurs à une valeur <code class="docutils literal notranslate"><span class="pre">n</span></code> initialement fixée.
+Proposez deux versions : l’une utilisant l’opérateur <code class="docutils literal notranslate"><span class="pre">%</span></code>, l’autre non.</p>
+</div>
+<div id="pad_3_1" class="pad"></div>
+<script>
+    Pythonpad('pad_3_1', {'id': 'aude_3.1', 'title': 'Testez votre code ici', 'src': "n = 20\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Version 1 : parcourez tous les entiers de 0 à <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code> et n’affichez que ceux pour lesquels <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">!=</span> <span class="pre">0</span></code>.
+Version 2 : les nombres impairs sont 1, 3, 5… : utilisez le troisième argument de <code class="docutils literal notranslate"><span class="pre">range</span></code>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p>Version avec une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> et le modulo :</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Version sans modulo, avec un pas de 2 :</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>On peut aussi utiliser une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code> :</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-3-2-table-de-multiplication admonition" id="ex3-2">
+<p class="admonition-title">Exercice 3.2 : Table de multiplication ★</p>
+<p>Écrivez un programme qui affiche la table de multiplication d’un nombre <code class="docutils literal notranslate"><span class="pre">n</span></code> (de <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">1</span></code> à <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">10</span></code>), sous la forme :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>7 x 1 = 7
+7 x 2 = 14
+...
+7 x 10 = 70
+</pre></div>
+</div>
+</div>
+<div id="pad_3_2" class="pad"></div>
+<script>
+    Pythonpad('pad_3_2', {'id': 'aude_3.2', 'title': 'Testez votre code ici', 'src': "n = 7\n# Complétez ce code\n"});
+</script>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-3-3-somme-des-carres admonition" id="ex3-3">
+<p class="admonition-title">Exercice 3.3 : Somme des carrés ★</p>
+<p>Calculez et affichez la somme <span class="math notranslate nohighlight">\(1^2 + 2^2 + \dots + n^2\)</span> pour une valeur de <code class="docutils literal notranslate"><span class="pre">n</span></code> donnée.
+Pour <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">10</span></code>, vous devez obtenir 385.</p>
+</div>
+<div id="pad_3_3" class="pad"></div>
+<script>
+    Pythonpad('pad_3_3', {'id': 'aude_3.3', 'title': 'Testez votre code ici', 'src': "n = 10\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Inspirez-vous de l’exemple guidé sur la somme des entiers : seule la quantité ajoutée à chaque tour change.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">somme</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">somme</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-3-4-factorielle admonition" id="ex3-4">
+<p class="admonition-title">Exercice 3.4 : Factorielle ★★</p>
+<p>La factorielle d’un entier <span class="math notranslate nohighlight">\(n\)</span>, notée <span class="math notranslate nohighlight">\(n!\)</span>, est le produit <span class="math notranslate nohighlight">\(1 \times 2 \times \dots \times n\)</span> (et par convention <span class="math notranslate nohighlight">\(0! = 1\)</span>).
+Écrivez un programme qui calcule et affiche <span class="math notranslate nohighlight">\(n!\)</span> pour une valeur de <code class="docutils literal notranslate"><span class="pre">n</span></code> donnée. Vous devez obtenir <span class="math notranslate nohighlight">\(5! = 120\)</span> et <span class="math notranslate nohighlight">\(0! = 1\)</span>.</p>
+</div>
+<div id="pad_3_4" class="pad"></div>
+<script>
+    Pythonpad('pad_3_4', {'id': 'aude_3.4', 'title': 'Testez votre code ici', 'src': "n = 5\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>C’est un accumulateur, mais pour un <strong>produit</strong>. Quelle doit être la valeur initiale ? (Que se passerait-il si on l’initialisait à 0 ?)</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">produit</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1"># et non 0 : 0 multiplié par n'importe quoi donne 0 !</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">produit</span> <span class="o">*=</span> <span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">! = </span><span class="si">{</span><span class="n">produit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pour <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">1)</span></code> est vide : la boucle ne fait aucun tour et le résultat vaut bien 1.</p>
+</div>
+<div class="admonition-exercice-3-5-doubler-son-capital admonition" id="ex3-5">
+<p class="admonition-title">Exercice 3.5 : Doubler son capital ★★</p>
+<p>On place 1000 € sur un compte rémunéré à 3 % par an (chaque année, le capital est multiplié par 1,03).
+Écrivez un programme qui calcule le nombre d’années nécessaires pour que le capital dépasse 2000 €, et affiche ce nombre ainsi que le capital final (arrondi au centime).</p>
+</div>
+<div id="pad_3_5" class="pad"></div>
+<script>
+    Pythonpad('pad_3_5', {'id': 'aude_3.5', 'title': 'Testez votre code ici', 'src': "capital = 1000\ntaux = 0.03\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>On ne sait pas à l’avance combien d’années il faudra : c’est une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>.
+Il vous faut deux variables qui évoluent à chaque tour : le capital et le nombre d’années écoulées (un compteur).</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">capital</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">taux</span> <span class="o">=</span> <span class="mf">0.03</span>
+<span class="n">annees</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">capital</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">:</span>
+    <span class="n">capital</span> <span class="o">=</span> <span class="n">capital</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">taux</span><span class="p">)</span>
+    <span class="n">annees</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Il faut </span><span class="si">{</span><span class="n">annees</span><span class="si">}</span><span class="s2"> ans ; le capital vaut alors </span><span class="si">{</span><span class="n">capital</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> euros"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On obtient 24 ans, pour un capital de 2032,79 €.</p>
+</div>
+<div class="admonition-exercice-3-6-suite-recurrente admonition" id="ex3-6">
+<p class="admonition-title">Exercice 3.6 : Suite récurrente ★★</p>
+<p>Écrivez un programme qui affiche tous les termes plus petits que 1000 de la suite <span class="math notranslate nohighlight">\((u_n)\)</span> définie par :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rcl}u_0 &amp; = &amp; 2 \\
+\forall n \geq 1, \, u_n &amp; = &amp; u_{n-1}^2\end{array}
+\end{split}\]</div>
+</div>
+<div id="pad_3_6" class="pad"></div>
+<script>
+    Pythonpad('pad_3_6', {'id': 'aude_3.6', 'title': 'Testez votre code ici', 'src': "# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Il suffit d’une variable <code class="docutils literal notranslate"><span class="pre">u</span></code> qui vaut d’abord 2, et que l’on remplace par son carré à chaque tour, tant qu’elle est inférieure à 1000.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">while</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Le programme affiche 2, 4, 16 et 256 (le terme suivant, 65536, dépasse 1000).</p>
+</div>
+<div class="admonition-exercice-3-7-triangle-d-etoiles admonition" id="ex3-7">
+<p class="admonition-title">Exercice 3.7 : Triangle d’étoiles ★★</p>
+<p>Écrivez un programme qui affiche un triangle de <code class="docutils literal notranslate"><span class="pre">n</span></code> lignes, la ligne numéro <code class="docutils literal notranslate"><span class="pre">i</span></code> contenant <code class="docutils literal notranslate"><span class="pre">i</span></code> étoiles. Pour <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">4</span></code> :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*
+**
+***
+****
+</pre></div>
+</div>
+<p>Puis, en bonus, affichez le même triangle aligné à droite.</p>
+</div>
+<div id="pad_3_7" class="pad"></div>
+<script>
+    Pythonpad('pad_3_7', {'id': 'aude_3.7', 'title': 'Testez votre code ici', 'src': "n = 4\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Rappelez-vous que l’opérateur <code class="docutils literal notranslate"><span class="pre">*</span></code> permet de répéter une chaîne de caractères : <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span> <span class="pre">*</span> <span class="pre">3</span></code> vaut <code class="docutils literal notranslate"><span class="pre">&quot;***&quot;</span></code>.
+Pour le bonus, chaque ligne commence par un certain nombre d’espaces : combien, en fonction de <code class="docutils literal notranslate"><span class="pre">n</span></code> et <code class="docutils literal notranslate"><span class="pre">i</span></code> ?</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"*"</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># Bonus : aligné à droite</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" "</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"*"</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sans utiliser la répétition de chaînes, on peut aussi utiliser deux boucles imbriquées et l’argument <code class="docutils literal notranslate"><span class="pre">end</span></code> de <code class="docutils literal notranslate"><span class="pre">print</span></code> (que nous verrons au chapitre suivant) :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"*"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>   <span class="c1"># passe à la ligne</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercice-3-8-nombre-premier admonition" id="ex3-8">
+<p class="admonition-title">Exercice 3.8 : Nombre premier ★★★</p>
+<p>Un nombre entier <span class="math notranslate nohighlight">\(n \geq 2\)</span> est <strong>premier</strong> s’il n’est divisible que par 1 et par lui-même (2, 3, 5, 7, 11, 13… sont premiers ; 9 = 3 × 3 ne l’est pas).
+Écrivez un programme qui affiche si l’entier <code class="docutils literal notranslate"><span class="pre">n</span></code> est premier.</p>
+</div>
+<div id="pad_3_8" class="pad"></div>
+<script>
+    Pythonpad('pad_3_8', {'id': 'aude_3.8', 'title': 'Testez votre code ici', 'src': "n = 91\n# Complétez ce code\n"});
+</script>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Comptez le nombre de diviseurs de <code class="docutils literal notranslate"><span class="pre">n</span></code> compris entre 2 et <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code> (on teste si <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">d</span> <span class="pre">==</span> <span class="pre">0</span></code> pour chaque <code class="docutils literal notranslate"><span class="pre">d</span></code>).
+<code class="docutils literal notranslate"><span class="pre">n</span></code> est premier si ce nombre vaut 0.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">91</span>
+<span class="n">nb_diviseurs</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">nb_diviseurs</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">nb_diviseurs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"est premier"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"n'est pas premier"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>91 n’est pas premier (91 = 7 × 13), mais 97 l’est.</p>
+<p>Pour aller plus loin : on peut s’arrêter dès qu’on a trouvé un diviseur, avec une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code>, et il suffit de tester les diviseurs <code class="docutils literal notranslate"><span class="pre">d</span></code> tels que <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">*</span> <span class="pre">d</span> <span class="pre">&lt;=</span> <span class="pre">n</span></code> (pourquoi ?).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">97</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">while</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="c1"># Si on est sorti de la boucle parce que d * d &gt; n, on n'a trouvé aucun diviseur</span>
+<span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"est premier"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"n'est pas premier"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="bilan-du-chapitre">
+<h2><span class="section-number">3.7. </span>Bilan du chapitre<a class="headerlink" href="#bilan-du-chapitre" title="Lien vers cette rubrique">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">condition:</span></code> répète le bloc <strong>tant que</strong> la condition est vraie ; la condition doit finir par devenir fausse.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">element</span> <span class="pre">in</span> <span class="pre">liste:</span></code> répète le bloc <strong>pour chaque</strong> élément de la liste.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range(n)</span></code> produit 0, 1, …, n-1 ; <code class="docutils literal notranslate"><span class="pre">range(a,</span> <span class="pre">b)</span></code> produit a, …, b-1 ; <code class="docutils literal notranslate"><span class="pre">range(a,</span> <span class="pre">b,</span> <span class="pre">pas)</span></code> avance de <code class="docutils literal notranslate"><span class="pre">pas</span></code> en <code class="docutils literal notranslate"><span class="pre">pas</span></code>.</p></li>
+<li><p>Accumulateur : on l’<strong>initialise avant</strong> la boucle, on le <strong>met à jour dans</strong> la boucle, on l’<strong>utilise après</strong>.</p></li>
+<li><p>En cas de doute, faites un <strong>tableau de suivi</strong> ou utilisez Python Tutor.</p></li>
+</ul>
+</div>
+<p>Faites le point : êtes-vous capable de…</p>
+<ul class="simple">
+<li><p>écrire une boucle <code class="docutils literal notranslate"><span class="pre">for</span></code> qui parcourt une liste ou un <code class="docutils literal notranslate"><span class="pre">range</span></code> ?</p></li>
+<li><p>prédire les valeurs produites par un <code class="docutils literal notranslate"><span class="pre">range</span></code> à 1, 2 ou 3 arguments ?</p></li>
+<li><p>écrire une boucle <code class="docutils literal notranslate"><span class="pre">while</span></code> qui s’arrête bien ?</p></li>
+<li><p>calculer une somme, un produit ou un comptage avec un accumulateur ?</p></li>
+<li><p>dresser le tableau de suivi d’une boucle ?</p></li>
+<li><p>choisir entre <code class="docutils literal notranslate"><span class="pre">for</span></code> et <code class="docutils literal notranslate"><span class="pre">while</span></code> pour un problème donné ?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="conditions.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Les conditions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fonctions.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Les fonctions et les modules</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-while">3.1. La boucle <code class="docutils literal notranslate"><span class="pre">while</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntaxe">3.1.1. Syntaxe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suivre-une-boucle-a-la-main-le-tableau-de-suivi">3.1.2. Suivre une boucle à la main : le tableau de suivi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attention-aux-boucles-infinies">3.1.3. Attention aux boucles infinies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-boucle-for">3.2. La boucle <code class="docutils literal notranslate"><span class="pre">for</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parcourir-une-liste">3.2.1. Parcourir une liste</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeter-un-nombre-donne-de-fois-range">3.2.2. Répéter un nombre donné de fois : <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-accumulateurs">3.3. Les accumulateurs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-guide-la-somme-des-entiers-de-1-a-n">3.3.1. Exemple guidé : la somme des entiers de 1 à n</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter">3.3.2. Compter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quelle-boucle-choisir">3.4. Quelle boucle choisir ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boucles-imbriquees">3.5. Boucles imbriquées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices">3.6. Exercices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan-du-chapitre">3.7. Bilan du chapitre</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

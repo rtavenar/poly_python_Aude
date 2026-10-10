@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bienvenue ! &#8212; Apprendre Python en autonomie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/betterpythonpad.css?v=a38d527a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Cliquez pour afficher';</script>
+    <script>let toggleHintHide = 'Cliquez pour masquer';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/pythonpad.bundle.js?v=d5cee81d"></script>
+    <script src="../_static/vue.js?v=c303d72a"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="1. Variables, types et opérations" href="variables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passer au contenu principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Haut de page</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Alerte de version"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navigation dans le site">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Sur cette page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apprendre Python en autonomie</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Les bases de Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variables.html">1. Variables, types et opérations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conditions.html">2. Les conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boucles.html">3. Les boucles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fonctions.html">4. Les fonctions et les modules</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Les collections de données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="listes.html">5. Les listes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chaines.html">6. Les chaînes de caractères</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dictionnaires.html">7. Dictionnaires, <em>tuples</em> et <em>sets</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">8. Déboguer et tester son code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyser des données</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="fichiers.html">9. Lire et écrire des fichiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_bases.html">11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas_transformer.html">12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelisation.html">14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">S'entraîner et réviser</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="projets.html">Mini-projets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memo.html">Fiche mémo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="et_apres.html">Et après ?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Thème" data-bs-title="Thème"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Clair"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Sombre"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Paramètres système"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bienvenue !</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-qui-s-adresse-ce-document">À qui s’adresse ce document ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-parcours-propose">Le parcours proposé</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-lire-les-encadres">Comment lire les encadrés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-ecrire-et-executer-du-code-python">Où écrire et exécuter du code Python ?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-blocs-de-code-de-ce-document">Les blocs de code de ce document</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-les-fenetres-de-code-integrees-version-web">Option 1 : les fenêtres de code intégrées (version web)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-sans-installation-dans-le-navigateur">Option 2 : sans installation, dans le navigateur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-recommandee-installer-python-sur-votre-ordinateur">Option 3 (recommandée) : installer Python sur votre ordinateur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-outil-precieux-python-tutor">Un outil précieux : Python Tutor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-de-travail-conseillee">Méthode de travail conseillée</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bienvenue">
+<h1>Bienvenue !<a class="headerlink" href="#bienvenue" title="Lien vers cette rubrique">#</a></h1>
+<p>Ce document est une version du polycopié <em>Introduction à Python</em> de la filière MIASHS de l’Université de Rennes 2, <strong>réécrite pour pouvoir apprendre seul·e, sans cours en présentiel</strong>, avec un objectif précis : <strong>acquérir les bases nécessaires pour analyser des données</strong> (<em>data science</em>) avec Python.</p>
+<p>Il vous mène des toutes premières lignes de code jusqu’à l’analyse d’un vrai jeu de données avec les bibliothèques <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> et <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.
+Vous y trouverez :</p>
+<ul class="simple">
+<li><p>des <strong>schémas</strong> pour visualiser ce qui se passe dans la machine ;</p></li>
+<li><p>des questions <strong>« Testez-vous »</strong> au fil de la lecture, pour vérifier immédiatement que vous avez compris ;</p></li>
+<li><p>des <strong>exercices progressifs</strong> (de ★ à ★★★) avec des <strong>indices</strong> et des <strong>corrections détaillées</strong> ;</p></li>
+<li><p>des encadrés <strong>« Erreurs fréquentes »</strong> qui montrent les vrais messages d’erreur de Python et comment les corriger ;</p></li>
+<li><p>un <strong>bilan</strong> à la fin de chaque chapitre pour faire le point sur ce que vous savez faire ;</p></li>
+<li><p>des <strong>mini-projets</strong> pour mettre tout cela en pratique et une <strong>fiche mémo</strong> pour réviser.</p></li>
+</ul>
+<p>Ce document est distribué librement sous licence <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA</a>.
+Le polycopié d’origine a notamment bénéficié des apports d’Aurélie Lemaitre, d’Agnès Maunoury et de Jean-Christophe Burnel.
+N’hésitez pas à faire vos remarques à son auteur dont vous trouverez le contact sur <a class="reference external" href="https://rtavenar.github.io/">sa page web</a>.</p>
+<section id="a-qui-s-adresse-ce-document">
+<h2>À qui s’adresse ce document ?<a class="headerlink" href="#a-qui-s-adresse-ce-document" title="Lien vers cette rubrique">#</a></h2>
+<p>À toute personne qui souhaite apprendre à programmer en Python pour analyser des données, <strong>sans aucun prérequis</strong> en programmation.
+Quelques notions de statistique (moyenne, médiane, quartiles, corrélation, régression) seront utiles dans la dernière partie.</p>
+<div class="important admonition">
+<p class="admonition-title">Vous connaissez déjà R ou SAS ?</p>
+<p>Ce document a été pensé pour vous aussi ! Vous connaissez déjà la logique de l’analyse de données ; il vous reste à apprendre la <strong>syntaxe</strong> et les <strong>habitudes</strong> de Python, qui diffèrent sur des points importants.</p>
+<ul class="simple">
+<li><p>Des encadrés <strong>« Si vous venez de R ou de SAS »</strong> signalent, dans chaque chapitre, les pièges à éviter (indices qui commencent à 0, indentation, <code class="docutils literal notranslate"><span class="pre">return</span></code> obligatoire, copie des listes…) et donnent des <strong>tables de correspondance</strong> entre R, SAS et Python.</p></li>
+<li><p>Vous pouvez parcourir plus vite les chapitres 1 à 8 : lisez les encadrés « À retenir » et « Si vous venez de R ou de SAS », répondez aux questions « Testez-vous », et faites au moins les exercices ★★. Ne les sautez pas complètement : <code class="docutils literal notranslate"><span class="pre">pandas</span></code> repose entièrement sur ces bases, et la plupart des erreurs viennent de réflexes R ou SAS appliqués à Python.</p></li>
+<li><p>Le chapitre 14 vous montre comment retrouver vos modèles habituels (<code class="docutils literal notranslate"><span class="pre">lm</span></code>, <code class="docutils literal notranslate"><span class="pre">glm</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">REG</span></code>, <code class="docutils literal notranslate"><span class="pre">PROC</span> <span class="pre">LOGISTIC</span></code>, tests…) avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p></li>
+</ul>
+</div>
+<p>Il suffit de savoir utiliser un ordinateur et d’avoir un peu de patience : apprendre à programmer, c’est un peu comme apprendre une langue étrangère, on progresse surtout en pratiquant régulièrement.</p>
+</section>
+<section id="le-parcours-propose">
+<h2>Le parcours proposé<a class="headerlink" href="#le-parcours-propose" title="Lien vers cette rubrique">#</a></h2>
+<p>Les chapitres sont conçus pour être lus <strong>dans l’ordre</strong>, chacun s’appuyant sur les précédents.
+Les durées indiquées sont des estimations (lecture + exercices) : prenez le temps qu’il vous faut !</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Partie</p></th>
+<th class="head"><p>Chapitre</p></th>
+<th class="head"><p>Durée indicative</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Les bases de Python</p></td>
+<td><p>1. Variables, types et opérations</p></td>
+<td><p>1h30</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>2. Les conditions</p></td>
+<td><p>1h30</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>3. Les boucles</p></td>
+<td><p>2h</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>4. Les fonctions et les modules</p></td>
+<td><p>2h</p></td>
+</tr>
+<tr class="row-even"><td><p>Les collections de données</p></td>
+<td><p>5. Les listes</p></td>
+<td><p>2h30</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>6. Les chaînes de caractères</p></td>
+<td><p>1h30</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>7. Dictionnaires, <em>tuples</em> et <em>sets</em></p></td>
+<td><p>2h</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>8. Déboguer et tester son code</p></td>
+<td><p>1h</p></td>
+</tr>
+<tr class="row-even"><td><p>Analyser des données</p></td>
+<td><p>9. Lire et écrire des fichiers</p></td>
+<td><p>1h30</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>10. <code class="docutils literal notranslate"><span class="pre">numpy</span></code> et le calcul matriciel</p></td>
+<td><p>1h30</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>11. Découvrir ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></td>
+<td><p>2h30</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>12. Préparer et résumer ses données avec <code class="docutils literal notranslate"><span class="pre">pandas</span></code></p></td>
+<td><p>2h30</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>13. Visualiser ses données avec <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> et <code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p></td>
+<td><p>2h</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>14. Modélisation statistique avec <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></p></td>
+<td><p>2h</p></td>
+</tr>
+<tr class="row-even"><td><p>S’entraîner</p></td>
+<td><p>Mini-projets</p></td>
+<td><p>2h à 4h chacun</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Les chapitres 1 à 8 forment le <strong>socle</strong> de programmation : ne les négligez pas, même si vous avez hâte d’analyser des données ! <code class="docutils literal notranslate"><span class="pre">pandas</span></code> repose entièrement sur ces notions (variables, fonctions, listes, dictionnaires…), et la plupart des difficultés rencontrées plus tard viennent de bases fragiles.
+Les chapitres 9 à 14 vous donnent ensuite les outils de l’analyse de données, que vous mettrez en œuvre dans les mini-projets.</p>
+<div class="tip admonition">
+<p class="admonition-title">Conseil</p>
+<p>Plutôt que de faire 10 heures d’un coup, préférez des séances régulières de 1h à 2h (par exemple 3 fois par semaine).
+Au début de chaque séance, relisez rapidement le <strong>bilan</strong> du chapitre précédent.</p>
+</div>
+</section>
+<section id="comment-lire-les-encadres">
+<h2>Comment lire les encadrés<a class="headerlink" href="#comment-lire-les-encadres" title="Lien vers cette rubrique">#</a></h2>
+<p>Tout au long de ce document, vous rencontrerez différents types d’encadrés.
+Voici à quoi ils ressemblent et ce qu’ils signifient.</p>
+<div class="note admonition">
+<p class="admonition-title">Objectifs du chapitre</p>
+<p>Au début de chaque chapitre : ce que vous saurez faire à la fin.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p>Les points essentiels, à connaître par cœur.</p>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Erreur fréquente</p>
+<p>Les pièges dans lesquels (presque) tout le monde tombe au début, et comment s’en sortir.</p>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Testez-vous</p>
+<p>Une petite question pour vérifier votre compréhension.
+Essayez <strong>vraiment</strong> d’y répondre (dans votre tête ou sur papier) avant de déplier la réponse.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Réponse</p>
+<p>La réponse apparaît quand on clique sur le titre de l’encadré.</p>
+</div>
+<div class="admonition-exercice-0-1 admonition">
+<p class="admonition-title">Exercice 0.1 ★</p>
+<p>Un exercice à faire sur ordinateur. Le nombre d’étoiles indique la difficulté :</p>
+<ul class="simple">
+<li><p>★ : application directe du cours ;</p></li>
+<li><p>★★ : demande de combiner plusieurs notions ou de réfléchir un peu ;</p></li>
+<li><p>★★★ : plus difficile, pour aller plus loin (ne vous découragez pas si vous bloquez !).</p></li>
+</ul>
+</div>
+<div class="hint dropdown admonition">
+<p class="admonition-title">Indice</p>
+<p>Un coup de pouce si vous êtes bloqué·e. N’ouvrez l’indice qu’après avoir cherché un moment.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Une correction commentée. Il y a souvent plusieurs bonnes solutions : si la vôtre est différente mais donne le bon résultat, elle est sans doute correcte aussi !</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Pour aller plus loin</p>
+<p>Des compléments facultatifs, que vous pouvez sauter lors d’une première lecture.</p>
+</div>
+<p>Les indices, réponses et solutions sont repliés : cliquez sur le titre de l’encadré pour les afficher.</p>
+</section>
+<section id="ou-ecrire-et-executer-du-code-python">
+<h2>Où écrire et exécuter du code Python ?<a class="headerlink" href="#ou-ecrire-et-executer-du-code-python" title="Lien vers cette rubrique">#</a></h2>
+<section id="les-blocs-de-code-de-ce-document">
+<h3>Les blocs de code de ce document<a class="headerlink" href="#les-blocs-de-code-de-ce-document" title="Lien vers cette rubrique">#</a></h3>
+<p>Durant la lecture, vous trouverez des blocs de code tels que celui-ci :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">v</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>289
+</pre></div>
+</div>
+</div>
+</div>
+<p>Le bloc situé sous le code correspond à ce qu’affiche ce code lorsqu’on l’exécute.</p>
+<div class="important admonition">
+<p class="admonition-title">À retenir</p>
+<p><strong>Ne vous contentez pas de lire les exemples : retapez-les vous-même</strong>, exécutez-les, puis modifiez-les pour voir ce qui change.
+C’est de loin la meilleure façon d’apprendre.
+Évitez le copier-coller, qui donne l’illusion d’avoir compris : taper le code vous oblige à faire attention à chaque détail (parenthèses, deux-points, décalages…).</p>
+</div>
+</section>
+<section id="option-1-les-fenetres-de-code-integrees-version-web">
+<h3>Option 1 : les fenêtres de code intégrées (version web)<a class="headerlink" href="#option-1-les-fenetres-de-code-integrees-version-web" title="Lien vers cette rubrique">#</a></h3>
+<p>Dans la version web de ce document, vous trouverez des fenêtres d’éditeur de code vous permettant de tester vos solutions aux exercices directement dans votre navigateur, sans rien installer.
+En voici une : appuyez sur « Run » pour exécuter le code, puis modifiez le code et observez le résultat en le ré-exécutant.</p>
+<div id="pad_intro" class="pad"></div>
+<script>
+    Pythonpad('pad_intro', {'id': 'aude_intro', 'title': 'Testez votre code ici', 'src': "a = 12 * 5\nprint(a)\nprint(\"Bonjour !\")\n"});
+</script>
+</section>
+<section id="option-2-sans-installation-dans-le-navigateur">
+<h3>Option 2 : sans installation, dans le navigateur<a class="headerlink" href="#option-2-sans-installation-dans-le-navigateur" title="Lien vers cette rubrique">#</a></h3>
+<p>Si vous ne pouvez pas installer de logiciel, le site <a class="reference external" href="https://basthon.fr">Basthon</a> propose une console et des carnets (<em>notebooks</em>) Python qui fonctionnent directement dans le navigateur.</p>
+</section>
+<section id="option-3-recommandee-installer-python-sur-votre-ordinateur">
+<h3>Option 3 (recommandée) : installer Python sur votre ordinateur<a class="headerlink" href="#option-3-recommandee-installer-python-sur-votre-ordinateur" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour travailler confortablement, il est préférable d’installer Python sur votre ordinateur. Deux outils sont utiles, selon la partie du document :</p>
+<ul class="simple">
+<li><p><strong>Pour les chapitres 1 à 9</strong>, le logiciel <a class="reference external" href="https://thonny.org">Thonny</a> est idéal pour débuter : il est gratuit, disponible sous Windows, macOS et Linux, et il installe Python en même temps que lui. Son interface est très simple : une zone <strong>éditeur</strong> (en haut) pour écrire un programme et l’enregistrer dans un fichier <code class="docutils literal notranslate"><span class="pre">.py</span></code>, un bouton <strong>Run</strong> (triangle vert) pour l’exécuter, et une <strong>console</strong> (en bas) où s’affichent les résultats. Thonny peut aussi afficher les valeurs de vos variables (menu <em>View &gt; Variables</em>), ce qui est très pratique pour comprendre ce que fait un programme.</p></li>
+<li><p><strong>Pour l’analyse de données (chapitres 10 à 14 et projets)</strong>, on travaille dans des <strong>notebooks Jupyter</strong> : des documents qui mêlent cellules de code, résultats (tableaux, graphiques) et texte, ce qui est idéal pour explorer des données et garder une trace de son analyse. Le plus simple est d’installer la distribution <a class="reference external" href="https://www.anaconda.com/download">Anaconda</a>, qui contient Python, Jupyter, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> et <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. Vous pouvez aussi utiliser <a class="reference external" href="https://colab.research.google.com">Google Colab</a>, qui fait fonctionner des notebooks dans le navigateur, sans installation, avec toutes ces bibliothèques (un compte Google est nécessaire).</p></li>
+</ul>
+<p>Rien ne vous empêche d’utiliser Jupyter dès le début, si vous préférez un seul outil.</p>
+<div class="tip admonition">
+<p class="admonition-title">Les fichiers de données</p>
+<p>Plusieurs chapitres utilisent des fichiers de données (dans le dossier <code class="docutils literal notranslate"><span class="pre">donnees</span></code> qui accompagne ce document) : <code class="docutils literal notranslate"><span class="pre">notes.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">fable.txt</span></code>, et trois jeux de données réels très utilisés pour apprendre l’analyse de données : <code class="docutils literal notranslate"><span class="pre">penguins.csv</span></code> (des manchots de l’Antarctique), <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> (des passagers du Titanic) et <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> (le trafic d’une compagnie aérienne de 1949 à 1960).
+Placez votre notebook ou votre script dans le même dossier que le dossier <code class="docutils literal notranslate"><span class="pre">donnees</span></code>.</p>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">Console ou fichier ?</p>
+<p>Il y a deux façons de faire exécuter du code Python :</p>
+<ol class="arabic simple">
+<li><p>dans une <strong>console</strong> (le prompt <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code>) : chaque instruction est exécutée dès que vous appuyez sur Entrée. C’est pratique pour faire de petits essais ;</p></li>
+<li><p>dans un <strong>fichier</strong> <code class="docutils literal notranslate"><span class="pre">.py</span></code> (un <em>script</em>) que l’on fait exécuter en entier. C’est ce que l’on fait dès que le programme fait plus de quelques lignes, car on garde une trace de ce que l’on a écrit.</p></li>
+</ol>
+<p>En ligne de commande (dans un terminal), on lance la console avec <code class="docutils literal notranslate"><span class="pre">python</span></code> (ou <code class="docutils literal notranslate"><span class="pre">python3</span></code>) et on exécute un script avec <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">nom_de_mon_fichier.py</span></code>.
+Assurez-vous d’utiliser Python 3 (la console affiche sa version au démarrage) : ce document ne s’applique pas à Python 2, qui n’est plus utilisé.</p>
+</div>
+</section>
+<section id="un-outil-precieux-python-tutor">
+<h3>Un outil précieux : Python Tutor<a class="headerlink" href="#un-outil-precieux-python-tutor" title="Lien vers cette rubrique">#</a></h3>
+<p>Certains exemples de ce document sont accompagnés d’un lien <em>« Voir ce code s’exécuter pas à pas dans Python Tutor »</em>.
+Le site <a class="reference external" href="https://pythontutor.com">Python Tutor</a> permet d’exécuter un programme <strong>instruction par instruction</strong> (bouton <em>Next</em>) en dessinant à chaque étape les variables et leurs valeurs.
+C’est l’équivalent d’un enseignant qui expliquerait au tableau ce qui se passe dans la machine : n’hésitez pas à l’utiliser dès qu’un code vous semble mystérieux, y compris le vôtre !</p>
+<p>Voici un premier exemple à essayer :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prenom</span> <span class="o">=</span> <span class="s2">"Aude"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prenom</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s2">"ans"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em><a class="reference external" href="https://pythontutor.com/visualize.html#code=prenom%20%3D%20%22Aude%22%0Aage%20%3D%2020%0Aage%20%3D%20age%20%2B%201%0Aprint%28prenom%2C%20%22a%22%2C%20age%2C%20%22ans%22%29%0A&amp;amp;cumulative=false&amp;amp;heapPrimitives=nevernest&amp;amp;mode=display&amp;amp;origin=opt-frontend.js&amp;amp;py=3&amp;amp;rawInputLstJSON=%5B%5D&amp;amp;textReferences=false">Voir ce code s’exécuter pas à pas dans Python Tutor</a></em></p>
+</section>
+</section>
+<section id="methode-de-travail-conseillee">
+<h2>Méthode de travail conseillée<a class="headerlink" href="#methode-de-travail-conseillee" title="Lien vers cette rubrique">#</a></h2>
+<p>Pour chaque chapitre :</p>
+<ol class="arabic simple">
+<li><p><strong>Lisez les objectifs</strong> pour savoir où vous allez.</p></li>
+<li><p><strong>Lisez une section</strong> en retapant et en exécutant les exemples. Modifiez-les : que se passe-t-il si… ?</p></li>
+<li><p><strong>Répondez aux questions « Testez-vous »</strong> avant de regarder la réponse. Si vous vous êtes trompé·e, relisez la section : c’est normal et c’est comme ça qu’on apprend.</p></li>
+<li><p><strong>Faites les exercices</strong> dans l’ordre. Cherchez au moins 10 à 15 minutes avant d’ouvrir l’indice, puis encore un peu avant d’ouvrir la solution. Une fois la solution lue, <strong>refaites l’exercice sans la regarder</strong>.</p></li>
+<li><p><strong>Faites le bilan</strong> en fin de chapitre : cochez ce que vous savez faire et revenez sur ce qui reste flou.</p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">Que faire quand on est bloqué·e ?</p>
+<ol class="arabic simple">
+<li><p><strong>Lisez le message d’erreur</strong> en entier, et en particulier sa dernière ligne (nous apprendrons à les lire dès le chapitre 1).</p></li>
+<li><p><strong>Affichez vos variables</strong> avec <code class="docutils literal notranslate"><span class="pre">print</span></code> à différents endroits du programme pour vérifier qu’elles contiennent ce que vous croyez.</p></li>
+<li><p><strong>Exécutez votre code pas à pas</strong> dans Python Tutor ou dans Thonny.</p></li>
+<li><p><strong>Expliquez votre code à voix haute</strong>, ligne par ligne, comme si vous l’expliquiez à quelqu’un d’autre (même à un canard en plastique : c’est une technique reconnue chez les programmeurs !). On trouve souvent l’erreur en cours de route.</p></li>
+<li><p><strong>Faites une pause.</strong> Sérieusement : la solution vient souvent après.</p></li>
+</ol>
+</div>
+<p>C’est parti !</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="variables.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Variables, types et opérations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-qui-s-adresse-ce-document">À qui s’adresse ce document ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-parcours-propose">Le parcours proposé</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-lire-les-encadres">Comment lire les encadrés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ou-ecrire-et-executer-du-code-python">Où écrire et exécuter du code Python ?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#les-blocs-de-code-de-ce-document">Les blocs de code de ce document</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-les-fenetres-de-code-integrees-version-web">Option 1 : les fenêtres de code intégrées (version web)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-sans-installation-dans-le-navigateur">Option 2 : sans installation, dans le navigateur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-recommandee-installer-python-sur-votre-ordinateur">Option 3 (recommandée) : installer Python sur votre ordinateur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-outil-precieux-python-tutor">Un outil précieux : Python Tutor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-de-travail-conseillee">Méthode de travail conseillée</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Romain Tavenard
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
