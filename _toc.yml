@@ -1,0 +1,31 @@
+format: jb-book
+root: content/intro
+parts:
+- caption: Les bases de Python
+  numbered: true
+  chapters:
+  - file: content/variables
+  - file: content/conditions
+  - file: content/boucles
+  - file: content/fonctions
+- caption: Les collections de données
+  numbered: true
+  chapters:
+  - file: content/listes
+  - file: content/chaines
+  - file: content/dictionnaires
+  - file: content/tests
+- caption: Analyser des données
+  numbered: true
+  chapters:
+  - file: content/fichiers
+  - file: content/numpy
+  - file: content/pandas_bases
+  - file: content/pandas_transformer
+  - file: content/visualisation
+  - file: content/modelisation
+- caption: "S'entra\xEEner et r\xE9viser"
+  chapters:
+  - file: content/projets
+  - file: content/memo
+  - file: content/et_apres

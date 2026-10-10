@@ -1,0 +1,113 @@
+# Book settings
+title: Apprendre Python en autonomie
+author: Romain Tavenard
+# logo: img/logo_ur2.svg
+exclude_patterns: [README.md, _build, "**.ipynb_checkpoints"]
+
+execute:
+  execute_notebooks: force
+  timeout: 60
+
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - dollarmath
+    - substitution
+
+html:
+  use_edit_page_button: false
+
+latex:
+  latex_documents:
+    targetname: book.tex
+  latex_engine: xelatex
+
+sphinx:
+  config:
+    today_fmt: "%B %Y"
+    latex_elements:
+      fncychap: "\\usepackage[Conny]{fncychap}"
+      printindex: ""
+      papersize: "a4paper"
+      pointsize: "11pt"
+      fontpkg: |
+        \setmainfont{texgyrepagella}[
+          Extension = .otf,
+          UprightFont = *-regular,
+          ItalicFont = *-italic,
+          BoldFont = *-bold,
+          BoldItalicFont = *-bolditalic
+        ]
+        \setsansfont{texgyreheros}[
+          Extension = .otf,
+          UprightFont = *-regular,
+          ItalicFont = *-italic,
+          BoldFont = *-bold,
+          BoldItalicFont = *-bolditalic
+        ]
+        \setmonofont{texgyrecursor}[
+          Extension = .otf,
+          UprightFont = *-regular,
+          ItalicFont = *-italic,
+          BoldFont = *-bold,
+          BoldItalicFont = *-bolditalic,
+          Scale = MatchLowercase
+        ]
+      preamble: |
+        \usepackage{newunicodechar}
+        \newfontfamily\emojifont{NotoEmoji-Regular.ttf}
+        \newunicodechar{🐔}{{\emojifont 🐔}}
+        \newunicodechar{🍳}{{\emojifont 🍳}}
+        \newunicodechar{✅}{{\emojifont ✅}}
+        \newunicodechar{❌}{{\emojifont ❌}}
+        \newunicodechar{★}{{\emojifont ⭐}}
+        \newunicodechar{→}{\ensuremath{\rightarrow}}
+        \setlength{\headheight}{14pt}
+        \addtolength{\topmargin}{-2pt}
+        \makeatletter
+        \fancypagestyle{normal}{
+          \fancyhf{}
+          \fancyfoot[RO]{{\py@HeaderFamily\thepage}}
+          \fancyfoot[LO]{{\py@HeaderFamily\nouppercase{\rightmark}}}
+          \fancyhead[RO]{{\py@HeaderFamily\color{TitleColor}\nouppercase{\leftmark}}}
+          \if@twoside
+           \fancyfoot[LE]{{\py@HeaderFamily\thepage}}
+           \fancyfoot[RE]{{\py@HeaderFamily\nouppercase{\leftmark}}}
+           \fancyhead[LE]{{\py@HeaderFamily\color{TitleColor}\nouppercase{\leftmark}}}
+          \fi
+          \renewcommand{\headrulewidth}{1pt}
+          \renewcommand{\footrulewidth}{0.4pt}
+          \let\sphinx@old@headrule\headrule
+          \renewcommand{\headrule}{{\color{TitleColor}\sphinx@old@headrule}}
+        }
+        \makeatother
+      maketitle: |
+        \begin{titlepage}
+        \makeatletter
+        \let\footnotesize\small
+        \let\footnoterule\relax
+        \begingroup
+          \def\endgraf{ }\def\and{\& }%
+          \pdfstringdefDisableCommands{\def\\{, }}%
+          \hypersetup{pdfauthor={\@author}, pdftitle={\@title}}%
+        \endgroup
+        \noindent{\color{TitleColor}\rule{\textwidth}{4pt}}\par
+        \vspace{2.2cm}
+        \begin{flushleft}
+          {\sffamily\bfseries\fontsize{34}{40}\selectfont\color{TitleColor} \@title \par}
+          \vspace{0.6cm}
+          {\Large\itshape Cours, illustrations et exercices corrigés pour apprendre seul·e\par}
+        \end{flushleft}
+        \vspace{1.2cm}
+        \noindent{\color{TitleColor}\rule{\textwidth}{0.6pt}}\par
+        \vfill
+        \begin{flushright}
+          {\Large\sffamily\bfseries \@author \par}
+          \vspace{0.4cm}
+          {\large\sffamily \@date \par}
+        \end{flushright}
+        \vfill
+        \noindent{\color{TitleColor}\rule{\textwidth}{4pt}}\par
+        \makeatother
+        \end{titlepage}
+    language: "fr"

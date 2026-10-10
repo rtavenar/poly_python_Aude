@@ -1,0 +1,22 @@
+format: jb-book
+root: content/intro
+options:
+  caption: Contenu du livre
+chapters:
+- file: content/variables
+- file: content/conditions
+- file: content/boucles
+- file: content/fonctions
+- file: content/listes
+- file: content/chaines
+- file: content/dictionnaires
+- file: content/tests
+- file: content/fichiers
+- file: content/numpy
+- file: content/pandas_bases
+- file: content/pandas_transformer
+- file: content/visualisation
+- file: content/modelisation
+- file: content/projets
+- file: content/memo
+- file: content/et_apres

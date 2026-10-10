@@ -1,0 +1,7 @@
+jupyter-book==1.0.4.post1
+numpy
+pandas
+matplotlib
+seaborn
+statsmodels
+scipy
